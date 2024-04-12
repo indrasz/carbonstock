@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\RegionalController;
 use App\Http\Controllers\Api\TimController;
 use App\Http\Controllers\Api\UserController;
 use Illuminate\Http\Request;
@@ -39,5 +40,16 @@ Route::prefix('admin')->group(function(){
 
         Route::get('list-anggota/{idTim}', [TimController::class, 'getAnggotaTim']);
         Route::post('add-anggota', [TimController::class, 'addAnggotaTim']);
+    });
+    Route::prefix('regional')->group(function(){
+        Route::get('/', [RegionalController::class, 'get']);
+        Route::post('add', [RegionalController::class, 'add']);
+        Route::put('edit/{id}', [RegionalController::class, 'edit']);
+        Route::delete('delete/{id}', [RegionalController::class, 'delete']);
+
+        Route::prefix('list-tim')->group(function(){
+            Route::post('/add', [RegionalController::class, 'add_tim']);
+            Route::delete('/{id_regional}/{id_tim}', [RegionalController::class, 'delete_tim']);
+        });
     });
 });
