@@ -94,6 +94,26 @@ class TimController extends Controller
         return $this->responses(true, 'Berhasil menambahkan anggota tim');
     }
 
+    function deleteAnggotaTim($id_tim, $id_user){
+        $check_tim = Tim::where('id', $id_tim)->count();
+        if($check_tim == 0){
+            return $this->responses(false, 'id tim tidak ditemukan');
+        }
+
+        $check_user = Users::where('id', $id_user)->count();
+        if($check_user == 0){
+            return $this->responses(false, 'id user tidak ditemukan');
+        }
+
+        $data = AnggotaTim::where('id_tim', $id_tim)->where('id_user', $id_user);
+        if($data->count() == 0){
+            return $this->responses(false, 'user belum terdaftar pada tim');
+        }
+
+        $deletes = $data->delete();
+        return $this->responses(true, 'Berhasil menghapus anggota tim');
+    }
+
     function getAnggotaTim($idTim){
         if(Tim::with('anggota', 'anggota.users')->where('id', $idTim)->count() == 0){
             return $this->responses(false, 'id tim tidak ditemukan');

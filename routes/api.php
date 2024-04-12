@@ -40,6 +40,7 @@ Route::prefix('admin')->group(function(){
 
         Route::get('list-anggota/{idTim}', [TimController::class, 'getAnggotaTim']);
         Route::post('add-anggota', [TimController::class, 'addAnggotaTim']);
+        Route::delete('delete-anggota/{id_tim}/{id_user}', [TimController::class, 'deleteAnggotaTim']);
     });
     Route::prefix('regional')->group(function(){
         Route::get('/', [RegionalController::class, 'get']);
