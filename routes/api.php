@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\MasterController;
 use App\Http\Controllers\Api\RegionalController;
 use App\Http\Controllers\Api\TimController;
 use App\Http\Controllers\Api\UserController;
@@ -32,6 +33,7 @@ Route::prefix('admin')->group(function(){
         Route::put('/setActive/{idUser}', [UserController::class, 'setActiveUser']);
         Route::delete('/delete/{idUser}', [UserController::class, 'deleteUser']);
     });
+
     Route::prefix('tim')->group(function(){
         Route::get('list', [TimController::class, 'get']);
         Route::post('add', [TimController::class, 'add']);
@@ -42,6 +44,7 @@ Route::prefix('admin')->group(function(){
         Route::post('add-anggota', [TimController::class, 'addAnggotaTim']);
         Route::delete('delete-anggota/{id_tim}/{id_user}', [TimController::class, 'deleteAnggotaTim']);
     });
+
     Route::prefix('regional')->group(function(){
         Route::get('/', [RegionalController::class, 'get']);
         Route::post('add', [RegionalController::class, 'add']);
@@ -53,4 +56,10 @@ Route::prefix('admin')->group(function(){
             Route::delete('/{id_regional}/{id_tim}', [RegionalController::class, 'delete_tim']);
         });
     });
+
+    
+});
+
+Route::prefix('master')->group(function(){
+    Route::get('jenis-hutan', [MasterController::class, 'getHutan']);
 });

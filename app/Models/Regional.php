@@ -16,10 +16,15 @@ class Regional extends Model
     protected $fillable = [
         'nama_regional',
         'tanggal_mulai',
-        'tanggal_selesai'
+        'tanggal_selesai',
+        'jenis_hutan'
     ];
 
     function tim(){
         return $this->hasMany(RegionalTim::class, 'id_regional', 'id');
+    }
+
+    function type_hutan(){
+        return $this->hasOne(MasterHutan::class, 'id', 'jenis_hutan');
     }
 }
