@@ -1,6 +1,12 @@
 <?php
 
 use App\Http\Controllers\Client\DashboardController;
+use App\Http\Controllers\Client\HamparanController;
+use App\Http\Controllers\Client\PeriodeController;
+use App\Http\Controllers\Client\PlotAreaController;
+use App\Http\Controllers\Client\RegionController;
+use App\Http\Controllers\Client\TeamController;
+use App\Http\Controllers\Client\ZonaController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,3 +21,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+// Route::get('/', [ZonaController::class, 'index'])->name('zona');
+Route::resource("zona", ZonaController::class);
+Route::resource("plot-area", PlotAreaController::class);
+Route::resource("periode", PeriodeController::class);
+Route::resource("hamparan", HamparanController::class);
+Route::resource("team", TeamController::class);
+Route::resource("region", RegionController::class);
