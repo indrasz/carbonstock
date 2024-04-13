@@ -10,7 +10,7 @@
 <script src="/assets/js/default-assets/active.js"></script>
 
 <!-- Inject JS -->
-<script src="/assets/js/default-assets/mini-event-calendar.min.js"></script>
+{{-- <script src="/assets/js/default-assets/mini-event-calendar.min.js"></script>
 <script src="/assets/js/default-assets/mini-calendar-active.js"></script>
 <script src="/assets/js/default-assets/apexchart.min.js"></script>
-<script src="/assets/js/default-assets/dashboard-active.js"></script>
+<script src="/assets/js/default-assets/dashboard-active.js"></script> --}}

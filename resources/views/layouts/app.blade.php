@@ -8,7 +8,13 @@
 
     <title>Carbon Stock Admin</title>
 
+
+
+    @stack('before-style')
+
     @include('includes.style')
+
+    @stack('after-style')
 
 </head>
 
@@ -21,7 +27,7 @@
         </div>
     </div>
     <!-- Preloader -->
-    
+
     <!-- ======================================
     ******* Page Wrapper Area Start **********
     ======================================= -->
@@ -34,7 +40,7 @@
         <div class="flapt-page-content pt-0">
 
             <style>
-                .top-header-area{
+                .top-header-area {
                     position: relative !important;
                     left: 0;
                     top: 0;
@@ -101,8 +107,13 @@
         </div>
     </div>
 
+    @stack('before-script')
 
-    @include('includes.script')
+     @include('includes.script')
+
+    @stack('after-script')
+
+
 
 </body>
 
