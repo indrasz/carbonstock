@@ -17,14 +17,28 @@ class Regional extends Model
         'nama_regional',
         'tanggal_mulai',
         'tanggal_selesai',
-        'jenis_hutan'
+        'jenis_hutan',
+        'latitude',
+        'longitude'
     ];
 
     function tim(){
         return $this->hasMany(RegionalTim::class, 'id_regional', 'id');
     }
 
+    function zona(){
+        return $this->hasMany(Zona::class, 'id_regional', 'id');
+    }
+
     function type_hutan(){
         return $this->hasOne(MasterHutan::class, 'id', 'jenis_hutan');
+    }
+
+    public static function booted(): void
+    {
+        static::deleting(function (Regional $regional) {
+            $regional->tim()->delete();
+            $regional->zona()->delete();
+        });
     }
 }

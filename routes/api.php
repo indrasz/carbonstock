@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\MasterController;
 use App\Http\Controllers\Api\RegionalController;
 use App\Http\Controllers\Api\TimController;
 use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\Api\ZonaController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -57,7 +58,16 @@ Route::prefix('admin')->group(function(){
         });
     });
 
-    
+    Route::prefix('zona')->group(function(){
+        Route::get('/list-zona', [ZonaController::class, 'get']);
+        Route::post('/add', [ZonaController::class, 'add']);
+        Route::delete('/delete/{id_regional}/{id_zona}', [ZonaController::class, 'delete']);
+
+        Route::prefix('list-tim')->group(function(){
+            Route::post('/add', [ZonaController::class, 'add_tim']);
+            Route::delete('/{id_zona}/{id_tim}', [ZonaController::class, 'delete_tim']);
+        });
+    });
 });
 
 Route::prefix('master')->group(function(){

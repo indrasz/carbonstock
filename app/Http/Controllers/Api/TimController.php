@@ -28,8 +28,15 @@ class TimController extends Controller
         return $this->responses(true, 'Berhasil menambahkan tim'); 
     }
 
-    function get(){
-        $data = Tim::all();
+    function get(Request $request){
+        $data = Tim::query();
+
+        $id = $request->get('id', NULL);
+        if($id != NULL){
+            $data = $data->where('id', $id);
+        }
+
+        $data = $data->get();
         return $this->responses(true, 'Berhasil mendapatkan data', $data);
     }
 
@@ -39,6 +46,7 @@ class TimController extends Controller
             return $this->responses(false, 'Tim tidak ditemukan');
         }
 
+        $deletes_anggota_tim = AnggotaTim::where('id_tim', $id)->delete();
         $deletes = Tim::where('id', $id)->delete();
         return $this->responses(true, 'Berhasil menghapus tim');
     }

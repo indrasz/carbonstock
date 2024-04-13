@@ -7,6 +7,7 @@ use App\Models\MasterHutan;
 use App\Models\Regional;
 use App\Models\RegionalTim;
 use App\Models\Tim;
+use App\Models\Zona;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use LDAP\Result;
@@ -32,7 +33,9 @@ class RegionalController extends Controller
             'nama_regional' => 'required',
             'jenis_hutan' => 'required',
             'tanggal_mulai' => 'required',
-            'tanggal_selesai' => 'required'
+            'tanggal_selesai' => 'required',
+            'latitude' => 'required',
+            'longitude' => 'required'
         ]);
 
         if($validator->fails()){
@@ -47,7 +50,9 @@ class RegionalController extends Controller
             'nama_regional' => $request->nama_regional,
             'tanggal_mulai' => $request->tanggal_mulai,
             'tanggal_selesai' => $request->tanggal_selesai,
-            'jenis_hutan' => $request->jenis_hutan
+            'jenis_hutan' => $request->jenis_hutan,
+            'latitude' => $request->latitude,
+            'longitude' => $request->latitude
         ]);
 
         return $this->responses(true, 'Berhasil menambahkan regional');
@@ -84,6 +89,8 @@ class RegionalController extends Controller
             return $this->responses(false, 'Regional tidak ditemukan');
         }
 
+        $deletes_regional_tim = RegionalTim::where('id_regional', $id)->delete();
+        $deletes_zona = Zona::where('id_regional', $id)->delete();
         $deletes = Regional::where('id', $id)->delete();
 
         return $this->responses(true, 'Berhasil menghapus regional');
