@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\Api\HamparanController;
 use App\Http\Controllers\Api\MasterController;
+use App\Http\Controllers\Api\PlotController;
 use App\Http\Controllers\Api\RegionalController;
 use App\Http\Controllers\Api\TimController;
 use App\Http\Controllers\Api\UserController;
@@ -68,8 +70,24 @@ Route::prefix('admin')->group(function(){
             Route::delete('/{id_zona}/{id_tim}', [ZonaController::class, 'delete_tim']);
         });
     });
+
+    Route::prefix('hamparan')->group(function(){
+        Route::get('/', [HamparanController::class, 'get']);
+        Route::post('/add', [HamparanController::class, 'add']);
+        Route::put('/edit/{id_hamparan}', [HamparanController::class, 'edit']);
+        Route::delete('/{id_zona}/{id_hamparan}', [HamparanController::class, 'delete']);
+    });
+
+    Route::prefix('plot')->group(function(){
+        Route::get('/', [PlotController::class, 'get']);
+        Route::post('add', [PlotController::class, 'add']);
+        Route::put('edit/{id_plot}', [PlotController::class, 'edit']);
+        Route::delete('/{id_hamparan}/{id_plot}', [PlotController::class, 'delete']);
+    });
+
 });
 
 Route::prefix('master')->group(function(){
     Route::get('jenis-hutan', [MasterController::class, 'getHutan']);
+    Route::get('plot', [MasterController::class, 'plot']);
 });
