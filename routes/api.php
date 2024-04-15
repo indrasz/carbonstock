@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\HamparanController;
 use App\Http\Controllers\Api\MasterController;
 use App\Http\Controllers\Api\PlotController;
 use App\Http\Controllers\Api\RegionalController;
+use App\Http\Controllers\Api\SubPlotController;
 use App\Http\Controllers\Api\TimController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\ZonaController;
@@ -85,6 +86,12 @@ Route::prefix('admin')->group(function(){
         Route::delete('/{id_hamparan}/{id_plot}', [PlotController::class, 'delete']);
     });
 
+    Route::prefix('subplot')->group(function(){
+        Route::get('/', [SubPlotController::class, 'get']);
+        Route::post('add', [SubPlotController::class, 'add']);
+        Route::put('edit/{id_subplot}', [SubPlotController::class, 'edit']);
+        Route::delete('/{id_plot}/{id_subplot}', [SubPlotController::class, 'delete']);
+    });
 });
 
 Route::prefix('master')->group(function(){

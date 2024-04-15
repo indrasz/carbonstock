@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 13, 2024 at 08:34 PM
+-- Generation Time: Apr 15, 2024 at 04:13 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.1.25
 
@@ -172,7 +172,9 @@ CREATE TABLE `plot` (
 --
 
 INSERT INTO `plot` (`id`, `nama_plot`, `type_plot`, `latitude`, `longitude`, `created_at`, `updated_at`, `deleted_at`, `id_hamparan`) VALUES
-(1, 'plot b', 1, NULL, NULL, '2024-04-13', '2024-04-13', '2024-04-13', 2);
+(1, 'plot b', 1, NULL, NULL, '2024-04-13', '2024-04-13', '2024-04-13', 2),
+(2, 'plot a', 1, NULL, NULL, '2024-04-15', '2024-04-15', NULL, 2),
+(3, 'plot b', 2, NULL, NULL, '2024-04-15', '2024-04-15', NULL, 2);
 
 -- --------------------------------------------------------
 
@@ -231,6 +233,32 @@ INSERT INTO `regional_tim` (`id`, `id_regional`, `id_tim`, `created_at`, `update
 (5, 3, 2, '2024-04-12', '2024-04-13', NULL),
 (6, 3, 1, '2024-04-13', '2024-04-13', NULL),
 (7, 5, 1, '2024-04-13', '2024-04-13', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `subplot`
+--
+
+CREATE TABLE `subplot` (
+  `id` int(11) NOT NULL,
+  `nama_subplot` varchar(50) DEFAULT NULL,
+  `type_subplot` int(11) DEFAULT NULL,
+  `latitude` varchar(30) DEFAULT NULL,
+  `longitude` varchar(30) DEFAULT NULL,
+  `id_plot` int(11) DEFAULT NULL,
+  `created_at` date DEFAULT NULL,
+  `updated_at` date DEFAULT NULL,
+  `deleted_at` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `subplot`
+--
+
+INSERT INTO `subplot` (`id`, `nama_subplot`, `type_subplot`, `latitude`, `longitude`, `id_plot`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 'subplot a', 1, NULL, NULL, 2, '2024-04-15', '2024-04-15', NULL),
+(2, 'subplot b', 1, NULL, NULL, 2, '2024-04-15', '2024-04-15', '2024-04-15');
 
 -- --------------------------------------------------------
 
@@ -401,6 +429,12 @@ ALTER TABLE `regional_tim`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `subplot`
+--
+ALTER TABLE `subplot`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `tim`
 --
 ALTER TABLE `tim`
@@ -462,7 +496,7 @@ ALTER TABLE `master_subplot`
 -- AUTO_INCREMENT for table `plot`
 --
 ALTER TABLE `plot`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `regional`
@@ -475,6 +509,12 @@ ALTER TABLE `regional`
 --
 ALTER TABLE `regional_tim`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `subplot`
+--
+ALTER TABLE `subplot`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `tim`
