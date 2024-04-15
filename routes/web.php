@@ -23,8 +23,30 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 // Route::get('/', [ZonaController::class, 'index'])->name('zona');
 Route::resource("zona", ZonaController::class);
+
 Route::resource("plot-area", PlotAreaController::class);
-Route::resource("periode", PeriodeController::class);
-Route::resource("hamparan", HamparanController::class);
+
+// Route::resource("periode", PeriodeController::class);
+
+Route::get('/hamparan', [HamparanController::class, 'index'])->name('hamparan.index');
+
 Route::resource("team", TeamController::class);
-Route::resource("region", RegionController::class);
+
+// Route::resource("region", RegionController::class);
+
+
+Route::get('/periode/edit/{id}', [PeriodeController::class, 'edit'])->name('periode.edit');
+Route::get('/periode/create', [PeriodeController::class, 'create'])->name('periode.create');
+Route::get('/periode', [PeriodeController::class, 'index'])->name('periode.index');
+
+Route::get('/team/edit/{id}', [TeamController::class, 'edit'])->name('team.edit');
+Route::get('/team/create/{id}', [TeamController::class, 'create'])->name('team.create');
+Route::get('/team', [TeamController::class, 'index'])->name('team.index');
+Route::post('/team', [TeamController::class, 'store'])->name('team.store');
+Route::post('/tambahAnggota', [TeamController::class, 'tambahAnggota'])->name('team.tambahAnggota');
+
+Route::get('/regional/edit/{id}', [RegionController::class, 'edit'])->name('region.edit');
+Route::get('/regional/create', [RegionController::class, 'create'])->name('region.create');
+Route::get('/regional', [RegionController::class, 'index'])->name('region.index');
+Route::post('/regional', [RegionController::class, 'store'])->name('region.store');
+

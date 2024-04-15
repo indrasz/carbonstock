@@ -83,19 +83,7 @@
                             <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown"
                                 aria-haspopup="true" aria-expanded="false"><img src="/assets/img/bg-img/person_1.jpg"
                                     alt=""></button>
-                            <div class="dropdown-menu profile dropdown-menu-right">
-                                <!-- User Profile Area -->
-                                <div class="user-profile-area">
-                                    <a href="#" class="dropdown-item"><i class="bx bx-user font-15"
-                                            aria-hidden="true"></i> My profile</a>
-                                    <a href="#" class="dropdown-item"><i class="bx bx-wallet font-15"
-                                            aria-hidden="true"></i> My wallet</a>
-                                    <a href="#" class="dropdown-item"><i class="bx bx-wrench font-15"
-                                            aria-hidden="true"></i> settings</a>
-                                    <a href="#" class="dropdown-item"><i class="bx bx-power-off font-15"
-                                            aria-hidden="true"></i> Sign-out</a>
-                                </div>
-                            </div>
+
                         </li>
                     </ul>
                 </div>
@@ -109,7 +97,7 @@
 
     @stack('before-script')
 
-     @include('includes.script')
+    @include('includes.script')
 
     @stack('after-script')
 

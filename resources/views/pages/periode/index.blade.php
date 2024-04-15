@@ -43,7 +43,7 @@
                                         </div>
                                         <div class="col-sm-8 col-12">
                                             <div class="text-sm-end text-start gap-2 d-flex d-sm-block mt-sm-0 mt-2">
-                                                <button class="btn btn-warning rounded-3 p-2">Ubah Data</button>
+                                                <a href="{{ route('periode.edit', 1) }}" class="btn btn-warning rounded-3 p-2">Ubah Data</a>
                                                 <button class="btn btn-danger rounded-3 p-2">Hapus Data</button>
                                             </div>
 
@@ -73,7 +73,7 @@
                                         </div>
                                         <div class="col-sm-8 col-12">
                                             <div class="text-sm-end text-start gap-2 d-flex d-sm-block mt-sm-0 mt-2">
-                                                <button class="btn btn-warning rounded-3 p-2">Ubah Data</button>
+                                                <a href="{{ route('periode.edit', 1) }}" class="btn btn-warning rounded-3 p-2">Ubah Data</a>
                                                 <button class="btn btn-danger rounded-3 p-2">Hapus Data</button>
                                             </div>
 

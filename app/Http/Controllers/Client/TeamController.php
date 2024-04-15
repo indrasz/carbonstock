@@ -2,63 +2,75 @@
 
 namespace App\Http\Controllers\Client;
 
-use App\Http\Controllers\Controller;
+use App\Models\Tim;
+use App\Models\Users;
+use App\Models\AnggotaTim;
 use Illuminate\Http\Request;
+use App\Http\Requests\TeamRequest;
+use App\Http\Controllers\Controller;
 
 class TeamController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        return view('pages.team.index');
-
+        $team = Tim::with('anggota.users')->get();
+        return view('pages.team.index', [
+            'team' => $team
+        ]);
     }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function create($id)
     {
-        //
+        $users = Users::all();
+        return view('pages.team.create', [
+            'users' => $users,
+            'id' => $id
+        ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function store(TeamRequest $request)
     {
-        //
+        $data = $request->all();
+        // dd($data);
+        Tim::create($data);
+
+        return redirect()->route('team.index');
+    }
+    public function tambahAnggota(Request $request)
+    {
+        $validatedData = $request->validate([
+            'id_tim' => 'required|exists:tim,id',
+            'id_user' => 'required|array',
+            'id_user.*' => 'required:integer',
+        ]);
+
+        foreach ($validatedData['id_user'] as $idUser) {
+            $anggotaTim = new AnggotaTim();
+            $anggotaTim->id_tim = $validatedData['id_tim'];
+            $anggotaTim->id_user = $idUser;
+
+            $anggotaTim->save();
+        }
+
+        // Redirect atau berikan respons sesuai kebutuhan Anda
+        return redirect()->route('team.index');
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(string $id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(string $id)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, string $id)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+
     public function destroy(string $id)
     {
         //
