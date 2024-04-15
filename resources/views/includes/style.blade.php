@@ -12,8 +12,27 @@
 <!-- Master Stylesheet CSS -->
 <link rel="stylesheet" href="/assets/style.css">
 
+<!-- These plugins only need for the run this page -->
+<link rel="stylesheet" href="/assets/css/default-assets/modal.css">
+<!-- Plugins css -->
+{{-- <link rel="stylesheet" href="/assets/css/default-assets/select2.min.css">
+<link rel="stylesheet" href="/assets/css/default-assets/jquery.bootstrap-touchspin.min.css">
+<link rel="stylesheet" href="/assets/css/bootstrap-colorpicker.min.css">
+<link rel="stylesheet" href="/assets/css/bootstrap-datepicker.min.css">
+<link rel="stylesheet" href="/assets/css/default-assets/color-picker-bootstrap.css">
+<link rel="stylesheet" href="/assets/css/default-assets/jquery.tagsinput.min.css">
+<link rel="stylesheet" href="/assets/css/default-assets/daterange-picker.css">
+<link rel="stylesheet" href="/assets/css/default-assets/form-picker.css"> --}}
+
 {{-- <link href='https://api.mapbox.com/mapbox-gl-js/v2.6.0/mapbox-gl.css' rel='stylesheet' />
 <script src='https://api.mapbox.com/mapbox-gl-js/v2.6.0/mapbox-gl.js'></script> --}}
+
+<script src="https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.js"></script>
+<link href="https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css" rel="stylesheet">
+<script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.min.js"></script>
+<link rel="stylesheet"
+    href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.css" type="text/css">
+
 <style>
     body {
         margin: 0;
@@ -21,9 +40,7 @@
     }
 
     #map {
-        position: absolute;
-        top: 0;
-        bottom: 0;
+        height: 400px;
         width: 100%;
     }
 

@@ -51,13 +51,13 @@
                     </li>
                     <li
                         class="px-0 py-1
-                    {{ request()->is('region') || request()->is('region/*') ? 'active' : '' }}">
+                    {{ request()->is('regional') || request()->is('regional/*') ? 'active' : '' }}">
                         <a href="{{ route('region.index') }}">
                             <div class="d-flex justify-content-center w-100">
-                                <i style="color: {{ request()->is('region') || request()->is('region/*') ? '#2A8D12' : '#1F2935' }}"
+                                <i style="color: {{ request()->is('regional') || request()->is('regional/*') ? '#2A8D12' : '#1F2935' }}"
                                     class='bx bx-area'></i>
                                 <span
-                                    style="color: {{ request()->is('region') || request()->is('region/*') ? '#2A8D12' : '#1F2935' }}">Regional</span>
+                                    style="color: {{ request()->is('regional') || request()->is('regional/*') ? '#2A8D12' : '#1F2935' }}">Regional</span>
                             </div>
                         </a>
                     </li>
