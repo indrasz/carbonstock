@@ -24,4 +24,8 @@ class SubPlot extends Model
     function subplot(){
         return $this->hasOne(MasterSubPlot::class, 'id', 'type_subplot');
     }
+
+    function plot(){
+        return $this->hasOne(Plot::class, 'id', 'id_plot');
+    }
 }

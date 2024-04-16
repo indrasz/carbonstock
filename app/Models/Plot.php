@@ -24,4 +24,8 @@ class Plot extends Model
     function plot(){
         return $this->hasOne(MasterPlot::class, 'id', 'type_plot');
     }
+
+    function hamparan(){
+        return $this->hasOne(Hamparan::class, 'id', 'id_hamparan');
+    }
 }

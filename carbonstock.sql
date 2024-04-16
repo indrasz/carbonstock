@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 15, 2024 at 04:13 PM
+-- Generation Time: Apr 16, 2024 at 06:43 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.1.25
 
@@ -70,6 +70,69 @@ INSERT INTO `hamparan` (`id`, `nama_hamparan`, `id_zona`, `latitude`, `longitude
 (1, 'hamparan 1', 2, '123', '123', '2024-04-13', '2024-04-13', '2024-04-13'),
 (2, 'hamparan 1', 2, '123', '123', '2024-04-13', '2024-04-13', NULL),
 (3, 'hamparan 2', 2, '123', '123', '2024-04-13', '2024-04-13', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `laporan_semai`
+--
+
+CREATE TABLE `laporan_semai` (
+  `id` int(11) NOT NULL,
+  `id_subplot` int(11) DEFAULT NULL,
+  `berat_basah_total` varchar(5) DEFAULT NULL,
+  `berat_basah_sample` varchar(5) DEFAULT NULL,
+  `berat_kering_total` varchar(5) DEFAULT NULL,
+  `kandungan_karbon` varchar(5) DEFAULT NULL,
+  `serapan_co2` varchar(5) DEFAULT NULL,
+  `catatan` text DEFAULT NULL,
+  `created_at` date DEFAULT NULL,
+  `updated_at` date DEFAULT NULL,
+  `deleted_at` date DEFAULT NULL,
+  `berat_kering_sample` varchar(5) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `laporan_serasah`
+--
+
+CREATE TABLE `laporan_serasah` (
+  `id` int(11) NOT NULL,
+  `id_subplot` int(11) DEFAULT NULL,
+  `berat_basah_total` varchar(5) DEFAULT NULL,
+  `berat_basah_sample` varchar(5) DEFAULT NULL,
+  `berat_kering_total` varchar(5) DEFAULT NULL,
+  `kandungan_karbon` varchar(5) DEFAULT NULL,
+  `serapan_co2` varchar(5) DEFAULT NULL,
+  `catatan` text DEFAULT NULL,
+  `created_at` date DEFAULT NULL,
+  `updated_at` date DEFAULT NULL,
+  `deleted_at` date DEFAULT NULL,
+  `berat_kering_sample` varchar(5) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `laporan_tumbuhan_bawah`
+--
+
+CREATE TABLE `laporan_tumbuhan_bawah` (
+  `id` int(11) NOT NULL,
+  `id_subplot` int(11) DEFAULT NULL,
+  `berat_basah_total` varchar(5) DEFAULT NULL,
+  `berat_basah_sample` varchar(5) DEFAULT NULL,
+  `berat_kering_total` varchar(5) DEFAULT NULL,
+  `kandungan_karbon` varchar(5) DEFAULT NULL,
+  `serapan_co2` varchar(5) DEFAULT NULL,
+  `catatan` text DEFAULT NULL,
+  `created_at` date DEFAULT NULL,
+  `updated_at` date DEFAULT NULL,
+  `deleted_at` date DEFAULT NULL,
+  `berat_kering_sample` varchar(5) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -392,6 +455,12 @@ ALTER TABLE `hamparan`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `laporan_semai`
+--
+ALTER TABLE `laporan_semai`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `master_hutan`
 --
 ALTER TABLE `master_hutan`
@@ -473,6 +542,12 @@ ALTER TABLE `anggota_tim`
 --
 ALTER TABLE `hamparan`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `laporan_semai`
+--
+ALTER TABLE `laporan_semai`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `master_hutan`
