@@ -28,15 +28,17 @@
                                         <div class="row align-items-center">
                                             <div class="col-12">
                                                 <h4 class=" mb-0">{{ $item->nama_regional }}</h4>
-                                                <p class="card-text" id="nama_koordinat"/>
+                                                <p class="card-text" id="nama_koordinat_{{ $item->id }}"></p>
                                                 <div class="d-flex justify-content-between align-items-center my-2">
                                                     <div class="d-flex align-items-center gap-2">
                                                         <i style="color: #22710E; font-size: 18px;"
                                                             class='bx bx-map-alt'></i>
                                                         <span style="color: #90A8BF">Jenis Hutan</span>
                                                     </div>
-                                                    <p class="m-0" style="color: #90A8BF">
-                                                        {{ $item->type_hutan->jenis_hutan }}</p>
+                                                    @if ($item->type_hutan)
+                                                        <p class="m-0" style="color: #90A8BF">
+                                                            {{ $item->type_hutan->jenis_hutan }}</p>
+                                                    @endif
                                                 </div>
                                                 <div class="d-flex justify-content-between align-items-center mb-2">
                                                     <div class="d-flex align-items-center gap-2">
@@ -59,28 +61,23 @@
                                                             class='bx bx-time-five'></i>
                                                         <span style="color: #90A8BF">Tanggal berakhir</span>
                                                     </div>
-                                                    <p class="m-0" style="color: #90A8BF">{{ $item->tanggal_selesai }}</p>
+                                                    <p class="m-0" style="color: #90A8BF">{{ $item->tanggal_selesai }}
+                                                    </p>
                                                 </div>
-                                                {{-- <div class="d-flex justify-content-start gap-2 align-items-center mb-2">
-                                                <div class="d-flex align-items-center justify-content-start gap-2">
-                                                    <i style="color: #22710E; font-size: 18px;" class='bx bx-map'></i>
-                                                    <span style="color: #90A8BF">Lokasi : </span>
-                                                </div>
-                                                <p class="m-0" style="color: #90A8BF">Bandung</p>
-                                            </div>
-                                            <div class="d-block justify-content-start gap-4 align-items-center mb-2">
-                                                <div class="d-flex align-items-center justify-content-start gap-2">
-                                                    <span style="color: #22710E">Detail Alamat </span>
-                                                </div>
-                                                <p class="mx-0 mt-2" style="color: #90A8BF">Jl. Telekomunikasi. 1, Terusan
-                                                    Buahbatu - Bojongsoang, Telkom University, Sukapura, Kec. Dayeuhkolot,
-                                                    Kabupaten Bandung, Jawa Barat 40257</p>
-                                            </div> --}}
                                             </div>
                                             <div class="col-12">
                                                 <div class="text-sm-end text-start gap-2 d-flex d-sm-block mt-sm-0 mt-2">
-                                                    <button class="btn btn-warning rounded-3 p-2">Ubah Data</button>
-                                                    <button class="btn btn-danger rounded-3 p-2">Hapus Data</button>
+
+                                                    <form class="d-flex gap-2 align-items-center"
+                                                        action="{{ route('region.destroy', $item->id) }}" method="POST">
+                                                        @csrf
+                                                        {{-- @method('DELETE') --}}
+                                                        <a class="btn btn-warning rounded-3 p-2">Ubah Data</a>
+                                                        <button onclick="return confirm('Apakah yakin ingin di hapus?')"
+                                                            class="btn btn-danger rounded-3 p-2">Hapus
+                                                            Data</button>
+                                                    </form>
+
                                                 </div>
 
                                             </div>
@@ -104,24 +101,31 @@
     <!-- Inject JS -->
     <script src="js/default-assets/modal-classes.js"></script>
     <script src="js/default-assets/modaleffects.js"></script>
-
     <script>
         mapboxgl.accessToken = 'pk.eyJ1IjoiaW5kcmFzeiIsImEiOiJjbHVxaWV3bngycmhiMmtuejluMTNzY216In0.EZ-2uwWJ3SAYv3ehMizmGw';
 
-        function getAddressFromCoordinates(latitude, longitude) {
+        function getAddressFromCoordinates(latitude, longitude, id) {
             fetch(
                     `https://api.mapbox.com/geocoding/v5/mapbox.places/${longitude},${latitude}.json?access_token=${mapboxgl.accessToken}`
-                    )
+                )
                 .then(response => response.json())
                 .then(data => {
                     const address = data.features[0].place_name;
-                    document.getElementById('nama_koordinat').innerText = address;
+                    // Gunakan ID yang disisipkan untuk memperbarui elemen yang sesuai
+                    document.getElementById('nama_koordinat_' + id).innerText = address;
                 })
                 .catch(error => console.error('Error:', error));
         }
-    </script>
-
-    <script>
-        getAddressFromCoordinates({{ $item->latitude }}, {{ $item->longitude }});
+        var regionalData = <?php echo json_encode($regional); ?>;
+        // console.log(regionalData);
+        if (Array.isArray(regionalData)) {
+            // regionalData adalah array, Anda dapat menggunakan forEach
+            regionalData.forEach(item => {
+                getAddressFromCoordinates(item.latitude, item.longitude, item.id);
+            });
+        } else {
+            // regionalData bukan array, lakukan penanganan kesalahan di sini
+            console.error('regionalData bukan array');
+        }
     </script>
 @endpush

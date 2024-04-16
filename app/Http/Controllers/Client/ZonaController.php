@@ -2,27 +2,43 @@
 
 namespace App\Http\Controllers\Client;
 
-use App\Http\Controllers\Controller;
+use App\Models\Regional;
+use App\Models\MasterHutan;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\ZonaRequest;
+use App\Models\Zona;
 
 class ZonaController extends Controller
 {
 
     public function index()
     {
-        return view('pages.zona.index');
+        $zona = Zona::with('regional.type_hutan', 'tim')->get();
+        return view('pages.zona.index',[
+            'zona' => $zona,
+        ]);
     }
 
 
     public function create()
     {
-        //
+        $regional = Regional::all();
+        $masterHutan = MasterHutan::all();
+        return view('pages.zona.create', [
+            'masterHutan' => $masterHutan,
+            'regional' => $regional
+        ]);
     }
 
 
-    public function store(Request $request)
+    public function store(ZonaRequest $request)
     {
-        //
+        $data = $request->all();
+        // dd($data);
+        Zona::create($data);
+
+        return redirect()->route('zona.index');
     }
 
 
@@ -40,7 +56,7 @@ class ZonaController extends Controller
     {
         //
     }
-    
+
     public function destroy(string $id)
     {
         //
