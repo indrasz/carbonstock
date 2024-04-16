@@ -22,7 +22,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 // Route::get('/', [ZonaController::class, 'index'])->name('zona');
-Route::resource("zona", ZonaController::class);
+// Route::resource("zona", ZonaController::class);
 
 Route::resource("plot-area", PlotAreaController::class);
 
@@ -49,4 +49,10 @@ Route::get('/regional/edit/{id}', [RegionController::class, 'edit'])->name('regi
 Route::get('/regional/create', [RegionController::class, 'create'])->name('region.create');
 Route::get('/regional', [RegionController::class, 'index'])->name('region.index');
 Route::post('/regional', [RegionController::class, 'store'])->name('region.store');
+Route::post('/regional/{id}', [RegionController::class, 'destroy'])->name('region.destroy');
 
+Route::get('/zona/edit/{id}', [ZonaController::class, 'edit'])->name('zona.edit');
+Route::get('/zona/create', [ZonaController::class, 'create'])->name('zona.create');
+Route::get('/zona', [ZonaController::class, 'index'])->name('zona.index');
+Route::post('/zona', [ZonaController::class, 'store'])->name('zona.store');
+Route::post('/tambahAnggota', [ZonaController::class, 'tambahAnggota'])->name('zona.tambahAnggota');

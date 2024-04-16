@@ -21,6 +21,11 @@ class Zona extends Model
         'longitude'
     ];
 
+    public function regional()
+    {
+        return $this->belongsTo(Regional::class, 'id_regional', 'id');
+    }
+    
     function tim(){
         return $this->hasMany(ZonaTim::class, 'id_zona', 'id');
     }

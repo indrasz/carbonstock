@@ -59,6 +59,9 @@ class RegionController extends Controller
 
     public function destroy(string $id)
     {
-        //
+        $region = Regional::findorFail($id);
+        $region->delete();
+
+        return redirect()->route('region.index');
     }
 }
