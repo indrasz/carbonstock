@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\HamparanController;
+use App\Http\Controllers\Api\LaporanController;
 use App\Http\Controllers\Api\MasterController;
 use App\Http\Controllers\Api\PlotController;
 use App\Http\Controllers\Api\RegionalController;
@@ -97,4 +98,10 @@ Route::prefix('admin')->group(function(){
 Route::prefix('master')->group(function(){
     Route::get('jenis-hutan', [MasterController::class, 'getHutan']);
     Route::get('plot', [MasterController::class, 'plot']);
+});
+
+Route::prefix('laporan')->group(function(){
+    Route::get('semai', [LaporanController::class, 'get_semai']);
+    Route::post('add-semai', [LaporanController::class, 'add_semai']);
+    Route::delete('delete-semai/{id_subplot}/{id_semai}', [LaporanController::class, 'delete_semai']);
 });
