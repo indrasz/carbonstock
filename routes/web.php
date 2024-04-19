@@ -21,20 +21,15 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
-// Route::get('/', [ZonaController::class, 'index'])->name('zona');
-// Route::resource("zona", ZonaController::class);
 
 Route::resource("plot-area", PlotAreaController::class);
 
-// Route::resource("periode", PeriodeController::class);
-
 Route::get('/hamparan', [HamparanController::class, 'index'])->name('hamparan.index');
+Route::get('/hamparan/create', [HamparanController::class, 'create'])->name('hamparan.create');
+Route::post('/hamparan/{id}', [HamparanController::class, 'destroy'])->name('hamparan.destroy');
+Route::post('/hamparan', [HamparanController::class, 'store'])->name('hamparan.store');
 
 Route::resource("team", TeamController::class);
-
-// Route::resource("region", RegionController::class);
-
-
 Route::get('/periode/edit/{id}', [PeriodeController::class, 'edit'])->name('periode.edit');
 Route::get('/periode/create', [PeriodeController::class, 'create'])->name('periode.create');
 Route::get('/periode', [PeriodeController::class, 'index'])->name('periode.index');
@@ -43,7 +38,8 @@ Route::get('/team/edit/{id}', [TeamController::class, 'edit'])->name('team.edit'
 Route::get('/team/create/{id}', [TeamController::class, 'create'])->name('team.create');
 Route::get('/team', [TeamController::class, 'index'])->name('team.index');
 Route::post('/team', [TeamController::class, 'store'])->name('team.store');
-Route::post('/tambahAnggota', [TeamController::class, 'tambahAnggota'])->name('team.tambahAnggota');
+Route::post('/team/tambahAnggota', [TeamController::class, 'tambahAnggota'])->name('team.tambahAnggota');
+Route::post('/team/{id}', [TeamController::class, 'destroy'])->name('team.destroy');
 
 Route::get('/regional/edit/{id}', [RegionController::class, 'edit'])->name('region.edit');
 Route::get('/regional/create', [RegionController::class, 'create'])->name('region.create');
@@ -55,4 +51,5 @@ Route::get('/zona/edit/{id}', [ZonaController::class, 'edit'])->name('zona.edit'
 Route::get('/zona/create', [ZonaController::class, 'create'])->name('zona.create');
 Route::get('/zona', [ZonaController::class, 'index'])->name('zona.index');
 Route::post('/zona', [ZonaController::class, 'store'])->name('zona.store');
-Route::post('/tambahAnggota', [ZonaController::class, 'tambahAnggota'])->name('zona.tambahAnggota');
+Route::post('/zona/tambahTim', [ZonaController::class, 'tambahTim'])->name('zona.tambahTim');
+Route::post('/zona/{id}', [ZonaController::class, 'destroy'])->name('zona.destroy');

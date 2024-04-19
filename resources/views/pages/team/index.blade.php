@@ -49,19 +49,26 @@
                                                                 style="background: #3e8829;">{{ $user->nama }}</span>
                                                         @endforeach
                                                     @else
-                                                    <p class="text-danger m-0"> Belum Ada Anggota yang ditambahkan</p>
+                                                        <p class="text-danger m-0"> Belum Ada Anggota yang ditambahkan</p>
                                                     @endif
 
                                                 </div>
                                                 <a href="{{ route('team.create', $item->id) }}">
-                                                    <p class="text-info mt-3" >+ Tambah User</p>
+                                                    <p class="text-info mt-3">+ Tambah User</p>
                                                 </a>
                                             </div>
                                             <div class="mt-3">
                                                 <div class="text-sm-end text-start gap-2 d-flex d-sm-block mt-sm-0 mt-3">
                                                     @if (!$item->anggota->isEmpty())
-                                                        <button class="btn btn-warning rounded-3 p-2">Ubah</button>
-                                                        <button class="btn btn-danger rounded-3 p-2">Hapus</button>
+                                                        <form class="d-flex gap-2 align-items-center"
+                                                            action="{{ route('team.destroy', $item->id) }}" method="POST">
+                                                            @csrf
+
+                                                            <a class="btn btn-warning rounded-3 p-2">Ubah</a>
+                                                            <button onclick="return confirm('Apakah yakin ingin di hapus?')"
+                                                                class="btn btn-danger rounded-3 p-2">Hapus
+                                                                Data</button>
+                                                        </form>
                                                     @endif
                                                 </div>
                                             </div>

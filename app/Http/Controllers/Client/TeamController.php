@@ -73,6 +73,9 @@ class TeamController extends Controller
 
     public function destroy(string $id)
     {
-        //
+        $team = Tim::findorFail($id);
+        $team->delete();
+
+        return redirect()->route('team.index');
     }
 }

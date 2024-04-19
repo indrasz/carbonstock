@@ -17,4 +17,10 @@ class ZonaTim extends Model
         'id_zona',
         'id_tim'
     ];
+
+    public function namaTim()
+    {
+        return $this->belongsTo(Tim::class, 'id_tim', 'id');
+    }
+
 }
