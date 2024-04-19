@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Client\AuthController;
 use App\Http\Controllers\Client\DashboardController;
 use App\Http\Controllers\Client\HamparanController;
 use App\Http\Controllers\Client\PeriodeController;
@@ -19,6 +20,17 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+Route::get('/profile', function () {
+    return view('profile');
+})->name('profile');
+
+Route::group(['prefix' => 'auth'], function () {
+    Route::get('/login', [AuthController::class, 'login'])->name('login');
+    Route::get('/login/email', [AuthController::class, 'loginWithEmail'])->name('login.email');
+    Route::get('/register', [AuthController::class, 'register'])->name('register');
+    Route::get('/validateUser', [AuthController::class, 'login'])->name('login.validateUser');
+    Route::get('/createUser', [AuthController::class, 'createUser'])->name('register.createUser');
+});
 
 Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 

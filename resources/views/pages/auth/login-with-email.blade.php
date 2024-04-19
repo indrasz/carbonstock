@@ -21,26 +21,33 @@
         </div>
     </nav>
 
-    {{-- main --}}
-    <main class="row w-100vw h-100vh">
-
-        {{-- left --}}
-        <section class="col-12 col-md-6 px-4 d-flex flex-column justify-content-center align-items-center">
-            <div class="d-flex align-items-center gap-4 mb-2 px-4 px-md-0">
-                <h1 class="font-praise text-green hero-logo-carbon">Carbon Stock</h1>
-                <img class="img-telkom" src="{{ asset('assets/img/auth-img/Logo.png') }}" class="">
-            </div>
-
+    <main class="row w-100vw h-100vh ">
+        <section class="col-12 col-md-6 px-4 d-flex flex-column justify-content-center align-items-center pt-5">
             <div class="text-center mb-4">
-                <h2 class="hero-title">Satu Visi: Bumi Hijau, Masa<br> Depan Berkelanjutan</h2>
-                <p class="fs-6">Masuk dan nikmati pengalaman yang terbaik</->
+                <h2 class="hero-title">Selamat Datang</h2>
+                <p class="fs-5 lh-sm">Lanjutkan dengan Google atau <br> Masukkan Detail Login</->
             </div>
 
+            <form class="w-cta mb-5" action="" method="POST">
+                <div class="form-floating mb-3">
+                    <input type="email" class="form-control input-form" id="floatingInput" placeholder="name@example.com">
+                    <label class="label-form" for="floatingInput">Alamat Email</label>
+                </div>
+                <div class="form-floating">
+                    <input type="password" class="form-control input-form" id="floatingPassword" placeholder="Password">
+                    <label class="label-form" for="floatingPassword">Password</label>
+                </div>
+            </form>
 
-            <a class="d-block hover text-center py-3 w-cta fs-6 fw-bold text-white bg-green rounded"
+
+            <a class="d-block hover text-center py-3 w-cta fs-6 fw-bold text-white bg-green rounded mb-3"
                 href="/auth/login/email">Lanjutkan dengan E-mail</a>
+
+            <p class="mb-2 fs-6">Belum punya akun? <span class="text-green fw-bold"><a href="{{ route('register') }}">Buat
+                        Akun</a></span></p>
+
             <!-- separator -->
-            <div class="d-flex my-4">
+            <div class="d-flex mb-4">
                 <span>atau</span>
             </div>
             <!-- Button Google -->
@@ -52,10 +59,7 @@
             </a>
         </section>
 
-        {{-- right --}}
         <section class="col-6 d-none d-md-block p-0">
-
-            {{-- carousel --}}
             <div class="carousel gap-0" data-flickity='{ "autoPlay": true,"prevNextButtons": false }'>
                 <div class="carousel-cell">
                     <div class="position-relative bg-danger-300 h-100vh w-100">
@@ -116,7 +120,12 @@
         }
 
         .font-gilroy {
-            font-family: "Gilroy-Bold", sans-serif;
+            /* font-family: 'Gilroy-Bold', sans-serif; */
+            font-family: 'Gilroy-Bold', sans-serif;
+            /* font-family: 'Gilroy-Light', sans-serif;
+                font-family: 'Gilroy-Medium', sans-serif;
+                font-family: 'Gilroy-Regular', sans-serif; */
+
         }
 
         .font-bold {
@@ -154,7 +163,6 @@
             /* counter-increment: gallery-cell; */
         }
 
-        /* carousel dot pagination */
 
         .flickity-page-dots {
             bottom: 40px;
@@ -188,11 +196,28 @@
         }
 
         .slider-text-wrapper:nth-child(1) {
-            font-family: 'Gilroy-Bold', sans-serif;
             font-size: 42px;
         }
 
-        /* responsive */
+        .input-form {
+            border: none !important;
+            border-bottom: 2px solid rgba(128, 128, 128, 0.3) !important;
+            background-color: transparent;
+            outline: none;
+            border-radius: 0;
+            font-size: 14px;
+            color: black !important;
+        }
+
+        .input-form:focus {
+            background-color: transparent !important;
+        }
+
+        .label-form {
+            opacity: 0.5;
+            font-size: 16px;
+            font-weight: lighter !important;
+        }
 
         @media only screen and (min-width: 992px) {
             .w-cta {

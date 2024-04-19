@@ -98,9 +98,6 @@
 @endpush
 
 @push('after-script')
-    <!-- Inject JS -->
-    <script src="js/default-assets/modal-classes.js"></script>
-    <script src="js/default-assets/modaleffects.js"></script>
     <script>
         mapboxgl.accessToken = 'pk.eyJ1IjoiaW5kcmFzeiIsImEiOiJjbHVxaWV3bngycmhiMmtuejluMTNzY216In0.EZ-2uwWJ3SAYv3ehMizmGw';
 
@@ -119,12 +116,10 @@
         var regionalData = <?php echo json_encode($regional); ?>;
         // console.log(regionalData);
         if (Array.isArray(regionalData)) {
-            // regionalData adalah array, Anda dapat menggunakan forEach
             regionalData.forEach(item => {
                 getAddressFromCoordinates(item.latitude, item.longitude, item.id);
             });
         } else {
-            // regionalData bukan array, lakukan penanganan kesalahan di sini
             console.error('regionalData bukan array');
         }
     </script>

@@ -18,7 +18,9 @@
                                 alt="Card image cap">
                             <div class="card-body">
                                 <h4 class=" mb-0">{{ $item->nama_hamparan }}</h4>
-                                <p class="card-text mb-0">{{ $item->zona->nama_zona }}</p>
+                                @if ($item->zona)
+                                    <p class="card-text mb-0">{{ $item->zona->nama_zona }}</p>
+                                @endif
 
                                 <div class="d-flex justify-content-between align-items-center my-2">
                                     <div class="d-flex align-items-center gap-2">

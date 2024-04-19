@@ -2,23 +2,25 @@
 
 namespace App\Http\Controllers\Client;
 
-use App\Http\Controllers\Controller;
+use App\Models\Zona;
+use App\Models\Hamparan;
+use App\Models\Regional;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class DashboardController extends Controller
 {
     public function index (){
-        // $token = 'sk.eyJ1IjoiaW5kcmFzeiIsImEiOiJjbHVxaW11MzUxZmExMm1wbmcwbTB2aHE4In0.HlEalQKwdn5EZOOYqMsYyg';
 
-        // $latitude = 40.7128;
-        // $longitude = -74.0060;
+        $regional = Regional::all();
+        $zona = Zona::all();
+        $hamparan = Hamparan::all();
 
         return view('pages.index', [
-            // 'token' => $token,
-            // 'latitude' => $latitude,
-            // 'longitude' => $longitude,
+            'regional' => $regional,
+            'zona' => $zona,
+            'hamparan' => $hamparan
         ]);
 
-        // return view('pages.index');
     }
 }
