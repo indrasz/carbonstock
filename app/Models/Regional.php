@@ -14,6 +14,7 @@ class Regional extends Model
     protected $primaryKey = 'id';
 
     protected $fillable = [
+        'id_periode',
         'nama_regional',
         'tanggal_mulai',
         'tanggal_selesai',

@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\HamparanController;
 use App\Http\Controllers\Api\LaporanController;
 use App\Http\Controllers\Api\MasterController;
+use App\Http\Controllers\Api\PeriodeController;
 use App\Http\Controllers\Api\PlotController;
 use App\Http\Controllers\Api\RegionalController;
 use App\Http\Controllers\Api\SubPlotController;
@@ -48,6 +49,13 @@ Route::prefix('admin')->group(function(){
         Route::get('list-anggota/{idTim}', [TimController::class, 'getAnggotaTim']);
         Route::post('add-anggota', [TimController::class, 'addAnggotaTim']);
         Route::delete('delete-anggota/{id_tim}/{id_user}', [TimController::class, 'deleteAnggotaTim']);
+    });
+
+    Route::prefix('periode')->group(function(){
+        Route::get('/', [PeriodeController::class, 'get']);
+        Route::post('/add', [PeriodeController::class, 'add']);
+        Route::put('edit/{id_periode}', [PeriodeController::class, 'edit']);
+        Route::delete('/delete/{id_periode}', [PeriodeController::class, 'delete']);
     });
 
     Route::prefix('regional')->group(function(){

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\MasterHutan;
+use App\Models\Periode;
 use App\Models\Regional;
 use App\Models\RegionalTim;
 use App\Models\Tim;
@@ -30,10 +31,11 @@ class RegionalController extends Controller
 
     function add(Request $request){
         $validator = Validator::make($request->all(), [
+            'id_periode' => 'required',
             'nama_regional' => 'required',
             'jenis_hutan' => 'required',
-            'tanggal_mulai' => 'required',
-            'tanggal_selesai' => 'required',
+            'tanggal_mulai' => 'nullable',
+            'tanggal_selesai' => 'nullable',
             'latitude' => 'required',
             'longitude' => 'required'
         ]);
@@ -46,7 +48,12 @@ class RegionalController extends Controller
             return $this->responses(false, 'Jenis hutan tidak ditemukan');
         }
 
+        if(Periode::where('id', $request->id_periode)->count() == 0){
+            return $this->responses(false, 'Periode tidak ditemukan');
+        }
+
         $inserts = Regional::create([
+            'id_periode' => $request->id_periode,
             'nama_regional' => $request->nama_regional,
             'tanggal_mulai' => $request->tanggal_mulai,
             'tanggal_selesai' => $request->tanggal_selesai,
