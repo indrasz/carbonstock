@@ -11,6 +11,7 @@ use App\Models\Zona;
 use App\Models\ZonaTim;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 class ZonaController extends Controller
 {
@@ -29,6 +30,25 @@ class ZonaController extends Controller
         }
 
         $data = $data->get();
+        for($i = 0; $i < count($data); $i++){
+            $dir_files = public_path('zona_'.$data[$i]->id);
+            $files = array();
+            if(is_dir($dir_files)){
+                $list_files = scandir($dir_files);
+                array_shift($list_files);
+                array_shift($list_files);
+
+                foreach($list_files as $list){
+                    array_push($files, array(
+                        'nama_file' => $list,
+                        'path' => 'zona_'.$data[$i]->id.'/'.$list
+                    ));
+                }
+            }
+            $data[$i]->files = $files;
+        }
+
+        $data = $data;
 
         return $this->responses(true, 'Berhasil mendapatkan data', $data);
     }
@@ -64,6 +84,33 @@ class ZonaController extends Controller
             'jenis_hutan' => $jenis_hutan
         ]);
 
+        if($request->hasFile('file')){
+            $dir = public_path('zona_'.$insert->id);
+            if(!is_dir($dir)){
+                mkdir($dir, 0777, true);
+            }
+
+            foreach($request->file('file') as $file){
+                $names = Str::random(6).'_'.$file->getClientOriginalName();
+                $list_files = scandir($dir);
+                array_shift($list_files);
+                array_shift($list_files);
+
+                $start = 0;
+                $is_found = true;
+                while($is_found){
+                    if(in_array($names, $list_files)){
+                        $names = Str::random(6).'_'.$file->getClientOriginalName();
+                        $is_found = true;
+                    }else {
+                        $is_found = false;
+                    }
+                }
+
+                $file->move($dir, $names);
+            }
+        }
+
         return $this->responses(true, 'Berhasil menambahkan zona');
     }
 
@@ -86,6 +133,67 @@ class ZonaController extends Controller
         $deletes = $zona->where('id_regional', $id_regional)->delete();
 
         return $this->responses(true, 'Berhasil menghapus zona');
+    }
+
+    function add_photo($id_zona, Request $request){
+        $check_zona = Zona::where('id', $id_zona)->count();
+        if($check_zona == 0){
+            return $this->responses(false, 'Zona tidak ditemukan');
+        }
+
+        if($request->hasFile('file')){
+            $dir = public_path('zona_'.$id_zona);
+            if(!is_dir($dir)){
+                mkdir($dir, 0777, true);
+            }
+
+            foreach($request->file('file') as $file){
+                $names = Str::random(6).'_'.$file->getClientOriginalName();
+                $list_files = scandir($dir);
+                array_shift($list_files);
+                array_shift($list_files);
+
+                $start = 0;
+                $is_found = true;
+                while($is_found){
+                    if(in_array($names, $list_files)){
+                        $names = Str::random(6).'_'.$file->getClientOriginalName();
+                        $is_found = true;
+                    }else {
+                        $is_found = false;
+                    }
+                }
+
+                $file->move($dir, $names);
+            }
+
+            return $this->responses(true, 'Berhasil menambahkan data');
+        }else {
+            return $this->responses(false, 'Files is required');
+        }
+    }
+
+    function delete_photo($id_zona, $nama_file){
+        $check_zona = Zona::where('id', $id_zona)->count();
+        if($check_zona == 0){
+            return $this->responses(false, 'Gagal menghapus photo, zona tidak ditemukan');
+        }
+
+        $dir = public_path('zona_'.$id_zona);
+        if(is_dir($dir)){
+            $list_files = scandir($dir);
+            array_shift($list_files);
+            array_shift($list_files);
+
+            if(in_array($nama_file, $list_files)){
+                unlink($dir.'\\'.$nama_file);
+                return $this->responses(true, 'Berhasil menghapus file');
+            }else {
+                return $this->responses(false, 'Gagal menghapus file, file tidak ditemukan');
+            }
+        }else {
+            return $this->responses(false, 'Gagal menghapus file, belum ada file pada zona ini');
+        }
     }
 
     function add_tim(Request $request){

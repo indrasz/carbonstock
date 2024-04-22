@@ -79,6 +79,11 @@ Route::prefix('admin')->group(function(){
             Route::post('/add', [ZonaController::class, 'add_tim']);
             Route::delete('/{id_zona}/{id_tim}', [ZonaController::class, 'delete_tim']);
         });
+
+        Route::prefix('files')->group(function(){
+            Route::post('add/{id_zona}', [ZonaController::class, 'add_photo']);
+            Route::delete('delete/{id_zona}/{nama_file}', [ZonaController::class, 'delete_photo']);
+        });
     });
 
     Route::prefix('hamparan')->group(function(){
