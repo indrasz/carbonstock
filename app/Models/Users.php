@@ -26,4 +26,8 @@ class Users extends Model
         'email',
         'password'
     ];
+
+    // function tim(){
+    //     return $this->hasMany(Tim::with('anggota')->whereHas())
+    // }
 }

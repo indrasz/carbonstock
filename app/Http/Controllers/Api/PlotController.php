@@ -8,6 +8,7 @@ use App\Models\MasterPlot;
 use App\Models\Plot;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 class PlotController extends Controller
 {
@@ -57,6 +58,33 @@ class PlotController extends Controller
             'latitude' => $request->latitude,
             'longitude' => $request->longitude
         ]);
+
+        if($request->hasFile('file')){
+            $dir = public_path('plot_'.$inserts->id);
+            if(!is_dir($dir)){
+                mkdir($dir, 0777, true);
+            }
+
+            foreach($request->file('file') as $file){
+                $names = Str::random(6).'_'.$file->getClientOriginalName();
+                $list_files = scandir($dir);
+                array_shift($list_files);
+                array_shift($list_files);
+
+                $start = 0;
+                $is_found = true;
+                while($is_found){
+                    if(in_array($names, $list_files)){
+                        $names = Str::random(6).'_'.$file->getClientOriginalName();
+                        $is_found = true;
+                    }else {
+                        $is_found = false;
+                    }
+                }
+
+                $file->move($dir, $names);
+            }
+        }
 
         return $this->responses(true, 'Berhasil menambahkan data');
     }
@@ -116,6 +144,67 @@ class PlotController extends Controller
 
         $deletes = $plot->delete();
         return $this->responses(true, 'Berhasil menghapus data');
+    }
+
+    function add_photo($id_plot, Request $request){
+        $check_zona = Plot::where('id', $id_plot)->count();
+        if($check_zona == 0){
+            return $this->responses(false, 'Zona tidak ditemukan');
+        }
+
+        if($request->hasFile('file')){
+            $dir = public_path('plot_'.$id_plot);
+            if(!is_dir($dir)){
+                mkdir($dir, 0777, true);
+            }
+
+            foreach($request->file('file') as $file){
+                $names = Str::random(6).'_'.$file->getClientOriginalName();
+                $list_files = scandir($dir);
+                array_shift($list_files);
+                array_shift($list_files);
+
+                $start = 0;
+                $is_found = true;
+                while($is_found){
+                    if(in_array($names, $list_files)){
+                        $names = Str::random(6).'_'.$file->getClientOriginalName();
+                        $is_found = true;
+                    }else {
+                        $is_found = false;
+                    }
+                }
+
+                $file->move($dir, $names);
+            }
+
+            return $this->responses(true, 'Berhasil menambahkan data');
+        }else {
+            return $this->responses(false, 'Files is required');
+        }
+    }
+
+    function delete_photo($id_plot, $nama_file){
+        $check_zona = Plot::where('id', $id_plot)->count();
+        if($check_zona == 0){
+            return $this->responses(false, 'Gagal menghapus photo, zona tidak ditemukan');
+        }
+
+        $dir = public_path('plot_'.$id_plot);
+        if(is_dir($dir)){
+            $list_files = scandir($dir);
+            array_shift($list_files);
+            array_shift($list_files);
+
+            if(in_array($nama_file, $list_files)){
+                unlink($dir.'\\'.$nama_file);
+                return $this->responses(true, 'Berhasil menghapus file');
+            }else {
+                return $this->responses(false, 'Gagal menghapus file, file tidak ditemukan');
+            }
+        }else {
+            return $this->responses(false, 'Gagal menghapus file, belum ada file pada zona ini');
+        }
     }
 
     function responses($status, $message, $data = array()){

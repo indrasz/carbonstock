@@ -98,6 +98,11 @@ Route::prefix('admin')->group(function(){
         Route::post('add', [PlotController::class, 'add']);
         Route::put('edit/{id_plot}', [PlotController::class, 'edit']);
         Route::delete('/{id_hamparan}/{id_plot}', [PlotController::class, 'delete']);
+
+        Route::prefix('files')->group(function(){
+            Route::post('add/{id_plot}', [PlotController::class, 'add_photo']);
+            Route::delete('delete/{id_plot}/{nama_file}', [PlotController::class, 'delete_photo']);
+        });
     });
 
     Route::prefix('subplot')->group(function(){
