@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 16, 2024 at 06:43 PM
+-- Generation Time: Apr 23, 2024 at 05:40 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.1.25
 
@@ -215,6 +215,30 @@ INSERT INTO `master_subplot` (`id`, `nama_sub_plot`, `luasan_minimal`, `id_plot`
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `periode`
+--
+
+CREATE TABLE `periode` (
+  `id` int(11) NOT NULL,
+  `tgl_mulai` date DEFAULT NULL,
+  `tgl_berakhir` date DEFAULT NULL,
+  `created_at` date DEFAULT NULL,
+  `updated_at` date DEFAULT NULL,
+  `deleted_at` date DEFAULT NULL,
+  `visible` tinyint(1) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `periode`
+--
+
+INSERT INTO `periode` (`id`, `tgl_mulai`, `tgl_berakhir`, `created_at`, `updated_at`, `deleted_at`, `visible`) VALUES
+(1, '2024-04-01', '2024-04-10', '2024-04-21', '2024-04-21', '2024-04-21', 0),
+(2, '2024-04-01', '2024-04-10', '2024-04-21', '2024-04-21', NULL, 1);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `plot`
 --
 
@@ -255,19 +279,21 @@ CREATE TABLE `regional` (
   `deleted_at` date DEFAULT NULL,
   `jenis_hutan` int(11) DEFAULT NULL,
   `latitude` varchar(30) DEFAULT NULL,
-  `longitude` varchar(30) DEFAULT NULL
+  `longitude` varchar(30) DEFAULT NULL,
+  `id_periode` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `regional`
 --
 
-INSERT INTO `regional` (`id`, `nama_regional`, `tanggal_mulai`, `tanggal_selesai`, `created_at`, `updated_at`, `deleted_at`, `jenis_hutan`, `latitude`, `longitude`) VALUES
-(1, 'regional 1', '2024-01-01', '2024-01-05', '2024-04-12', '2024-04-12', NULL, NULL, NULL, NULL),
-(2, 'regional 2', '2024-01-01', '2024-01-10', '2024-04-12', '2024-04-12', NULL, NULL, NULL, NULL),
-(3, 'regional 1', '2024-01-01', '2024-01-05', '2024-04-12', '2024-04-13', NULL, 1, NULL, NULL),
-(4, 'regional 2', '2024-01-01', '2024-01-05', '2024-04-12', '2024-04-12', NULL, 1, '123', '123'),
-(5, 'regional 4', '2024-01-01', '2024-01-05', '2024-04-13', '2024-04-13', NULL, 1, '123', '123');
+INSERT INTO `regional` (`id`, `nama_regional`, `tanggal_mulai`, `tanggal_selesai`, `created_at`, `updated_at`, `deleted_at`, `jenis_hutan`, `latitude`, `longitude`, `id_periode`) VALUES
+(1, 'regional 1', '2024-01-01', '2024-01-05', '2024-04-12', '2024-04-12', NULL, NULL, NULL, NULL, NULL),
+(2, 'regional 2', '2024-01-01', '2024-01-10', '2024-04-12', '2024-04-12', NULL, NULL, NULL, NULL, NULL),
+(3, 'regional 1', '2024-01-01', '2024-01-05', '2024-04-12', '2024-04-13', NULL, 1, NULL, NULL, NULL),
+(4, 'regional 2', '2024-01-01', '2024-01-05', '2024-04-12', '2024-04-12', NULL, 1, '123', '123', NULL),
+(5, 'regional 4', '2024-01-01', '2024-01-05', '2024-04-13', '2024-04-13', NULL, 1, '123', '123', NULL),
+(6, 'regional 4', NULL, NULL, '2024-04-21', '2024-04-21', NULL, 1, '123', '123', 2);
 
 -- --------------------------------------------------------
 
@@ -412,7 +438,8 @@ CREATE TABLE `zona` (
 INSERT INTO `zona` (`id`, `nama_zona`, `jenis_hutan`, `latitude`, `longitude`, `created_at`, `updated_at`, `deleted_at`, `id_regional`) VALUES
 (1, 'zona a', NULL, '123', '321', '2024-04-12', '2024-04-13', '2024-04-13', 3),
 (2, 'zona a', NULL, '123', '321', '2024-04-12', '2024-04-13', NULL, 3),
-(3, 'zona a', NULL, '123', '321', '2024-04-12', '2024-04-13', NULL, 3);
+(3, 'zona a', NULL, '123', '321', '2024-04-12', '2024-04-13', NULL, 3),
+(4, 'zona a', NULL, '123', '321', '2024-04-22', '2024-04-22', NULL, 3);
 
 -- --------------------------------------------------------
 
@@ -478,6 +505,12 @@ ALTER TABLE `master_plot`
 ALTER TABLE `master_subplot`
   ADD PRIMARY KEY (`id`),
   ADD KEY `id_plot` (`id_plot`);
+
+--
+-- Indexes for table `periode`
+--
+ALTER TABLE `periode`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `plot`
@@ -568,6 +601,12 @@ ALTER TABLE `master_subplot`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
+-- AUTO_INCREMENT for table `periode`
+--
+ALTER TABLE `periode`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `plot`
 --
 ALTER TABLE `plot`
@@ -577,7 +616,7 @@ ALTER TABLE `plot`
 -- AUTO_INCREMENT for table `regional`
 --
 ALTER TABLE `regional`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `regional_tim`
@@ -601,7 +640,7 @@ ALTER TABLE `tim`
 -- AUTO_INCREMENT for table `zona`
 --
 ALTER TABLE `zona`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `zona_tim`
