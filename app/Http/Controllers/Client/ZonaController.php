@@ -11,21 +11,19 @@ use Illuminate\Http\Request;
 use App\Http\Requests\ZonaRequest;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ZonaTimRequest;
+use App\Models\RegionalTim;
 
 class ZonaController extends Controller
 {
 
     public function index()
     {
-        $tim = Tim::all();
+        $regionalTim = Regional::with('tim.namaTim')->get();
         $zona = Zona::with('regional.type_hutan', 'tim.namaTim')->get();
-        // $zonaTim = ZonaTim::find($id);
-
-        // dd($zona->toArray());
 
         return view('pages.zona.index', [
             'zona' => $zona,
-            'tim' => $tim,
+            'regionalTim' => $regionalTim,
         ]);
     }
 
@@ -50,11 +48,40 @@ class ZonaController extends Controller
         return redirect()->route('zona.index');
     }
 
-    public function tambahTim(ZonaTimRequest $request)
+    public function tambahTim(Request $request)
     {
 
-        $zonaTim = $request->all();
-        ZonaTim::create($zonaTim);
+        // $zonaTim = $request->all();
+        // ZonaTim::create($zonaTim);
+
+        // return redirect()->route('zona.index');
+
+        $validatedData = $request->validate([
+            'id_zona' => 'required:integer',
+            'id_tim' => 'required|array',
+            'id_tim.*' => 'required:integer',
+        ]);
+
+        $timExists = false;
+
+        foreach ($validatedData['id_tim'] as $idTim) {
+            if (ZonaTim::where('id_zona', $validatedData['id_zona'])->where('id_tim', $idTim)->exists()) {
+                $timExists = true;
+                break;
+            }
+        }
+
+        if ($timExists) {
+            session()->flash('error', 'Gagal menambahkan, tim telah terdaftar di regional');
+            return redirect()->back(); // Redirect ke halaman sebelumnya
+        }
+
+        foreach ($validatedData['id_tim'] as $idTim) {
+            $zonaTim = new ZonaTim();
+            $zonaTim->id_zona = $validatedData['id_zona'];
+            $zonaTim->id_tim = $idTim;
+            $zonaTim->save();
+        }
 
         return redirect()->route('zona.index');
     }

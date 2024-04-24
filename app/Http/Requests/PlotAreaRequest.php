@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class RegionRequest extends FormRequest
+class PlotAreaRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,9 +24,9 @@ class RegionRequest extends FormRequest
         return [
             'latitude' => 'required',
             'longitude' => 'required',
-            'nama_regional' => 'required',
-            'jenis_hutan' => 'required',
-            'id_periode' => 'required'
+            'nama_plot' => 'required',
+            'type_plot' => 'required',
+            'id_hamparan' => 'required'
         ];
     }
 }

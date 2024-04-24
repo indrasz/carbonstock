@@ -11,7 +11,7 @@
                     </div>
                 </div>
 
-                <form method="POST" action="{{ route('region.store') }}">
+                <form method="POST" action="{{ route('plot-area.store') }}">
                     @csrf
                     <fieldset>
                         <div class="col-12 mb-3">
@@ -30,22 +30,22 @@
                                     required readonly>
                             </div>
                             <div class="form-group mb-3 col-6">
-                                <label for="id_periode">Pilih Periode</label>
-                                <select name="id_periode" class="form-control" id="exampleFormControlSelect1">
-                                    @foreach ($periode as $item)
-                                        <option value="{{ $item->id }}">{{ $item->tgl_mulai }} - {{ $item->tgl_berakhir }}</option>
+                                <label for="nama_plot">Nama Plot</label>
+                                <input id="nama_plot" class="form-control" name="nama_plot" type="text" required>
+                            </div>
+                            <div class="form-group mb-3 col-6">
+                                <label for="id_hamparan">Pilih Hamparan</label>
+                                <select name="id_hamparan" class="form-control" id="exampleFormControlSelect1">
+                                    @foreach ($hamparan as $item)
+                                        <option value="{{ $item->id }}">{{ $item->nama_hamparan }}</option>
                                     @endforeach
                                 </select>
                             </div>
                             <div class="form-group mb-3 col-6">
-                                <label for="nama_regional">Nama Regional</label>
-                                <input id="nama_regional" class="form-control" name="nama_regional" type="text" required>
-                            </div>
-                            <div class="form-group mb-3 col-6">
-                                <label for="jenis_hutan">Jenis Hutan</label>
-                                <select name="jenis_hutan" class="form-control" id="exampleFormControlSelect1">
-                                    @foreach ($masterHutan as $item)
-                                        <option value="{{ $item->id }}">{{ $item->jenis_hutan }}</option>
+                                <label for="type_plot">Tipe Plot</label>
+                                <select name="type_plot" class="form-control" id="exampleFormControlSelect1">
+                                    @foreach ($masterPlot as $item)
+                                        <option value="{{ $item->id }}">{{ $item->nama_plot }}</option>
                                     @endforeach
                                 </select>
                             </div>

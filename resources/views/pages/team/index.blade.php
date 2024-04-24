@@ -49,7 +49,7 @@
                                                                 style="background: #3e8829;">{{ $user->nama }}</span>
                                                         @endforeach
                                                     @else
-                                                        <p class="text-danger m-0"> Belum Ada Anggota yang ditambahkan</p>
+                                                        <p class="text-danger m-0"> Belum ada anggota yang ditambahkan</p>
                                                     @endif
 
                                                 </div>

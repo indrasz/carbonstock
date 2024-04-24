@@ -16,8 +16,6 @@ class Regional extends Model
     protected $fillable = [
         'id_periode',
         'nama_regional',
-        'tanggal_mulai',
-        'tanggal_selesai',
         'jenis_hutan',
         'latitude',
         'longitude'
@@ -35,11 +33,22 @@ class Regional extends Model
         return $this->hasOne(MasterHutan::class, 'id', 'jenis_hutan');
     }
 
+    function periode()
+    {
+        return $this->hasOne(Periode::class, 'id', 'id_periode');
+    }
+
     public static function booted(): void
     {
         static::deleting(function (Regional $regional) {
+            // Hapus entitas terkait RegionalTim
             $regional->tim()->delete();
-            $regional->zona()->delete();
+
+            // Hapus entitas terkait Zona dan Hamparan
+            $regional->zona()->each(function ($zona) {
+                $zona->delete();
+            });
         });
+
     }
 }

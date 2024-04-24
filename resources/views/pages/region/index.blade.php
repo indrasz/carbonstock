@@ -29,6 +29,30 @@
                                             <div class="col-12">
                                                 <h4 class=" mb-0">{{ $item->nama_regional }}</h4>
                                                 <p class="card-text" id="nama_koordinat_{{ $item->id }}"></p>
+                                                <div class="d-block justify-content-start align-items-center">
+                                                    <div class="d-flex align-items-center justify-content-between">
+                                                        <div class="d-flex align-items-center justify-content-start gap-2">
+                                                            <i style="color: #22710E; font-size: 18px;"
+                                                                class='bx bx-group'></i>
+                                                            <span style="color: #90A8BF">Daftar Tim</span>
+                                                        </div>
+                                                        <a href="#" data-bs-toggle="modal"
+                                                            data-bs-target="#myModal{{ $item->id }}">
+                                                            <p class="text-info m-0">+ Tambah tim</p>
+                                                        </a>
+                                                    </div>
+                                                    <div class="d-flex align-items-center gap-2 overflow-x-auto mt-2">
+                                                        @if (!$item->tim->isEmpty())
+                                                            @foreach ($item->tim as $listTim)
+                                                                <span class="badge p-2"
+                                                                    style="background: #3e8829;">{{ $listTim->namaTim->nama }}</span>
+                                                            @endforeach
+                                                        @else
+                                                            <p class="text-danger m-0"> Belum ada tim yang ditambahkan
+                                                            </p>
+                                                        @endif
+                                                    </div>
+                                                </div>
                                                 <div class="d-flex justify-content-between align-items-center my-2">
                                                     <div class="d-flex align-items-center gap-2">
                                                         <i style="color: #22710E; font-size: 18px;"
@@ -53,7 +77,11 @@
                                                         <i style="color: #22710E; font-size: 18px;" class='bx bx-time'></i>
                                                         <span style="color: #90A8BF">Tanggal mulai</span>
                                                     </div>
-                                                    <p class="m-0" style="color: #90A8BF">{{ $item->tanggal_mulai }}</p>
+                                                    @if ($item->periode)
+                                                        <p class="m-0" style="color: #90A8BF">
+                                                            {{ $item->periode->tgl_mulai }}</p>
+                                                    @endif
+
                                                 </div>
                                                 <div class="d-flex justify-content-between align-items-center mb-2">
                                                     <div class="d-flex align-items-center gap-2">
@@ -61,8 +89,10 @@
                                                             class='bx bx-time-five'></i>
                                                         <span style="color: #90A8BF">Tanggal berakhir</span>
                                                     </div>
-                                                    <p class="m-0" style="color: #90A8BF">{{ $item->tanggal_selesai }}
-                                                    </p>
+                                                    @if ($item->periode)
+                                                        <p class="m-0" style="color: #90A8BF">
+                                                            {{ $item->periode->tgl_berakhir }}</p>
+                                                    @endif
                                                 </div>
                                             </div>
                                             <div class="col-12">
@@ -85,6 +115,40 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <div class="modal inmodal" id="myModal{{ $item->id }}" tabindex="-1" role="dialog"
+                                aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content animated bounceInRight">
+                                        <div class="modal-header">
+                                            <h4 class="modal-title d-block">Buat Tim</h4>
+                                        </div>
+                                        <div class="modal-body mb-3">
+                                            <form method="POST" action="{{ route('region.tambahTim') }}">
+                                                @csrf
+                                                <input type="hidden" name="id_regional" value="{{ $item->id }}">
+                                                <label class="mb-2">Nama Tim</label>
+                                                <div class="form-group w-100 mb-2" id="listTeam">
+                                                    <select name="id_tim[]" class="form-control"
+                                                        id="exampleFormControlSelect1">
+                                                        @foreach ($tim as $timItem)
+                                                            <option value="{{ $timItem->id }}">{{ $timItem->nama }}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                                <div id="appenTeam"></div>
+                                                <a href="#" id="addTeam">
+                                                    <p class="text-info">+ Tambah Tim</p>
+                                                </a>
+                                                <button class="btn btn-success rounded-2 mt-3" type="submit">Tambah
+                                                    Tim</button>
+                                            </form>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
                         @empty
                         @endforelse
                     </div>
@@ -98,6 +162,31 @@
 @endpush
 
 @push('after-script')
+    <script>
+        document.getElementById('addTeam').addEventListener('click', function(event) {
+            event.preventDefault();
+            var selectWrapper = document.getElementById('listTeam').cloneNode(true);
+
+            // Membuat div wrapper
+            var divWrapper = document.createElement('div');
+            divWrapper.classList.add('d-flex', 'gap-2', 'align-items-center', 'team-item');
+            divWrapper.appendChild(selectWrapper);
+
+            // Membuat tombol hapus
+            var deleteButton = document.createElement('a');
+            deleteButton.href = '#';
+            deleteButton.innerHTML = '<i class="text-danger bx bx-trash"></i>';
+            deleteButton.addEventListener('click', function(e) {
+                e.preventDefault();
+                divWrapper.remove();
+            });
+
+            // Menambahkan select dan tombol hapus ke dalam container
+            divWrapper.appendChild(deleteButton);
+            var appenTeam = document.getElementById('appenTeam');
+            appenTeam.appendChild(divWrapper);
+        });
+    </script>
     <script>
         mapboxgl.accessToken = 'pk.eyJ1IjoiaW5kcmFzeiIsImEiOiJjbHVxaWV3bngycmhiMmtuejluMTNzY216In0.EZ-2uwWJ3SAYv3ehMizmGw';
 

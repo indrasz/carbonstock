@@ -25,8 +25,20 @@ class Zona extends Model
     {
         return $this->belongsTo(Regional::class, 'id_regional', 'id');
     }
-    
+
+    function hamparan()
+    {
+        return $this->hasMany(Hamparan::class, 'id_zona', 'id');
+    }
+
     function tim(){
         return $this->hasMany(ZonaTim::class, 'id_zona', 'id');
+    }
+
+    protected static function booted()
+    {
+        static::deleting(function ($zona) {
+            $zona->hamparan()->delete();
+        });
     }
 }

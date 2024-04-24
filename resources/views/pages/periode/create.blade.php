@@ -12,22 +12,18 @@
                     </div>
                 </div>
 
-                <form class="cmxform" id="commentForm" method="get" action="#">
+                <form method="POST" action="{{ route('periode.store') }}">
+                    @csrf
                     <fieldset>
                         <div class="form-group mb-3">
-                            <label for="periode">Nama periode</label>
-                            <input id="periode" class="form-control" name="periode" minlength="2" type="text"
-                                required>
+                            <label for="tgl_mulai">Mulai Tanggal</label>
+                            <input id="tgl_mulai" class="form-control" type="date" name="tgl_mulai" required>
                         </div>
                         <div class="form-group mb-3">
-                            <label for="start_date">Mulai Tanggal</label>
-                            <input id="start_date" class="form-control" type="date" name="start_date" required>
+                            <label for="tgl_berakhir">Berakhir Tanggal</label>
+                            <input id="tgl_berakhir" class="form-control" type="date" name="tgl_berakhir" required>
                         </div>
-                        <div class="form-group mb-3">
-                            <label for="end_date">Berakhir Tanggal</label>
-                            <input id="end_date" class="form-control" type="date" name="end_date" required>
-                        </div>
-                        <button class="btn btn-success" type="submit" value="Submit">Submit</button>
+                        <button class="btn btn-success" type="submit" >Submit</button>
                     </fieldset>
                 </form>
 

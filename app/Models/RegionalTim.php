@@ -17,4 +17,9 @@ class RegionalTim extends Model
         'id_regional',
         'id_tim'
     ];
+
+    public function namaTim()
+    {
+        return $this->belongsTo(Tim::class, 'id_tim', 'id');
+    }
 }

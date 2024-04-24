@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class RegionRequest extends FormRequest
+class PeriodeRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,11 +22,8 @@ class RegionRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'latitude' => 'required',
-            'longitude' => 'required',
-            'nama_regional' => 'required',
-            'jenis_hutan' => 'required',
-            'id_periode' => 'required'
+            'tgl_mulai' => 'required|date',
+            'tgl_berakhir' => 'required|date',
         ];
     }
 }

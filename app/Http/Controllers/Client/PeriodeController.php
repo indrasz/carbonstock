@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\PeriodeRequest;
+use App\Models\Periode;
 use Illuminate\Http\Request;
 
 class PeriodeController extends Controller
@@ -10,7 +12,11 @@ class PeriodeController extends Controller
 
     public function index()
     {
-        return view('pages.periode.index');
+        $periode = Periode::all();
+
+        return view('pages.periode.index', [
+            'periode' => $periode
+        ]);
 
     }
     public function create()
@@ -18,9 +24,13 @@ class PeriodeController extends Controller
         return view('pages.periode.create');
     }
 
-    public function store(Request $request)
+    public function store(PeriodeRequest $request)
     {
-        //
+        $data = $request->all();
+        // dd($data);
+        Periode::create($data);
+
+        return redirect()->route('periode.index');
     }
 
     public function show(string $id)

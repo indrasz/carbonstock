@@ -19,11 +19,6 @@ class Hamparan extends Model
         'latitude',
         'longitude'
     ];
-
-    // function zona(){
-    //     return $this->hasOne(Zona::class, 'id', 'id_zona');
-    // }
-
     public function zona()
     {
         return $this->belongsTo(Zona::class, 'id_zona', 'id');

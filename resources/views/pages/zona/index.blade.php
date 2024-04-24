@@ -19,22 +19,29 @@
                             <div class="card-body">
                                 <h4 class=" mb-0">{{ $item->nama_zona }}</h4>
                                 <p class="card-text mb-0">{{ $item->regional->nama_regional }}</p>
-                                <div class="d-flex justify-content-between align-items-center my-2">
-                                    <div class="d-flex align-items-center gap-2">
-                                        <i style="color: #22710E; font-size: 18px;" class='bx bx-group'></i>
-                                        <span style="color: #90A8BF">Tim</span>
-                                    </div>
-                                    @if (!$item->tim->isEmpty())
-                                        <p class="m-0 text-end" style="color: #90A8BF">
-                                            {{ $item->tim->first()->namaTim->nama }}
-                                            {{-- {{ $item->tim }}  --}}
-                                        </p>
-                                    @else
+                                <div class="d-block justify-content-start align-items-center mb-2">
+                                    <div class="d-flex align-items-center justify-content-between">
+                                        <div class="d-flex align-items-center justify-content-start gap-2">
+                                            <i style="color: #22710E; font-size: 18px;" class='bx bx-group'></i>
+                                            <span style="color: #90A8BF">Daftar Tim</span>
+                                        </div>
                                         <a href="#" data-bs-toggle="modal"
                                             data-bs-target="#myModal{{ $item->id }}">
                                             <p class="text-info m-0">+ Tambah tim</p>
                                         </a>
-                                    @endif
+                                    </div>
+                                    <div class="d-flex align-items-center gap-2 overflow-x-auto mt-2">
+                                        @if (!$item->tim->isEmpty())
+                                            @foreach ($item->tim as $listTim)
+                                                <span class="badge p-2"
+                                                    style="background: #3e8829;">{{ $listTim->namaTim->nama }}</span>
+                                            @endforeach
+                                        @else
+                                            <p class="text-danger m-0"> Belum ada tim yang ditambahkan
+                                            </p>
+                                        @endif
+                                    </div>
+
                                 </div>
                                 <div class="d-flex justify-content-between align-items-center mb-2">
                                     <div class="d-flex align-items-center gap-2">
@@ -71,7 +78,7 @@
                                             <a class="btn btn-warning rounded-3 p-2">Ubah</a>
                                             <button onclick="return confirm('Apakah yakin ingin di hapus?')"
                                                 class="btn btn-danger rounded-3 p-2">Hapus
-                                                </button>
+                                            </button>
                                         </form>
                                         {{-- @endif --}}
                                     </div>
@@ -90,16 +97,25 @@
                                 </div>
                                 <div class="modal-body mb-3">
                                     <form action="{{ route('zona.tambahTim') }}" method="POST">
-                                        <input type="text" name="id_zona" value="{{ $item->id }}">
                                         @csrf
-                                        <div class="form-group"><label>Nama Tim</label>
-                                            <select name="id_tim" class="form-control" id="exampleFormControlSelect1">
-                                                @foreach ($tim as $timItem)
-                                                    <option value="{{ $timItem->id }}">{{ $timItem->nama }}
-                                                    </option>
+                                        <input type="hidden" name="id_zona" value="{{ $item->id }}">
+
+                                        <label>Nama Tim</label>
+                                        <div class="form-group w-100 mb-2" id="listTeam">
+                                            <select name="id_tim[]" class="form-control">
+                                                @foreach ($regionalTim as $regional)
+                                                    @foreach ($regional->tim as $timItem)
+                                                        <option value="{{ $timItem->namaTim->id }}">
+                                                            {{ $timItem->namaTim->nama }}</option>
+                                                    @endforeach
                                                 @endforeach
                                             </select>
                                         </div>
+                                        <div id="appendTeam"></div>
+                                        <a href="#" id="addTeam">
+                                            <p class="text-info">+ Tambah Tim</p>
+                                        </a>
+                                        <button class="btn btn-success rounded-2 mt-2" type="submit">Tambah Tim</button>
                                     </form>
                                 </div>
 
@@ -121,6 +137,31 @@
     <!-- Inject JS -->
     {{-- <script src="js/default-assets/modal-classes.js"></script>
     <script src="js/default-assets/modaleffects.js"></script> --}}
+    <script>
+        document.getElementById('addTeam').addEventListener('click', function(event) {
+            event.preventDefault();
+            var selectWrapper = document.getElementById('listTeam').cloneNode(true);
+
+            // Membuat div wrapper
+            var divWrapper = document.createElement('div');
+            divWrapper.classList.add('d-flex', 'gap-2', 'align-items-center', 'team-item');
+            divWrapper.appendChild(selectWrapper);
+
+            // Membuat tombol hapus
+            var deleteButton = document.createElement('a');
+            deleteButton.href = '#';
+            deleteButton.innerHTML = '<i class="text-danger bx bx-trash"></i>';
+            deleteButton.addEventListener('click', function(e) {
+                e.preventDefault();
+                divWrapper.remove();
+            });
+
+            // Menambahkan select dan tombol hapus ke dalam container
+            divWrapper.appendChild(deleteButton);
+            var appenTeam = document.getElementById('appendTeam');
+            appenTeam.appendChild(divWrapper);
+        });
+    </script>
     <script>
         mapboxgl.accessToken = 'pk.eyJ1IjoiaW5kcmFzeiIsImEiOiJjbHVxaWV3bngycmhiMmtuejluMTNzY216In0.EZ-2uwWJ3SAYv3ehMizmGw';
 
