@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\HamparanController;
 use App\Http\Controllers\Api\LaporanController;
+use App\Http\Controllers\Api\LaporanMobile;
 use App\Http\Controllers\Api\MasterController;
 use App\Http\Controllers\Api\PeriodeController;
 use App\Http\Controllers\Api\PlotController;
@@ -111,11 +112,28 @@ Route::prefix('admin')->group(function(){
         Route::put('edit/{id_subplot}', [SubPlotController::class, 'edit']);
         Route::delete('/{id_plot}/{id_subplot}', [SubPlotController::class, 'delete']);
     });
+
+    
 });
 
 Route::prefix('master')->group(function(){
     Route::get('jenis-hutan', [MasterController::class, 'getHutan']);
     Route::get('plot', [MasterController::class, 'plot']);
+});
+
+Route::prefix('laporan-mobile')->group(function(){
+    Route::post('/subplot-a', [LaporanMobile::class, 'add_subplot_a']);
+    Route::post('/subplot-b', [LaporanMobile::class, 'add_subplot_b']);
+    Route::post('/subplot-c', [LaporanMobile::class, 'add_subplot_c']);
+    Route::post('/subplot-d', [LaporanMobile::class, 'add_subplot_d']);
+
+    Route::post('/subplot-a-semai', [LaporanMobile::class, 'add_subplot_a_semai']);
+    Route::post('/subplot-a-seresah', [LaporanMobile::class, 'add_subplot_a_seresah']);
+    Route::post('/subplot-a-tumbuhan-bawah', [LaporanMobile::class, 'add_subplot_a_tumbuhan_bawah']);
+
+    Route::post('/subplot-d-pohon', [LaporanMobile::class, 'add_subplot_d_pohon']);
+    Route::post('/subplot-d-nekromas', [LaporanMobile::class, 'add_subplot_d_nekromas']);
+    Route::post('/subplot-d-tanah', [LaporanMobile::class, 'add_subplot_d_tanah']);
 });
 
 Route::prefix('laporan')->group(function(){
