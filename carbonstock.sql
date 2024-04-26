@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 23, 2024 at 05:40 AM
+-- Generation Time: Apr 26, 2024 at 08:57 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.1.25
 
@@ -348,6 +348,282 @@ CREATE TABLE `subplot` (
 INSERT INTO `subplot` (`id`, `nama_subplot`, `type_subplot`, `latitude`, `longitude`, `id_plot`, `created_at`, `updated_at`, `deleted_at`) VALUES
 (1, 'subplot a', 1, NULL, NULL, 2, '2024-04-15', '2024-04-15', NULL),
 (2, 'subplot b', 1, NULL, NULL, 2, '2024-04-15', '2024-04-15', '2024-04-15');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `subplot_a`
+--
+
+CREATE TABLE `subplot_a` (
+  `uuid` varchar(100) DEFAULT NULL,
+  `plot_id` varchar(10) DEFAULT NULL,
+  `area_name` varchar(100) DEFAULT NULL,
+  `plot_name` varchar(100) DEFAULT NULL,
+  `subplot_a_photo_url` varchar(100) DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `subplot_a`
+--
+
+INSERT INTO `subplot_a` (`uuid`, `plot_id`, `area_name`, `plot_name`, `subplot_a_photo_url`, `updated_at`) VALUES
+('q1w2e3r4', '1', 'hutan', 'nama plot', NULL, '2024-04-01 00:00:00');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `subplot_a_semai`
+--
+
+CREATE TABLE `subplot_a_semai` (
+  `uuid` varchar(100) DEFAULT NULL,
+  `uuid_subplot_a` varchar(100) DEFAULT NULL,
+  `plot_id` varchar(100) DEFAULT NULL,
+  `area_name` varchar(100) DEFAULT NULL,
+  `plot_name` varchar(100) DEFAULT NULL,
+  `basah_total` double DEFAULT NULL,
+  `basah_sample` double DEFAULT NULL,
+  `kering_total` double DEFAULT NULL,
+  `kering_sample` double DEFAULT NULL,
+  `carbon_value` double DEFAULT NULL,
+  `carbon_absorb` double DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `subplot_a_semai`
+--
+
+INSERT INTO `subplot_a_semai` (`uuid`, `uuid_subplot_a`, `plot_id`, `area_name`, `plot_name`, `basah_total`, `basah_sample`, `kering_total`, `kering_sample`, `carbon_value`, `carbon_absorb`, `updated_at`) VALUES
+('azsxdc', '1q2w3e', '1', 'area name', 'plot name', 2.5, 2.5, 2.5, 2.5, 2.5, 2.5, '2024-01-01 00:00:00');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `subplot_a_seresah`
+--
+
+CREATE TABLE `subplot_a_seresah` (
+  `uuid` varchar(100) DEFAULT NULL,
+  `uuid_subplot_a` varchar(100) DEFAULT NULL,
+  `plot_id` varchar(100) DEFAULT NULL,
+  `area_name` varchar(100) DEFAULT NULL,
+  `plot_name` varchar(100) DEFAULT NULL,
+  `basah_total` double DEFAULT NULL,
+  `basah_sample` double DEFAULT NULL,
+  `kering_total` double DEFAULT NULL,
+  `kering_sample` double DEFAULT NULL,
+  `carbon_value` double DEFAULT NULL,
+  `carbon_absorb` double DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `subplot_a_seresah`
+--
+
+INSERT INTO `subplot_a_seresah` (`uuid`, `uuid_subplot_a`, `plot_id`, `area_name`, `plot_name`, `basah_total`, `basah_sample`, `kering_total`, `kering_sample`, `carbon_value`, `carbon_absorb`, `updated_at`) VALUES
+('dcsxaz', '1q2w3e', '1', 'area name', 'plot name', 2.5, 2.5, 2.5, 2.5, 2.5, 2.5, '2024-01-01 00:00:00');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `subplot_a_tumbuhan_bawah`
+--
+
+CREATE TABLE `subplot_a_tumbuhan_bawah` (
+  `uuid` varchar(100) DEFAULT NULL,
+  `uuid_subplot_a` varchar(100) DEFAULT NULL,
+  `plot_id` varchar(100) DEFAULT NULL,
+  `area_name` varchar(100) DEFAULT NULL,
+  `plot_name` varchar(100) DEFAULT NULL,
+  `basah_total` double DEFAULT NULL,
+  `basah_sample` double DEFAULT NULL,
+  `kering_total` double DEFAULT NULL,
+  `kering_sample` double DEFAULT NULL,
+  `carbon_value` double DEFAULT NULL,
+  `carbon_absorb` double DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `subplot_a_tumbuhan_bawah`
+--
+
+INSERT INTO `subplot_a_tumbuhan_bawah` (`uuid`, `uuid_subplot_a`, `plot_id`, `area_name`, `plot_name`, `basah_total`, `basah_sample`, `kering_total`, `kering_sample`, `carbon_value`, `carbon_absorb`, `updated_at`) VALUES
+('xszacd', '1q2w3e', '1', 'area name', 'plot name', 2.5, 2.5, 2.5, 2.5, 2.5, 2.5, '2024-01-01 00:00:00');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `subplot_b`
+--
+
+CREATE TABLE `subplot_b` (
+  `uuid` varchar(100) DEFAULT NULL,
+  `plot_id` varchar(100) DEFAULT NULL,
+  `area_name` varchar(100) DEFAULT NULL,
+  `plot_name` varchar(100) DEFAULT NULL,
+  `local_name` varchar(100) DEFAULT NULL,
+  `bio_name` varchar(100) DEFAULT NULL,
+  `keliling` double DEFAULT NULL,
+  `diameter` double DEFAULT NULL,
+  `kerapatan_kayu` double DEFAULT NULL,
+  `biomass` double DEFAULT NULL,
+  `carbon_value` double DEFAULT NULL,
+  `carbon_absorb` double DEFAULT NULL,
+  `subplot_b_photo_url` varchar(100) DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `subplot_b`
+--
+
+INSERT INTO `subplot_b` (`uuid`, `plot_id`, `area_name`, `plot_name`, `local_name`, `bio_name`, `keliling`, `diameter`, `kerapatan_kayu`, `biomass`, `carbon_value`, `carbon_absorb`, `subplot_b_photo_url`, `updated_at`) VALUES
+('3e2w1q', '1', 'area name', 'plot name', 'local name', 'bio name', 2, 2, 2.5, 2.5, 2.5, 2.5, NULL, '2024-01-01 00:00:00');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `subplot_c`
+--
+
+CREATE TABLE `subplot_c` (
+  `uuid` varchar(100) DEFAULT NULL,
+  `plot_id` varchar(100) DEFAULT NULL,
+  `area_name` varchar(100) DEFAULT NULL,
+  `plot_name` varchar(100) DEFAULT NULL,
+  `local_name` varchar(100) DEFAULT NULL,
+  `bio_name` varchar(100) DEFAULT NULL,
+  `keliling` double DEFAULT NULL,
+  `diameter` double DEFAULT NULL,
+  `kerapatan_kayu` double DEFAULT NULL,
+  `biomass` double DEFAULT NULL,
+  `carbon_value` double DEFAULT NULL,
+  `carbon_absorb` double DEFAULT NULL,
+  `subplot_c_photo_url` varchar(100) DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `subplot_c`
+--
+
+INSERT INTO `subplot_c` (`uuid`, `plot_id`, `area_name`, `plot_name`, `local_name`, `bio_name`, `keliling`, `diameter`, `kerapatan_kayu`, `biomass`, `carbon_value`, `carbon_absorb`, `subplot_c_photo_url`, `updated_at`) VALUES
+('2w1q3e', '1', 'area name', 'plot name', 'local name', 'bio name', 2.5, 2.5, 2, 2.5, 2.5, 2.5, NULL, '2024-01-01 00:00:00');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `subplot_d`
+--
+
+CREATE TABLE `subplot_d` (
+  `uuid` varchar(100) DEFAULT NULL,
+  `plot_id` varchar(10) DEFAULT NULL,
+  `area_name` varchar(100) DEFAULT NULL,
+  `plot_name` varchar(100) DEFAULT NULL,
+  `subplot_d_photo_url` varchar(100) DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `subplot_d`
+--
+
+INSERT INTO `subplot_d` (`uuid`, `plot_id`, `area_name`, `plot_name`, `subplot_d_photo_url`, `updated_at`) VALUES
+('3e1q2w', '1', 'area name', 'plot name', NULL, '2024-01-01 00:00:00');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `subplot_d_nekromas`
+--
+
+CREATE TABLE `subplot_d_nekromas` (
+  `uuid` varchar(100) DEFAULT NULL,
+  `uuid_subplot_d` varchar(100) DEFAULT NULL,
+  `plot_id` varchar(100) DEFAULT NULL,
+  `area_name` varchar(100) DEFAULT NULL,
+  `plot_name` varchar(100) DEFAULT NULL,
+  `diameter_pangkal` double DEFAULT NULL,
+  `diameter_ujung` double DEFAULT NULL,
+  `panjang` double DEFAULT NULL,
+  `volume` double DEFAULT NULL,
+  `biomass` double DEFAULT NULL,
+  `carbon_value` double DEFAULT NULL,
+  `carbon_absorb` double DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `subplot_d_nekromas`
+--
+
+INSERT INTO `subplot_d_nekromas` (`uuid`, `uuid_subplot_d`, `plot_id`, `area_name`, `plot_name`, `diameter_pangkal`, `diameter_ujung`, `panjang`, `volume`, `biomass`, `carbon_value`, `carbon_absorb`, `updated_at`) VALUES
+('edwsqa', '3e1q2w', '1', 'area name', 'plot name', 2.5, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5, '2024-01-01 00:00:00');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `subplot_d_pohon`
+--
+
+CREATE TABLE `subplot_d_pohon` (
+  `uuid` varchar(100) DEFAULT NULL,
+  `uuid_subplot_d` varchar(100) DEFAULT NULL,
+  `plot_id` varchar(100) DEFAULT NULL,
+  `area_name` varchar(100) DEFAULT NULL,
+  `plot_name` varchar(100) DEFAULT NULL,
+  `local_name` varchar(100) DEFAULT NULL,
+  `bio_name` varchar(100) DEFAULT NULL,
+  `keliling` double DEFAULT NULL,
+  `diameter` double DEFAULT NULL,
+  `kerapatan_kayu` double DEFAULT NULL,
+  `biomass` double DEFAULT NULL,
+  `carbon_value` double DEFAULT NULL,
+  `carbon_absorb` double DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `subplot_d_pohon`
+--
+
+INSERT INTO `subplot_d_pohon` (`uuid`, `uuid_subplot_d`, `plot_id`, `area_name`, `plot_name`, `local_name`, `bio_name`, `keliling`, `diameter`, `kerapatan_kayu`, `biomass`, `carbon_value`, `carbon_absorb`, `updated_at`) VALUES
+('qawsed', '3e1q2w', '1', 'area name', 'plot name', 'local name', 'bio name', 2.5, 2.5, 2.5, 2.5, 2.5, 2.5, '2024-01-01 00:00:00');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `subplot_d_tanah`
+--
+
+CREATE TABLE `subplot_d_tanah` (
+  `uuid` varchar(100) DEFAULT NULL,
+  `uuid_subplot_d` varchar(100) DEFAULT NULL,
+  `plot_id` varchar(100) DEFAULT NULL,
+  `area_name` varchar(100) DEFAULT NULL,
+  `plot_name` varchar(100) DEFAULT NULL,
+  `kedalaman_sample` double DEFAULT NULL,
+  `berat_jenis_tanah` double DEFAULT NULL,
+  `organik_c_tanah` double DEFAULT NULL,
+  `carbon_gr_cm` double DEFAULT NULL,
+  `carbon_ton_ha` double DEFAULT NULL,
+  `carbon_ton` double DEFAULT NULL,
+  `carbon_absorb` double DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `subplot_d_tanah`
+--
+
+INSERT INTO `subplot_d_tanah` (`uuid`, `uuid_subplot_d`, `plot_id`, `area_name`, `plot_name`, `kedalaman_sample`, `berat_jenis_tanah`, `organik_c_tanah`, `carbon_gr_cm`, `carbon_ton_ha`, `carbon_ton`, `carbon_absorb`, `updated_at`) VALUES
+('wsqaed', '3e1q2w', '1', 'area name', 'plot name', 2.5, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5, '2024-01-01 00:00:00');
 
 -- --------------------------------------------------------
 
