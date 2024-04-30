@@ -1,0 +1,33 @@
+version: '3'
+services:
+  app:
+    build:
+      context: .
+      dockerfile: DockerFile
+    image: php
+    volumes:
+      - ./:/var/www
+
+  web:
+    image: nginx
+    volumes:
+      - ./:/var/www
+      - ./nginx/conf.d/:/etc/nginx/conf.d/
+    ports:
+      - 80:80
+
+  db:
+    image: mysql
+    restart: always
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=qazzxc123
+  
+  phpmyadmin:
+    image: phpmyadmin
+    restart: always
+    ports:
+      - 8888:80
+    depends_on:
+      - db
