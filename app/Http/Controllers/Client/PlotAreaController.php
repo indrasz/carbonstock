@@ -8,6 +8,14 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PlotAreaRequest;
 use App\Models\MasterPlot;
+use App\Models\SubplotASemai;
+use App\Models\SubplotASeresah;
+use App\Models\SubplotATumbuhanBawah;
+use App\Models\SubplotB;
+use App\Models\SubplotC;
+use App\Models\SubplotDNekromas;
+use App\Models\SubplotDPohon;
+use App\Models\SubplotDTanah;
 
 class PlotAreaController extends Controller
 {
@@ -50,7 +58,27 @@ class PlotAreaController extends Controller
 
     public function edit(string $id)
     {
-        return view('pages.plot-area.show');
+        $seresah = SubplotASeresah::all();
+        $semai = SubplotASemai::all();
+        $tumbuhanBawah = SubplotATumbuhanBawah::all();
+
+        $tiang = SubplotB::all();
+        $pancang = SubplotC::all();
+
+        $necromass = SubplotDNekromas::all();
+        $pohon = SubplotDPohon::all();
+        $tanah = SubplotDTanah::all();
+
+        return view('pages.plot-area.show',[
+            'seresah' => $seresah,
+            'semai' => $semai,
+            'tumbuhanBawah' => $tumbuhanBawah,
+            'tiang' => $tiang,
+            'pancang' => $pancang,
+            'necromass' => $necromass,
+            'pohon' => $pohon,
+            'tanah' => $tanah
+        ]);
     }
 
 
