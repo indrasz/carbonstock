@@ -1,8 +1,8 @@
 <div class="flapt-sidemenu-wrapper bg-white">
     <!-- Desktop Logo -->
     <div class="flapt-logo">
-        <a href="index.html"><img class="desktop-logo" src="" alt="Desktop Logo">
-            <img class="small-logo" src="" alt="Mobile Logo" />
+        <a href="{{ route('dashboard') }}"><img class="desktop-logo" src="/main-logo.png" style="min-width: 80px; min-height: 80px;" class="w-100" alt="Desktop Logo">
+            <img class="small-logo" src="/main-logo.png" alt="Mobile Logo" />
         </a>
     </div>
 
@@ -57,7 +57,7 @@
                                 <i style="color: {{ request()->is('regional') || request()->is('regional/*') ? '#2A8D12' : '#1F2935' }}"
                                     class='bx bx-area'></i>
                                 <span
-                                    style="color: {{ request()->is('regional') || request()->is('regional/*') ? '#2A8D12' : '#1F2935' }}">Regional</span>
+                                    style="color: {{ request()->is('regional') || request()->is('regional/*') ? '#2A8D12' : '#1F2935' }}">Lokasi</span>
                             </div>
                         </a>
                     </li>
@@ -107,7 +107,7 @@
                         </a>
                     </li>
                     <li class="px-0 py-1">
-                        <a href="#" class="btn-logout">
+                        <a href="{{ route('logout') }}" class="btn-logout">
                             <div class="d-flex justify-content-center w-100">
                                 <i style="color: #ED1800" class='bx bx-log-in-circle'></i>
                                 <span style="color: #ED1800">Logout</span>

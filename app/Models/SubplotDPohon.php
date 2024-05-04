@@ -30,4 +30,8 @@ class SubplotDPohon extends Model
         "carbon_absorb",
         "updated_at"
     ];
+    public function subplotD()
+    {
+        return $this->belongsTo(SubplotD::class, 'uuid_subplot_d', 'uuid');
+    }
 }

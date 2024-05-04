@@ -38,7 +38,7 @@
                                 </select>
                             </div>
                             <div class="form-group mb-3 col-6">
-                                <label for="nama_regional">Nama Regional</label>
+                                <label for="nama_regional">Nama Lokasi</label>
                                 <input id="nama_regional" class="form-control" name="nama_regional" type="text" required>
                             </div>
                             <div class="form-group mb-3 col-6">

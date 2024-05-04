@@ -13,7 +13,7 @@ class PlotAreaController extends Controller
 {
     public function index()
     {
-        
+
         $plotArea = Plot::with('plot', 'hamparan')->get();
         return view('pages.plot-area.index',[
             'plotArea' => $plotArea
@@ -50,7 +50,7 @@ class PlotAreaController extends Controller
 
     public function edit(string $id)
     {
-        //
+        return view('pages.plot-area.show');
     }
 
 

@@ -38,7 +38,7 @@
 
 
             <a class="d-block hover text-center py-3 w-cta fs-6 fw-bold text-white bg-green rounded"
-                href="/auth/login/email">Lanjutkan dengan E-mail</a>
+                href="{{ route('login.email') }}">Lanjutkan dengan E-mail</a>
             <!-- separator -->
             <div class="d-flex my-4">
                 <span>atau</span>

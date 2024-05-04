@@ -28,4 +28,8 @@ class SubplotATumbuhanBawah extends Model
         "carbon_absorb",
         "updated_at"
     ];
+    public function subplotA()
+    {
+        return $this->belongsTo(SubplotA::class, 'uuid_subplot_a', 'uuid');
+    }
 }

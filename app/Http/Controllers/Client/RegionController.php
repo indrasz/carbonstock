@@ -66,6 +66,16 @@ class RegionController extends Controller
         //
     }
 
+    public function addteam($id)
+    {
+        $tim = Tim::all();
+        return view('pages.region.addTeam', [
+            'tim' => $tim,
+            'id' => $id
+        ]);
+    }
+
+
     public function storeTeam(Request $request)
     {
         $validatedData = $request->validate([

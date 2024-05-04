@@ -10,8 +10,8 @@
                         <h4 class="m-0">Informasi Lokasi</h4>
                         <p class="m-0" style="color: #90A8BF">Dapat memantau daerah Carbon Stock</p>
                     </div>
-                    <a href="#" class="btn btn-success rounded-3 mt-3 mt-sm-0 ">Tambahkan
-                        Data</a>
+                    {{-- <a href="#" class="btn btn-success rounded-3 mt-3 mt-sm-0 ">Tambahkan
+                        Data</a> --}}
                 </div>
                 <div class="card-body">
                     <div id="map" class="rounded-3"></div>
