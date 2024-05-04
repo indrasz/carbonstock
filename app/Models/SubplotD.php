@@ -22,4 +22,25 @@ class SubplotD extends Model
         "subplot_d_photo_url",
         "updated_at"
     ];
+
+    public function plot()
+    {
+        return $this->belongsTo(Plot::class, 'plot_id', 'id');
+    }
+
+    public function subplotDNekromas()
+    {
+        return $this->hasOne(SubplotDNekromas::class, 'uuid_subplot_d', 'uuid');
+    }
+
+    public function subplotDPohon()
+    {
+        return $this->hasOne(SubplotDPohon::class, 'uuid_subplot_d', 'uuid');
+    }
+
+    public function subplotDTanah()
+    {
+        return $this->hasOne(SubplotDTanah::class, 'uuid_subplot_d', 'uuid');
+    }
 }
+

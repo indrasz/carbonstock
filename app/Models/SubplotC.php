@@ -30,4 +30,9 @@ class SubplotC extends Model
         "subplot_c_photo_url",
         "updated_at"
     ];
+
+    public function plot()
+    {
+        return $this->belongsTo(Plot::class, 'plot_id', 'id');
+    }
 }

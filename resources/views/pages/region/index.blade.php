@@ -7,8 +7,8 @@
                 <div class="container-fluid periode-section mb-4">
                     <div class="d-block d-sm-flex justify-content-between align-items-center text-center text-sm-start mb-4">
                         <div class="gap-1">
-                            <h4 class="m-0">Daftar Regional</h4>
-                            <p class="m-0" style="color: #90A8BF">Informasi terkait Data regional yang aktif</p>
+                            <h4 class="m-0">Daftar Lokasi</h4>
+                            <p class="m-0" style="color: #90A8BF">Informasi terkait data lokasi yang aktif</p>
                         </div>
                         <a href="{{ route('region.create') }}" class="btn btn-success rounded-3 mt-3 mt-sm-0 md-trigger"
                             data-modal="modal-1">Tambahkan
@@ -163,28 +163,32 @@
 
 @push('after-script')
     <script>
-        document.getElementById('addTeam').addEventListener('click', function(event) {
-            event.preventDefault();
-            var selectWrapper = document.getElementById('listTeam').cloneNode(true);
+        var addTeamButtons = document.querySelectorAll('a[id^="addTeam"]');
 
-            // Membuat div wrapper
-            var divWrapper = document.createElement('div');
-            divWrapper.classList.add('d-flex', 'gap-2', 'align-items-center', 'team-item');
-            divWrapper.appendChild(selectWrapper);
+        addTeamButtons.forEach(function(addTeamButton) {
+            addTeamButton.addEventListener('click', function(event) {
+                event.preventDefault();
 
-            // Membuat tombol hapus
-            var deleteButton = document.createElement('a');
-            deleteButton.href = '#';
-            deleteButton.innerHTML = '<i class="text-danger bx bx-trash"></i>';
-            deleteButton.addEventListener('click', function(e) {
-                e.preventDefault();
-                divWrapper.remove();
+                var modal = addTeamButton.closest('.modal');
+                var listTeam = modal.querySelector('.listTeam');
+                var appenTeam = modal.querySelector('#appenTeam');
+                var selectWrapper = listTeam.querySelector('select').cloneNode(true);
+
+                var divWrapper = document.createElement('div');
+                divWrapper.classList.add('d-flex', 'gap-2', 'align-items-center', 'team-item');
+                divWrapper.appendChild(selectWrapper);
+
+                var deleteButton = document.createElement('a');
+                deleteButton.href = '#';
+                deleteButton.innerHTML = '<i class="text-danger bx bx-trash"></i>';
+                deleteButton.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    divWrapper.remove();
+                });
+
+                divWrapper.appendChild(deleteButton);
+                appenTeam.appendChild(divWrapper);
             });
-
-            // Menambahkan select dan tombol hapus ke dalam container
-            divWrapper.appendChild(deleteButton);
-            var appenTeam = document.getElementById('appenTeam');
-            appenTeam.appendChild(divWrapper);
         });
     </script>
     <script>

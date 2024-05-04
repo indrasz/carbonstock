@@ -42,10 +42,10 @@
                                 </select>
                             </div>
                             <div class="form-group mb-3 col-6">
-                                <label for="id_regional">Nama regional</label>
-                                <select name="id_regional" class="form-control" id="exampleFormControlSelect1">
+                                <select name="id_regional" class="form-control" id="regionalSelect">
                                     @foreach ($regional as $item)
-                                        <option value="{{ $item->id }}">{{ $item->nama_regional }}</option>
+                                        <option value="{{ $item->id }}" data-lat="{{ $item->latitude }}"
+                                            data-lng="{{ $item->longitude }}">{{ $item->nama_regional }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -66,14 +66,13 @@
 
 @push('after-script')
     <script>
-        mapboxgl.accessToken =
-            'pk.eyJ1IjoiaW5kcmFzeiIsImEiOiJjbHVxaWV3bngycmhiMmtuejluMTNzY216In0.EZ-2uwWJ3SAYv3ehMizmGw';
+        mapboxgl.accessToken = 'pk.eyJ1IjoiaW5kcmFzeiIsImEiOiJjbHVxaWV3bngycmhiMmtuejluMTNzY216In0.EZ-2uwWJ3SAYv3ehMizmGw';
 
         const map = new mapboxgl.Map({
             container: 'map',
             style: 'mapbox://styles/mapbox/streets-v11',
-            center: [118.0149, -2.5489],
-            zoom: 5
+            center: [parseFloat(document.getElementById('regionalSelect').options[0].getAttribute('data-lng')), parseFloat(document.getElementById('regionalSelect').options[0].getAttribute('data-lat'))], // Koordinat default yang digunakan
+            zoom: 10 // Tingkat zoom default yang digunakan
         });
 
         map.addControl(new mapboxgl.NavigationControl());
@@ -99,6 +98,21 @@
             marker.setLngLat(e.lngLat).addTo(map);
             document.getElementById('latitude').value = e.lngLat.lat.toFixed(4);
             document.getElementById('longitude').value = e.lngLat.lng.toFixed(4);
+        });
+
+        // Tambahkan event listener untuk elemen select
+        document.getElementById('regionalSelect').addEventListener('change', function() {
+            // Dapatkan lat dan long dari opsi yang dipilih
+            var selectedOption = this.options[this.selectedIndex];
+            var lat = parseFloat(selectedOption.getAttribute('data-lat'));
+            var lng = parseFloat(selectedOption.getAttribute('data-lng'));
+
+            // Perbarui center map dan level zoom
+            map.flyTo({
+                center: [lng, lat],
+                zoom: 10, // Atur level zoom sesuai kebutuhan Anda
+                essential: true // Sisipkan opsi ini agar perubahan map dianggap sebagai perubahan penting
+            });
         });
     </script>
 @endpush

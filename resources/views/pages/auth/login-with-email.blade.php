@@ -28,20 +28,25 @@
                 <p class="fs-5 lh-sm">Lanjutkan dengan Google atau <br> Masukkan Detail Login</->
             </div>
 
-            <form class="w-cta mb-5" action="" method="POST">
+            <form class="w-cta mb-5" action="{{ route('login.validateUser') }}" method="POST">
+                @csrf
                 <div class="form-floating mb-3">
-                    <input type="email" class="form-control input-form" id="floatingInput" placeholder="name@example.com">
+                    <input type="email" class="form-control input-form" name="email" id="floatingInput"
+                        placeholder="name@example.com">
                     <label class="label-form" for="floatingInput">Alamat Email</label>
                 </div>
                 <div class="form-floating">
-                    <input type="password" class="form-control input-form" id="floatingPassword" placeholder="Password">
+                    <input type="password" class="form-control input-form" id="floatingPassword" placeholder="Password"
+                        name="password">
                     <label class="label-form" for="floatingPassword">Password</label>
                 </div>
+
+                <button type="submit"
+                    class="d-block hover text-center py-3 mt-5 w-cta fs-6 fw-bold text-white bg-green rounded mb-3">Lanjutkan
+                    dengan E-mail</button>
+
             </form>
 
-
-            <a class="d-block hover text-center py-3 w-cta fs-6 fw-bold text-white bg-green rounded mb-3"
-                href="/auth/login/email">Lanjutkan dengan E-mail</a>
 
             <p class="mb-2 fs-6">Belum punya akun? <span class="text-green fw-bold"><a href="{{ route('register') }}">Buat
                         Akun</a></span></p>
@@ -51,7 +56,7 @@
                 <span>atau</span>
             </div>
             <!-- Button Google -->
-            <a href=""
+            <a href="#"
                 class="d-flex gap-2 justify-content-center align-items-center text-center py-3 w-cta fs-6 fw-bold border-2 border rounded">
                 <img class="img-cta"
                     src="https://lh3.googleusercontent.com/COxitqgJr1sJnIDe8-jiKhxDx1FrYbtRHKJ9z_hELisAlapwE9LUPh6fcXIfb5vwpbMl4xl9H9TRFPc5NOO8Sb3VSgIBrfRYvW6cUA">
@@ -123,8 +128,8 @@
             /* font-family: 'Gilroy-Bold', sans-serif; */
             font-family: 'Gilroy-Bold', sans-serif;
             /* font-family: 'Gilroy-Light', sans-serif;
-                font-family: 'Gilroy-Medium', sans-serif;
-                font-family: 'Gilroy-Regular', sans-serif; */
+                    font-family: 'Gilroy-Medium', sans-serif;
+                    font-family: 'Gilroy-Regular', sans-serif; */
 
         }
 

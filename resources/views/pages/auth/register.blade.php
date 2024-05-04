@@ -17,31 +17,32 @@
         <section class="px-5 py-3" style="">
             <h3>Infromasi Umum</h3>
             <p style="font-size: 1rem;">Silahkan isi informasi umum dengan benar</p>
-            <form method="" action="">
+            <form method="POST" action="{{ route('register.createUser') }}">
+                @csrf
                 <div class="form-group mb-3">
                     <label for="inputNama">Nama</label>
-                    <input type="text" class="form-control" id="inputNama" placeholder="Masukkan nama">
+                    <input type="text" class="form-control" name="nama" id="inputNama" placeholder="Masukkan nama">
                 </div>
                 <div class="form-group mb-3">
                     <label for="inputKatasandi">Kata Sandi</label>
-                    <input type="password" class="form-control" id="inputKatasandi" placeholder="Masukkan kata sandi">
+                    <input type="password" class="form-control" name="password" id="inputKatasandi" placeholder="Masukkan kata sandi">
                 </div>
-                <div class="form-group mb-3">
+                {{-- <div class="form-group mb-3">
                     <label for="inputConfirmKatasandi">Konfirmasi Kata Sandi</label>
                     <input type="password" class="form-control" id="inputConfirmKatasandi"
                         placeholder="Masukkan kembali kata sandi">
-                </div>
+                </div> --}}
                 <div class="form-group mb-3">
                     <label for="inputTempat">Tempat Lahir</label>
-                    <input type="text" class="form-control" id="inputTempat" placeholder="Masukkan tempat lahir">
+                    <input type="text" class="form-control" id="inputTempat" name="tempat_lahir" placeholder="Masukkan tempat lahir">
                 </div>
                 <div class="form-group mb-3">
                     <label for="inputTanggalLahir">Tanggal Lahir</label>
-                    <input type="date" class="form-control" id="inputTanggalLahir">
+                    <input type="date" class="form-control" id="inputTanggalLahir" name="tanggal_lahir">
                 </div>
                 <div class="form-group mb-3">
                     <label for="inputJenisKelamin">Jenis Kelamin</label>
-                    <select class="form-control" id="inputJenisKelamin">
+                    <select class="form-control" name="jenis_kelamin" id="inputJenisKelamin">
                         <option disabled selected>Pilih Jenis Kelamin</option>
                         <option value="Laki-laki">Laki-laki</option>
                         <option value="Perempuan">Perempuan</option>
@@ -49,13 +50,13 @@
                 </div>
                 <div class="form-group mb-3">
                     <label for="inputNoTelepon">Nomor Telepon</label>
-                    <input type="tel" class="form-control" id="inputNoTelepon" placeholder="Masukkan nomor telepon">
+                    <input type="text" class="form-control" id="inputNoTelepon" placeholder="Masukkan nomor telepon" name="telepon">
                 </div>
                 <div class="form-group mb-3">
                     <label for="inputEmail">Email</label>
-                    <input type="email" class="form-control" id="inputEmail" placeholder="Masukkan email">
+                    <input type="email" class="form-control" id="inputEmail" placeholder="Masukkan email" name="email">
                 </div>
-                <a href="#" class="btn btn-success mt-2 rounded-2" style="width: 100%">Daftar Sekarang</a>
+                <button type="submit" class="btn btn-success mt-2 rounded-2" style="width: 100%">Daftar Sekarang</button>
             </form>
 
         </section>

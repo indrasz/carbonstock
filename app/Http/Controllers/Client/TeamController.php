@@ -43,6 +43,20 @@ class TeamController extends Controller
             'id_user.*' => 'required:integer',
         ]);
 
+        $anggotaExist = false;
+
+        foreach ($validatedData['id_user'] as $idUser) {
+            if (AnggotaTim::where('id_tim', $validatedData['id_tim'])->where('id_user', $idUser)->exists()) {
+                $anggotaExist = true;
+                break;
+            }
+        }
+
+        if ($anggotaExist) {
+            toastr()->error('anggota telah terdaftar di tim');
+            return redirect()->back(); // Redirect ke halaman sebelumnya
+        }
+
         foreach ($validatedData['id_user'] as $idUser) {
             $anggotaTim = new AnggotaTim();
             $anggotaTim->id_tim = $validatedData['id_tim'];
