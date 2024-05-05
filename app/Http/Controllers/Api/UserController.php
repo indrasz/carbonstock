@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Users;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rules\Password;
@@ -72,6 +73,13 @@ class UserController extends Controller
         $users = Users::where('email', $request->email)->where('password', md5($request->password))->where('is_active', 1)->get();
         //available user
         if(count($users) > 0){
+            $users[0]->listplot = DB::table('plot as p')
+                ->join('hamparan as h', 'p.id_hamparan', 'h.id')
+                ->join('zona as z', 'h.id_zona', 'z.id')
+                ->join('zona_tim as zt', 'z.id', 'zt.id_zona')
+                ->join('anggota_tim as at', 'zt.id_tim', 'at.id_tim')
+                ->where('at.id_user', $users[0]->id)
+                ->get('p.*');
             return $this->responses(true, 'Berhasil login', $users[0]);
         }else {
             return $this->responses(false, 'Gagal Login. Username atau password salah');
