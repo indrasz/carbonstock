@@ -14,8 +14,8 @@
                 @forelse ($zona as $item)
                     <div class="col-md-6 col-lg-4 height-card box-margin">
                         <div class="card">
-                            <img class="card-img-top img-responsive p-3 rounded-5" src="/assets/img/gallery-img/4.jpg"
-                                alt="Card image cap">
+                            {{-- <img class="card-img-top img-responsive p-3 rounded-5" src="/assets/img/gallery-img/4.jpg"
+                                alt="Card image cap"> --}}
                             <div class="card-body">
                                 <h4 class=" mb-0">{{ $item->nama_zona }}</h4>
                                 <p class="card-text mb-0">{{ $item->regional->nama_regional }}</p>

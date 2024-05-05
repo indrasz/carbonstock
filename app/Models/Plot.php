@@ -31,22 +31,49 @@ class Plot extends Model
 
     public function subplotA()
     {
-        return $this->hasOne(SubplotA::class, 'plot_id', 'id');
+        return $this->hasMany(SubplotA::class, 'plot_id', 'id');
+    }
+    public function subplotASeresah()
+    {
+        return $this->hasMany(SubplotASeresah::class, 'plot_id', 'id');
+    }
+
+    public function subplotASemai()
+    {
+        return $this->hasMany(SubplotASemai::class, 'plot_id', 'id');
+    }
+
+    public function subplotATumbuhanBawah()
+    {
+        return $this->hasMany(SubplotATumbuhanBawah::class, 'plot_id', 'id');
     }
 
     public function subplotB()
     {
-        return $this->hasOne(SubplotB::class, 'plot_id', 'id');
+        return $this->hasMany(SubplotB::class, 'plot_id', 'id');
     }
 
     public function subplotC()
     {
-        return $this->hasOne(SubplotC::class, 'plot_id', 'id');
+        return $this->hasMany(SubplotC::class, 'plot_id', 'id');
     }
 
     public function subplotD()
     {
-        return $this->hasOne(SubplotD::class, 'plot_id', 'id');
+        return $this->hasMany(SubplotD::class, 'plot_id', 'id');
+    }
+    public function subplotDNekromas()
+    {
+        return $this->hasMany(SubplotDNekromas::class, 'plot_id', 'id');
     }
 
+    public function subplotDPohon()
+    {
+        return $this->hasMany(SubplotDPohon::class, 'plot_id', 'id');
+    }
+
+    public function subplotDTanah()
+    {
+        return $this->hasMany(SubplotDTanah::class, 'plot_id', 'id');
+    }
 }

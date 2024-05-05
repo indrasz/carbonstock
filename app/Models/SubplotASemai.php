@@ -32,4 +32,8 @@ class SubplotASemai extends Model
     {
         return $this->belongsTo(SubplotA::class, 'uuid_subplot_a', 'uuid');
     }
+    public function plot()
+    {
+        return $this->belongsTo(Plot::class, 'plot_id', 'id');
+    }
 }

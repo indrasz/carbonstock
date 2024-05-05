@@ -16,8 +16,8 @@
                         <div class="col-md-6 col-lg-4 height-card box-margin">
                             <div class="card">
                                 <a href="{{ route('plot-area.edit', $item->id) }}">
-                                    <img class="card-img-top img-responsive p-3 rounded-5"
-                                        src="/assets/img/gallery-img/4.jpg" alt="Card image cap">
+                                    {{-- <img class="card-img-top img-responsive p-3 rounded-5"
+                                        src="/assets/img/gallery-img/4.jpg" alt="Card image cap"> --}}
                                     <div class="card-body">
                                         <h4 class=" mb-0">{{ $item->nama_plot }}</h4>
                                         <p class="card-text mb-2">{{ $item->hamparan->nama_hamparan }}</p>

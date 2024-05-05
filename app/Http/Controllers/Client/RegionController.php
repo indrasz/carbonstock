@@ -51,7 +51,25 @@ class RegionController extends Controller
 
     public function show(string $id)
     {
-        //
+        $regional = Regional::with([
+            'zona.hamparan.plot.subplotA',
+            'zona.hamparan.plot.subplotASemai',
+            'zona.hamparan.plot.subplotASeresah',
+            'zona.hamparan.plot.subplotATumbuhanBawah',
+            'zona.hamparan.plot.subplotB',
+            'zona.hamparan.plot.subplotC',
+            'zona.hamparan.plot.subplotD',
+            'zona.hamparan.plot.subplotDNekromas',
+            'zona.hamparan.plot.subplotDTanah',
+            'zona.hamparan.plot.subplotDPohon'
+        ])->findOrFail($id);
+
+        // dd($regional->toArray());
+
+        // Pass data regional ke tampilan
+        return view('pages.region.show', [
+            'regional' => $regional,
+        ]);
     }
 
 

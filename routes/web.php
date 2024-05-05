@@ -57,7 +57,7 @@ Route::middleware(['auth'])->group(
         Route::post('/team/tambahAnggota', [TeamController::class, 'tambahAnggota'])->name('team.tambahAnggota');
         Route::post('/team/{id}', [TeamController::class, 'destroy'])->name('team.destroy');
 
-        Route::get('/regional/edit/{id}', [RegionController::class, 'edit'])->name('region.edit');
+        Route::get('/regional/show/{id}', [RegionController::class, 'show'])->name('region.show');
         Route::get('/regional/create', [RegionController::class, 'create'])->name('region.create');
         Route::get('/regional', [RegionController::class, 'index'])->name('region.index');
         Route::post('/regional', [RegionController::class, 'store'])->name('region.store');

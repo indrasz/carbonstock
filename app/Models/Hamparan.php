@@ -23,4 +23,9 @@ class Hamparan extends Model
     {
         return $this->belongsTo(Zona::class, 'id_zona', 'id');
     }
+
+    function plot()
+    {
+        return $this->hasMany(Plot::class, 'id_hamparan', 'id');
+    }
 }

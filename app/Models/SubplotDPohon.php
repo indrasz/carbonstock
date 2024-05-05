@@ -34,4 +34,9 @@ class SubplotDPohon extends Model
     {
         return $this->belongsTo(SubplotD::class, 'uuid_subplot_d', 'uuid');
     }
+    public function plot()
+    {
+        return $this->belongsTo(Plot::class, 'plot_id', 'id');
+    }
+
 }

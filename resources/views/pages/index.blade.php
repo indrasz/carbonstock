@@ -48,20 +48,6 @@
 
         </div>
     </div>
-    {{-- <script>
-        mapboxgl.accessToken = '{{ $token }}';
-        var map = new mapboxgl.Map({
-            container: 'map',
-            style: 'mapbox://styles/mapbox/streets-v11',
-            center: [{{ $longitude }}, {{ $latitude }}],
-            zoom: 10
-        });
-
-        // Tambahkan marker untuk menunjukkan posisi saat ini
-        new mapboxgl.Marker()
-            .setLngLat([{{ $longitude }}, {{ $latitude }}])
-            .addTo(map);
-    </script> --}}
 @endsection
 
 @push('after-style')
@@ -77,21 +63,23 @@
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
+        var regionalLabels = {!! json_encode(array_keys($regionalCarbonValues)) !!};
+        var carbonValues = {!! json_encode(array_values($regionalCarbonValues)) !!};
+        var carbonAbsorbs = {!! json_encode(array_values($regionalCarbonAbsorbs)) !!};
+
         var ctx = document.getElementById('regionalChart').getContext('2d');
         var myChart = new Chart(ctx, {
             type: 'bar',
             data: {
-                labels: ['Regional 1', 'Regional 2', 'Regional 3',
-                    'Regional 4'
-                ],
+                labels: regionalLabels,
                 datasets: [{
                         label: 'Kandungan Karbon',
-                        data: [150, 200, 180, 220],
+                        data: carbonValues,
                         backgroundColor: '#8FC457'
                     },
                     {
                         label: 'Serapan CO2',
-                        data: [100, 120, 90, 110],
+                        data: carbonAbsorbs,
                         backgroundColor: '#2A8D12'
                     }
                 ]
@@ -107,8 +95,8 @@
     </script>
 
     <script>
-        var carbonTotal = 1000;
-        var co2Total = 800;
+        var carbonTotal = {{ $sumCarbonValuePlot }};
+        var co2Total = {{ $sumCarbonAbsorbPlot }};
 
         var ctx = document.getElementById('regionalPieChart').getContext('2d');
         var myChart = new Chart(ctx, {
@@ -118,9 +106,8 @@
                 datasets: [{
                     // label: 'Regional Data',
                     data: [
-                        (carbonTotal / (carbonTotal + co2Total) * 100).toFixed(
-                            2),
-                        (co2Total / (carbonTotal + co2Total) * 100).toFixed(2)
+                        (carbonTotal).toFixed(2),
+                        (co2Total).toFixed(2)
                     ],
                     backgroundColor: [
                         '#8FC457',
