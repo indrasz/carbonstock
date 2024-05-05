@@ -73,6 +73,10 @@ class UserController extends Controller
         $users = Users::where('email', $request->email)->where('password', md5($request->password))->where('is_active', 1)->get();
         //available user
         if(count($users) > 0){
+            $users[0]->list_tim = DB::table('tim as t')
+                ->join('anggota_tim as at', 't.id', 'at.id_tim')
+                ->where('at.id_user', $users[0]->id)
+                ->get('t.*');
             $users[0]->listplot = DB::table('plot as p')
                 ->join('hamparan as h', 'p.id_hamparan', 'h.id')
                 ->join('zona as z', 'h.id_zona', 'z.id')

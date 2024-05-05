@@ -3,9 +3,22 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Hamparan;
 use App\Models\laporan_semai;
 use App\Models\laporan_serasah;
+use App\Models\Plot;
 use App\Models\SubPlot;
+use App\Models\SubplotA;
+use App\Models\SubplotASemai;
+use App\Models\SubplotASeresah;
+use App\Models\SubplotATumbuhanBawah;
+use App\Models\SubplotB;
+use App\Models\SubplotC;
+use App\Models\SubplotD;
+use App\Models\SubplotDNekromas;
+use App\Models\SubplotDPohon;
+use App\Models\SubplotDTanah;
+use App\Models\Zona;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -198,5 +211,74 @@ class LaporanController extends Controller
             'message' => $message,
             'data' => $data
         ), JSON_PRETTY_PRINT);
+    }
+
+    function get_laporan_by_regional($id_regional){
+        $subplot_b = array();
+        $subplot_c = array();
+        $subplot_a_semai = array();
+        $subplot_a_seresah = array();
+        $subplot_a_tumbuhan_bawah = array();
+        $subplot_d_nekromas = array();
+        $subplot_d_pohon = array();
+        $subplot_d_tanah = array();
+
+        $list_zona = Zona::where('id_regional', $id_regional)->get(); //get laporan from regional
+        foreach($list_zona as $zona){
+            $list_hamparan = Hamparan::where('id_zona', $zona->id)->get(); //get laporan from zona
+            foreach($list_hamparan as $hamparan){
+                $list_plot = Plot::where('id_hamparan', $hamparan->id)->get(); //get laporan from hamparan
+                foreach($list_plot as $plot){//get laporan from plot
+                    $list_subplot_a = SubplotA::where('plot_id', $plot->id)->get(); 
+                    foreach($list_subplot_a as $subplot_a){
+                        $list_subplot_a_semai = SubplotASemai::where('uuid_subplot_a', $subplot_a->uuid)->get();
+                        foreach($list_subplot_a_semai as $semai){
+                            array_push($subplot_a_semai, $semai);
+                        }
+
+                        $list_subplot_a_seresah = SubplotASeresah::where('uuid_subplot_a', $subplot_a->uuid)->get();
+                        foreach($list_subplot_a_seresah as $seresah){
+                            array_push($subplot_a_seresah, $seresah);
+                        }
+
+                        $list_subplot_a_tumbuhan_bawah = SubplotATumbuhanBawah::where('uuid_subplot_a', $subplot_a->uuid)->get();
+                        foreach($list_subplot_a_tumbuhan_bawah as $tb){
+                            array_push($subplot_a_tumbuhan_bawah, $tb);
+                        }
+                    }
+
+                    $list_subplot_b = SubplotB::where('plot_id', $plot->id)->get();
+                    foreach($list_subplot_b as $sb){
+                        array_push($subplot_b, $sb);
+                    }
+
+                    $list_subplot_c = SubplotC::where('plot_id', $plot->id)->get();
+                    foreach($list_subplot_c as $sc){
+                        array_push($subplot_c, $sc);
+                    }
+
+                    $list_subplot_d = SubplotD::where('plot_id', $plot->id)->get();
+                    foreach($list_subplot_d as $subplot_d){
+                        $list_subplot_d_nekromas = SubplotDNekromas::where('uuid_subplot_d', $subplot_d)->get();
+                        foreach($list_subplot_d_nekromas as $sdn){
+                            array_push($subplot_d_nekromas, $sdn);
+                        }
+
+                        $list_subplot_d_pohon = SubplotDPohon::where('uuid_subplot_d', $subplot_d)->get();
+                        foreach($list_subplot_d_pohon as $sdp){
+                            array_push($subplot_d_pohon, $sdp);
+                        }
+
+                        $list_subplot_d_tanah = SubplotDTanah::where('uuid_subplot_d', $subplot_d)->get();
+                        foreach($list_subplot_d_tanah as $sdt){
+                            array_push($subplot_d_tanah, $sdt);
+                        }
+                    }
+                }
+            }
+        }
+
+        //array object
+        return compact("subplot_b","subplot_c", "subplot_a_semai", "subplot_a_seresah", "subplot_a_tumbuhan_bawah", "subplot_d_nekromas", "subplot_d_pohon", "subplot_d_tanah");
     }
 }
