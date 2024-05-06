@@ -34,39 +34,18 @@ class DashboardController extends Controller
             'zona.hamparan.plot.subplotDPohon'
         ])->get();
 
-        // $dataRegional = [];
-        // foreach ($regional as $reg) {
-        //     $dataZona = [];
-        //     foreach ($reg->zona as $zona) {
-        //         $dataHamparan = [];
-        //         foreach ($zona->hamparan as $hamparan) {
-        //             $dataPlot = [];
-        //             foreach ($hamparan->plot as $plot) {
-        //                 $allSubplotASemaiPlot = SubplotASemai::where('plot_id', $plot->id)->get();
-        //                 $rataRataCarbonValuePlot = $allSubplotASemaiPlot->avg('carbon_value');
-        //                 $rataRataCarbonAbsorbPlot = $allSubplotASemaiPlot->avg('carbon_absorb');
 
-        //                 $dataPlot[] = [
-        //                     'plot' => $plot,
-        //                     'rata_rata_carbon_value' => $rataRataCarbonValuePlot,
-        //                     'rata_rata_carbon_absorb' => $rataRataCarbonAbsorbPlot
-        //                 ];
-        //             }
-        //             $dataHamparan[] = [
-        //                 'hamparan' => $hamparan,
-        //                 'plot' => $dataPlot
-        //             ];
-        //         }
-        //         $dataZona[] = [
-        //             'zona' => $zona,
-        //             'hamparan' => $dataHamparan
-        //         ];
-        //     }
-        //     $dataRegional[] = [
-        //         'regional' => $reg,
-        //         'zona' => $dataZona
-        //     ];
-        // }
+        $seresah = SubplotASeresah::all();
+        $semai = SubplotASemai::all();
+        $tumbuhanBawah = SubplotATumbuhanBawah::all();
+
+        $tiang = SubplotB::all();
+        $pancang = SubplotC::all();
+
+        $necromass = SubplotDNekromas::all();
+        $pohon = SubplotDPohon::all();
+        $tanah = SubplotDTanah::all();
+
         $sumCarbonValuePlot = 0;
         $sumCarbonAbsorbPlot = 0;
 
@@ -145,6 +124,14 @@ class DashboardController extends Controller
             'sumCarbonAbsorbPlot' => $sumCarbonAbsorbPlot,
             'regionalCarbonValues' => $regionalCarbonValues,
             'regionalCarbonAbsorbs' => $regionalCarbonAbsorbs,
+            'seresah' => $seresah,
+            'semai' => $semai,
+            'tumbuhanBawah' => $tumbuhanBawah,
+            'tiang' => $tiang,
+            'pancang' => $pancang,
+            'necromass' => $necromass,
+            'pohon' => $pohon,
+            'tanah' => $tanah
         ]);
     }
 }

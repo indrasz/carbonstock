@@ -23,11 +23,14 @@
                                                 Hamparan: {{ $hamparan->nama_hamparan }}
                                             </button>
                                         </h2>
+
                                         <div id="collapse{{ $hamparan->id }}" class="accordion-collapse collapse"
                                             aria-labelledby="heading{{ $hamparan->id }}"
                                             data-bs-parent="#accordion{{ $hamparan->id }}">
                                             <div class="accordion-body">
+
                                                 @forelse ($hamparan->plot as $plot)
+
                                                     <div class="accordion" id="accordionPlot{{ $plot->id }}">
                                                         <div class="accordion-item">
                                                             <h2 class="accordion-header"
@@ -423,6 +426,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
+                                                    
                                                 @empty
                                                     <h3 class="text-center">Data masih kosong</h3>
                                                 @endforelse
