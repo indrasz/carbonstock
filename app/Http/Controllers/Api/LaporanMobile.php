@@ -16,6 +16,7 @@ use App\Models\SubplotDTanah;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use PhpParser\Node\Stmt\Return_;
+use Symfony\Component\Uid\NilUlid;
 
 class LaporanMobile extends Controller
 {
@@ -204,6 +205,139 @@ class LaporanMobile extends Controller
         ]);
 
         return $this->responses(true, 'Berhasil menambahkan data');
+    }
+
+    function get_subplot_a(Request $request){
+        $data = SubplotA::with('subplotASemai', 'subplotASeresah', 'subplotATumbuhanBawah');
+        // $data = SubplotB::query();
+
+        $id = $request->get('id_plot', NULL);
+        if($id != NULL){
+            $data = $data->where('plot_id', $id);
+        }
+
+        $hamparan = $request->get('id_hamparan', NULL);
+        if($hamparan != NULL){
+            $data = $data->whereHas('plot', function($db)use($hamparan){
+                $db->where('id_hamparan', $hamparan);
+            });
+        }
+
+        $zona = $request->get('id_zona', NULL);
+        if($zona != NULL){
+            $data = $data->whereHas('plot.hamparan', function($db)use($zona){
+                $db->where('id_zona', $zona);
+            });
+        }
+
+        $regional = $request->get('id_regional', NULL);
+        if($regional != NULL){
+            $data = $data->whereHas('plot.hamparan.zona', function($db)use($regional){
+                $db->where('id_regional', $regional);
+            });
+        }
+
+        $data = $data->get();
+        return $this->responses(true, 'Berhasil mendapatkan data', $data);
+    }
+
+    function get_subplot_b(Request $request){
+        $data = SubplotB::query();
+
+        $id = $request->get('id_plot', NULL);
+        if($id != NULL){
+            $data = $data->where('plot_id', $id);
+        }
+
+        $hamparan = $request->get('id_hamparan', NULL);
+        if($hamparan != NULL){
+            $data = $data->whereHas('plot', function($db)use($hamparan){
+                $db->where('id_hamparan', $hamparan);
+            });
+        }
+
+        $zona = $request->get('id_zona', NULL);
+        if($zona != NULL){
+            $data = $data->whereHas('plot.hamparan', function($db)use($zona){
+                $db->where('id_zona', $zona);
+            });
+        }
+
+        $regional = $request->get('id_regional', NULL);
+        if($regional != NULL){
+            $data = $data->whereHas('plot.hamparan.zona', function($db)use($regional){
+                $db->where('id_regional', $regional);
+            });
+        }
+
+        $data = $data->get();
+        return $this->responses(true, 'Berhasil mendapatkan data', $data);
+    }
+
+    function get_subplot_c(Request $request){
+        $data = SubplotC::query();
+
+        $id = $request->get('id_plot', NULL);
+        if($id != NULL){
+            $data = $data->where('plot_id', $id);
+        }
+
+        $hamparan = $request->get('id_hamparan', NULL);
+        if($hamparan != NULL){
+            $data = $data->whereHas('plot', function($db)use($hamparan){
+                $db->where('id_hamparan', $hamparan);
+            });
+        }
+
+        $zona = $request->get('id_zona', NULL);
+        if($zona != NULL){
+            $data = $data->whereHas('plot.hamparan', function($db)use($zona){
+                $db->where('id_zona', $zona);
+            });
+        }
+
+        $regional = $request->get('id_regional', NULL);
+        if($regional != NULL){
+            $data = $data->whereHas('plot.hamparan.zona', function($db)use($regional){
+                $db->where('id_regional', $regional);
+            });
+        }
+
+        $data = $data->get();
+        return $this->responses(true, 'Berhasil mendapatkan data', $data);
+    }
+
+    function get_subplot_d(Request $request){
+        $data = SubplotD::query();
+
+        $id = $request->get('id_plot', NULL);
+        if($id != NULL){
+            $data = $data->where('plot_id', $id);
+        }
+
+        $hamparan = $request->get('id_hamparan', NULL);
+        if($hamparan != NULL){
+            $data = $data->whereHas('plot', function($db)use($hamparan){
+                $db->where('id_hamparan', $hamparan);
+            });
+        }
+
+        $zona = $request->get('id_zona', NULL);
+        if($zona != NULL){
+            $data = $data->whereHas('plot.hamparan', function($db)use($zona){
+                $db->where('id_zona', $zona);
+            });
+        }
+
+        $regional = $request->get('id_regional', NULL);
+        if($regional != NULL){
+            $data = $data->whereHas('plot.hamparan.zona', function($db)use($regional){
+                $db->where('id_regional', $regional);
+            });
+        }
+
+        $data = $data->get();
+        return $this->responses(true, 'Berhasil mendapatkan data', $data);
     }
 
     function responses($status, $message, $data = array()){
