@@ -46,6 +46,23 @@ class DashboardController extends Controller
         $pohon = SubplotDPohon::all();
         $tanah = SubplotDTanah::all();
 
+        $avgAllCarbonValueSemai = $semai->avg('carbon_value');
+        $avgAllCarbonAbsorbSemai = $semai->avg('carbon_absorb');
+        $avgAllCarbonValueSeresah = $seresah->avg('carbon_value');
+        $avgAllCarbonAbsorbSeresah = $seresah->avg('carbon_absorb');
+        $avgAllCarbonValueTumbuhanBawah = $tumbuhanBawah->avg('carbon_value');
+        $avgAllCarbonAbsorbTumbuhanBawah = $tumbuhanBawah->avg('carbon_absorb');
+        $avgAllCarbonValueSubplotB = $tiang->avg('carbon_value');
+        $avgAllCarbonAbsorbSubplotB = $tiang->avg('carbon_absorb');
+        $avgAllCarbonValueSubplotC = $pancang->avg('carbon_value');
+        $avgAllCarbonAbsorbSubplotC = $pancang->avg('carbon_absorb');
+        $avgAllCarbonValueNekromas = $necromass->avg('carbon_value');
+        $avgAllCarbonAbsorbNekromas = $necromass->avg('carbon_absorb');
+        $avgAllCarbonValuePohon = $pohon->avg('carbon_value');
+        $avgAllCarbonAbsorbPohon = $pohon->avg('carbon_absorb');
+        $avgAllCarbonValueTanah = $tanah->avg('carbon_value');
+        $avgAllCarbonAbsorbTanah = $tanah->avg('carbon_absorb');
+
         $sumCarbonValuePlot = 0;
         $sumCarbonAbsorbPlot = 0;
 
@@ -131,7 +148,39 @@ class DashboardController extends Controller
             'pancang' => $pancang,
             'necromass' => $necromass,
             'pohon' => $pohon,
-            'tanah' => $tanah
+            'tanah' => $tanah,
+            'avgCarbonValueSemai' => $avgCarbonValueSemai,
+            'avgCarbonAbsorbSemai' => $avgCarbonAbsorbSemai,
+            'avgCarbonValueSeresah' => $avgCarbonValueSeresah,
+            'avgCarbonAbsorbSeresah' => $avgCarbonAbsorbSeresah,
+            'avgCarbonValueTumbuhanBawah' => $avgCarbonValueTumbuhanBawah,
+            'avgCarbonAbsorbTumbuhanBawah' => $avgCarbonAbsorbTumbuhanBawah,
+            'avgCarbonValueSubplotB' => $avgCarbonValueSubplotB,
+            'avgCarbonAbsorbSubplotB' => $avgCarbonAbsorbSubplotB,
+            'avgCarbonValueSubplotC' => $avgCarbonValueSubplotC,
+            'avgCarbonAbsorbSubplotC' => $avgCarbonAbsorbSubplotC,
+            'avgCarbonValueNekromas' => $avgCarbonValueNekromas,
+            'avgCarbonAbsorbNekromas' => $avgCarbonAbsorbNekromas,
+            'avgCarbonValuePohon' => $avgCarbonValuePohon,
+            'avgCarbonAbsorbPohon' => $avgCarbonAbsorbPohon,
+            'avgCarbonValueTanah' => $avgCarbonValueTanah,
+            'avgCarbonAbsorbTanah' => $avgCarbonAbsorbTanah,
+            'avgAllCarbonValueSemai' => $avgAllCarbonValueSemai,
+            'avgAllCarbonAbsorbSemai' => $avgAllCarbonAbsorbSemai,
+            'avgAllCarbonValueSeresah' => $avgAllCarbonValueSeresah,
+            'avgAllCarbonAbsorbSeresah' => $avgAllCarbonAbsorbSeresah,
+            'avgAllCarbonValueTumbuhanBawah' => $avgAllCarbonValueTumbuhanBawah,
+            'avgAllCarbonAbsorbTumbuhanBawah' => $avgAllCarbonAbsorbTumbuhanBawah,
+            'avgAllCarbonValueSubplotB' => $avgAllCarbonValueSubplotB,
+            'avgAllCarbonAbsorbSubplotB' => $avgAllCarbonAbsorbSubplotB,
+            'avgAllCarbonValueSubplotC' => $avgAllCarbonValueSubplotC,
+            'avgAllCarbonAbsorbSubplotC' => $avgAllCarbonAbsorbSubplotC,
+            'avgAllCarbonValueNekromas' => $avgAllCarbonValueNekromas,
+            'avgAllCarbonAbsorbNekromas' => $avgAllCarbonAbsorbNekromas,
+            'avgAllCarbonValuePohon' => $avgAllCarbonValuePohon,
+            'avgAllCarbonAbsorbPohon' => $avgAllCarbonAbsorbPohon,
+            'avgAllCarbonValueTanah' => $avgAllCarbonValueTanah,
+            'avgAllCarbonAbsorbTanah' => $avgAllCarbonAbsorbTanah,
         ]);
     }
 }
