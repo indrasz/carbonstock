@@ -369,6 +369,80 @@
                 </div> <!-- end card-->
             </section>
 
+            <section>
+                <div class="card mt-4">
+                    <div class="card-body">
+                        <h4 class="card-title mb-4">Summary Kandungan Karbon</h4>
+
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Semai</th>
+                                        <th>Seresah</th>
+                                        <th>Tumbuhan Bawah</th>
+                                        <th>Pancang</th>
+                                        <th>Tiang</th>
+                                        <th>Nekromas</th>
+                                        <th>Pohon</th>
+                                        <th>Tanah</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>{{ $avgAllCarbonValueSemai }}</td>
+                                        <td>{{ $avgAllCarbonValueSeresah }}</td>
+                                        <td>{{ $avgAllCarbonValueTumbuhanBawah }}</td>
+                                        <td>{{ $avgAllCarbonValueSubplotB }}</td>
+                                        <td>{{ $avgAllCarbonValueSubplotC }}</td>
+                                        <td>{{ $avgAllCarbonValueNekromas }}</td>
+                                        <td>{{ $avgAllCarbonValuePohon }}</td>
+                                        <td>{{ $avgAllCarbonValueTanah }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="card my-4">
+                    <div class="card-body">
+                        <h4 class="card-title mb-4">Summary Serapan CO2</h4>
+
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Semai</th>
+                                        <th>Seresah</th>
+                                        <th>Tumbuhan Bawah</th>
+                                        <th>Pancang</th>
+                                        <th>Tiang</th>
+                                        <th>Nekromas</th>
+                                        <th>Pohon</th>
+                                        <th>Tanah</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>{{ $avgAllCarbonAbsorbSemai }}</td>
+                                        <td>{{ $avgAllCarbonAbsorbSeresah }}</td>
+                                        <td>{{ $avgAllCarbonAbsorbTumbuhanBawah }}</td>
+                                        <td>{{ $avgAllCarbonAbsorbSubplotB }}</td>
+                                        <td>{{ $avgAllCarbonAbsorbSubplotC }}</td>
+                                        <td>{{ $avgAllCarbonAbsorbNekromas }}</td>
+                                        <td>{{ $avgAllCarbonAbsorbPohon }}</td>
+                                        <td>{{ $avgAllCarbonAbsorbTanah }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
         </div>
     </div>
 @endsection
