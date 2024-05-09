@@ -28,13 +28,14 @@ class ZonaController extends Controller
     }
 
 
-    public function create()
+    public function create($regionalId)
     {
-        $regional = Regional::all();
+        $regional = Regional::findOrFail($regionalId);
         $masterHutan = MasterHutan::all();
         return view('pages.zona.create', [
             'masterHutan' => $masterHutan,
-            'regional' => $regional
+            'regional' => $regional,
+            'regionalId' => $regionalId,
         ]);
     }
 
@@ -89,7 +90,12 @@ class ZonaController extends Controller
 
     public function show(string $id)
     {
-        //
+        $zona = Zona::with(['hamparan'])->findOrFail($id);
+
+        return view('pages.zona.show', [
+            'zona' => $zona,
+            'zonaId' => $id,
+        ]);
     }
 
     public function edit(string $id)

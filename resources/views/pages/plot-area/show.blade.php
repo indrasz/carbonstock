@@ -198,7 +198,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($seresah as $row)
+                                            @foreach ($plot->subplotASeresah as $row)
                                                 <tr>
                                                     <td>{{ $row->basah_total }}</td>
                                                     <td>{{ $row->basah_sample }}</td>
@@ -227,7 +227,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($semai as $row)
+                                            @foreach ($plot->subplotASemai as $row)
                                                 <tr>
 
                                                     <td>{{ $row->basah_total }}</td>
@@ -257,7 +257,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($tumbuhanBawah as $row)
+                                            @foreach ($plot->subplotATumbuhanBawah as $row)
                                                 <tr>
 
                                                     <td>{{ $row->basah_total }}</td>
@@ -291,7 +291,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($pancang as $row)
+                                            @foreach ($plot->subplotC as $row)
                                                 <tr>
 
                                                     <td>{{ $row->local_name }}</td>
@@ -329,7 +329,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($tiang as $row)
+                                            @foreach ($plot->subplotB as $row)
                                                 <tr>
 
                                                     <td>{{ $row->local_name }}</td>
@@ -365,7 +365,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($necromass as $row)
+                                            @foreach ($plot->subplotDNekromas as $row)
                                                 <tr>
 
                                                     <td>{{ $row->diameter_pangkal }}</td>
@@ -400,7 +400,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($pohon as $row)
+                                            @foreach ($plot->subplotDPohon as $row)
                                                 <tr>
 
                                                     <td>{{ $row->local_name }}</td>
@@ -436,7 +436,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($tanah as $row)
+                                            @foreach ($plot->subplotDTanah as $row)
                                                 <tr>
 
                                                     <td>{{ $row->kedalaman_sample }}</td>

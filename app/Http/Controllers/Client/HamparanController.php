@@ -19,11 +19,12 @@ class HamparanController extends Controller
         ]);
     }
 
-    public function create()
+    public function create($zonaId)
     {
-        $zona = Zona::all();
+        $zona = Zona::findOrFail($zonaId);
         return view('pages.hamparan.create', [
             'zona' => $zona,
+            'zonaId' => $zonaId,
         ]);
     }
 
@@ -38,7 +39,12 @@ class HamparanController extends Controller
 
     public function show(string $id)
     {
-        //
+        $hamparan = Hamparan::with(['plot'])->findOrFail($id);
+
+        return view('pages.hamparan.show', [
+            'hamparan' => $hamparan,
+            'hamparanId' => $id,
+        ]);
     }
 
     public function edit(string $id)

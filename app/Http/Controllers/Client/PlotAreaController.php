@@ -23,17 +23,17 @@ class PlotAreaController extends Controller
     {
 
         $plotArea = Plot::with('plot', 'hamparan')->get();
-        return view('pages.plot-area.index',[
+        return view('pages.plot-area.index', [
             'plotArea' => $plotArea
         ]);
     }
 
 
-    public function create()
+    public function create($hamparanId)
     {
-        $hamparan = Hamparan::all();
+        $hamparan = Hamparan::findOrFail($hamparanId);
         $masterPlot = MasterPlot::all();
-        return view('pages.plot-area.create',[
+        return view('pages.plot-area.create', [
             'hamparan' => $hamparan,
             'masterPlot' => $masterPlot
         ]);
@@ -52,7 +52,76 @@ class PlotAreaController extends Controller
 
     public function show(string $id)
     {
-        return view('pages.plot-area.show');
+        $plot = Plot::with([
+            'subplotASemai',
+            'subplotASeresah',
+            'subplotATumbuhanBawah',
+            'subplotC',
+            'subplotB',
+            'subplotDNekromas',
+            'subplotDPohon',
+            'subplotDTanah'
+        ])->findOrFail($id);
+
+        $avgCV = $this->getAvgCarbonValue($plot);
+        $avgCA = $this->getAvgCarbonAbsorb($plot);
+
+        // dd($avgCV, $avgCA);
+
+
+
+        // dd($plot);
+        // $seresah = Plot::with(['subplotASeresah'])->findOrFail($id);
+        // // $semai = SubplotASemai::all();
+        // $tumbuhanBawah = Plot::with(['subplotATumbuhanBawah'])->findOrFail($id);
+
+        // $tiang = Plot::with(['subplotC'])->findOrFail($id);
+        // $pancang = Plot::with(['subplotB'])->findOrFail($id);
+
+        // $necromass = Plot::with(['subplotDNekromas'])->findOrFail($id);
+        // $pohon = Plot::with(['subplotDPohon'])->findOrFail($id);
+        // $tanah = Plot::with(['subplotDTanah'])->findOrFail($id);
+        // dd($semai, $seresah, $tumbuhanBawah, $tiang, $pancang, $necromass, $pohon, $tanah);
+
+        return view('pages.plot-area.show', [
+            'plot' => $plot,
+            'plotId' => $id,
+            'avgCarbonValue' => $avgCV,
+            'avgCarbonAbsorb' => $avgCA
+        ]);
+        // return view('pages.plot-area.show');
+    }
+
+    private function getAvgCarbonValue($plot)
+    {
+        $averageValues = [];
+
+        $averageValues['subplotASemai'] = $plot->subplotASemai->avg('carbon_value');
+        $averageValues['subplotASeresah'] = $plot->subplotASeresah->avg('carbon_value');
+        $averageValues['subplotATumbuhanBawah'] = $plot->subplotATumbuhanBawah->avg('carbon_value');
+        $averageValues['subplotB'] = $plot->subplotB->avg('carbon_value');
+        $averageValues['subplotC'] = $plot->subplotC->avg('carbon_value');
+        $averageValues['subplotDNekromas'] = $plot->subplotDNekromas->avg('carbon_value');
+        $averageValues['subplotDPohon'] = $plot->subplotDPohon->avg('carbon_value');
+        $averageValues['subplotDTanah'] = $plot->subplotDTanah->avg('carbon_ton');
+
+        return $averageValues;
+    }
+
+    private function getAvgCarbonAbsorb($plot)
+    {
+        $averageValues = [];
+
+        $averageValues['subplotASemai'] = $plot->subplotASemai->avg('carbon_absorb');
+        $averageValues['subplotASeresah'] = $plot->subplotASeresah->avg('carbon_absorb');
+        $averageValues['subplotATumbuhanBawah'] = $plot->subplotATumbuhanBawah->avg('carbon_absorb');
+        $averageValues['subplotB'] = $plot->subplotB->avg('carbon_absorb');
+        $averageValues['subplotC'] = $plot->subplotC->avg('carbon_absorb');
+        $averageValues['subplotDNekromas'] = $plot->subplotDNekromas->avg('carbon_absorb');
+        $averageValues['subplotDPohon'] = $plot->subplotDPohon->avg('carbon_absorb');
+        $averageValues['subplotDTanah'] = $plot->subplotDTanah->avg('carbon_absorb');
+
+        return $averageValues;
     }
 
 
@@ -69,7 +138,7 @@ class PlotAreaController extends Controller
         $pohon = SubplotDPohon::all();
         $tanah = SubplotDTanah::all();
 
-        return view('pages.plot-area.show',[
+        return view('pages.plot-area.show', [
             'seresah' => $seresah,
             'semai' => $semai,
             'tumbuhanBawah' => $tumbuhanBawah,

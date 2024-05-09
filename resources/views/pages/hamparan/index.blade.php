@@ -8,7 +8,7 @@
                     <h4 class="m-0">Daftar Hamparan</h4>
                     <p class="m-0" style="color: #90A8BF">Informasi terkait data hamparan untuk setiap zona yang aktif</p>
                 </div>
-                <a href="{{ route('hamparan.create') }}" class="btn btn-success rounded-3 mt-3 mt-sm-0">Tambahkan Data</a>
+                {{-- <a href="{{ route('hamparan.create') }}" class="btn btn-success rounded-3 mt-3 mt-sm-0">Tambahkan Data</a> --}}
             </div>
             <div class="row">
                 @forelse ($hamparan as $item)

@@ -370,7 +370,7 @@
             </section>
 
             <section>
-                <div class="card mt-4">
+                {{-- <div class="card mt-4">
                     <div class="card-body">
                         <h4 class="card-title mb-4">Summary Kandungan Karbon</h4>
 
@@ -404,9 +404,9 @@
                         </div>
 
                     </div>
-                </div>
+                </div> --}}
 
-                <div class="card my-4">
+                {{-- <div class="card my-4">
                     <div class="card-body">
                         <h4 class="card-title mb-4">Summary Serapan CO2</h4>
 
@@ -440,7 +440,7 @@
                         </div>
 
                     </div>
-                </div>
+                </div> --}}
             </section>
 
         </div>
@@ -460,22 +460,24 @@
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
-        var regionalLabels = {!! json_encode(array_keys($regionalCarbonValues)) !!};
-        var carbonValues = {!! json_encode(array_values($regionalCarbonValues)) !!};
-        var carbonAbsorbs = {!! json_encode(array_values($regionalCarbonAbsorbs)) !!};
+       var regionData = <?php echo $regionJson; ?>;
+        var labels = regionData.map(region => region.label);
+        var carbonValues = regionData.map(region => region.carbon_value);
+        var carbonAbsorbs = regionData.map(region => region.carbon_absorb);
 
+        // Membuat grafik menggunakan Chart.js
         var ctx = document.getElementById('regionalChart').getContext('2d');
         var myChart = new Chart(ctx, {
             type: 'bar',
             data: {
-                labels: regionalLabels,
+                labels: labels,
                 datasets: [{
-                        label: 'Kandungan Karbon',
+                        label: 'Carbon Value',
                         data: carbonValues,
                         backgroundColor: '#8FC457'
                     },
                     {
-                        label: 'Serapan CO2',
+                        label: 'Carbon Absorb',
                         data: carbonAbsorbs,
                         backgroundColor: '#2A8D12'
                     }
@@ -547,7 +549,7 @@
         });
         map.addControl(new mapboxgl.NavigationControl());
 
-        var regionalData = <?php echo json_encode($regional); ?>;
+        var regionalData = <?php echo json_encode($regionalData); ?>;
         if (Array.isArray(regionalData)) {
             regionalData.forEach(item => {
                 new mapboxgl.Marker()

@@ -8,7 +8,7 @@
                     <h4 class="m-0">Daftar Zona</h4>
                     <p class="m-0" style="color: #90A8BF">Informasi data terkait zona untuk setiap regional</p>
                 </div>
-                <a href="{{ route('zona.create') }}" class="btn btn-success rounded-3 mt-3 mt-sm-0">Tambahkan Data</a>
+                {{-- <a href="{{ route('zona.create') }}" class="btn btn-success rounded-3 mt-3 mt-sm-0">Tambahkan Data</a> --}}
             </div>
             <div class="row">
                 @forelse ($zona as $item)
@@ -82,41 +82,6 @@
                                         </form>
                                         {{-- @endif --}}
                                     </div>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="modal inmodal" id="myModal{{ $item->id }}" tabindex="-1" role="dialog"
-                        aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered">
-                            <div class="modal-content animated bounceInRight">
-                                <div class="modal-header">
-                                    <h4 class="modal-title d-block">Buat Tim</h4>
-                                </div>
-                                <div class="modal-body mb-3">
-                                    <form action="{{ route('zona.tambahTim') }}" method="POST">
-                                        @csrf
-                                        <input type="hidden" name="id_zona" value="{{ $item->id }}">
-
-                                        <label>Nama Tim</label>
-                                        <div class="form-group w-100 mb-2" id="listTeam">
-                                            <select name="id_tim[]" class="form-control">
-                                                @foreach ($regionalTim as $regional)
-                                                    @foreach ($regional->tim as $timItem)
-                                                        <option value="{{ $timItem->namaTim->id }}">
-                                                            {{ $timItem->namaTim->nama }}</option>
-                                                    @endforeach
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                        <div id="appendTeam"></div>
-                                        <a href="#" id="addTeam">
-                                            <p class="text-info">+ Tambah Tim</p>
-                                        </a>
-                                        <button class="btn btn-success rounded-2 mt-2" type="submit">Tambah Tim</button>
-                                    </form>
                                 </div>
 
                             </div>

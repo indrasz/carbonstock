@@ -24,103 +24,99 @@
                         @forelse ($regional as $item)
                             <div class="col-sm-4 col-12 box-margin">
                                 <div class="card mb-2">
-                                    <a href="{{ route('region.show', $item->id) }}">
-
-                                        <div class="card-body">
-                                            <div class="row align-items-center">
-                                                <div class="col-12">
-                                                    <h4 class=" mb-0">{{ $item->nama_regional }}</h4>
-                                                    <p class="card-text" id="nama_koordinat_{{ $item->id }}"></p>
-                                                    <div class="d-block justify-content-start align-items-center">
-                                                        <div class="d-flex align-items-center justify-content-between">
-                                                            <div
-                                                                class="d-flex align-items-center justify-content-start gap-2">
-                                                                <i style="color: #22710E; font-size: 18px;"
-                                                                    class='bx bx-group'></i>
-                                                                <span style="color: #90A8BF">Daftar Tim</span>
-                                                            </div>
-                                                            <a href="#" data-bs-toggle="modal"
-                                                                data-bs-target="#myModal{{ $item->id }}">
-                                                                <p class="text-info m-0">+ Tambah tim</p>
-                                                            </a>
-                                                        </div>
-                                                        <div class="d-flex align-items-center gap-2 overflow-x-auto mt-2">
-                                                            @if (!$item->tim->isEmpty())
-                                                                @foreach ($item->tim as $listTim)
-                                                                    <span class="badge p-2"
-                                                                        style="background: #3e8829;">{{ $listTim->namaTim->nama }}</span>
-                                                                @endforeach
-                                                            @else
-                                                                <p class="text-danger m-0"> Belum ada tim yang ditambahkan
-                                                                </p>
-                                                            @endif
-                                                        </div>
-                                                    </div>
-                                                    <div class="d-flex justify-content-between align-items-center my-2">
-                                                        <div class="d-flex align-items-center gap-2">
+                                    <div class="card-body">
+                                        <div class="row align-items-center">
+                                            <div class="col-12">
+                                                <h4 class=" mb-0">{{ $item->nama_regional }}</h4>
+                                                <p class="card-text text-truncate" id="nama_koordinat_{{ $item->id }}"></p>
+                                                <div class="d-block justify-content-start align-items-center">
+                                                    <div class="d-flex align-items-center justify-content-between">
+                                                        <div
+                                                            class="d-flex align-items-center justify-content-start gap-2">
                                                             <i style="color: #22710E; font-size: 18px;"
-                                                                class='bx bx-map-alt'></i>
-                                                            <span style="color: #90A8BF">Jenis Hutan</span>
+                                                                class='bx bx-group'></i>
+                                                            <span style="color: #90A8BF">Daftar Tim</span>
                                                         </div>
-                                                        @if ($item->type_hutan)
-                                                            <p class="m-0" style="color: #90A8BF">
-                                                                {{ $item->type_hutan->jenis_hutan }}</p>
-                                                        @endif
+                                                        <a href="#" data-bs-toggle="modal"
+                                                            data-bs-target="#myModal{{ $item->id }}">
+                                                            <p class="text-info m-0">+ Tambah tim</p>
+                                                        </a>
                                                     </div>
-                                                    <div class="d-flex justify-content-between align-items-center mb-2">
-                                                        <div class="d-flex align-items-center gap-2">
-                                                            <i style="color: #22710E; font-size: 18px;"
-                                                                class='bx bx-map'></i>
-                                                            <span style="color: #90A8BF">Koordinat</span>
-                                                        </div>
-                                                        <p class="m-0" style="color: #90A8BF">{{ $item->latitude }},
-                                                            {{ $item->longitude }}</p>
-                                                    </div>
-                                                    <div class="d-flex justify-content-between align-items-center mb-2">
-                                                        <div class="d-flex align-items-center gap-2">
-                                                            <i style="color: #22710E; font-size: 18px;"
-                                                                class='bx bx-time'></i>
-                                                            <span style="color: #90A8BF">Tanggal mulai</span>
-                                                        </div>
-                                                        @if ($item->periode)
-                                                            <p class="m-0" style="color: #90A8BF">
-                                                                {{ $item->periode->tgl_mulai }}</p>
-                                                        @endif
-
-                                                    </div>
-                                                    <div class="d-flex justify-content-between align-items-center mb-2">
-                                                        <div class="d-flex align-items-center gap-2">
-                                                            <i style="color: #22710E; font-size: 18px;"
-                                                                class='bx bx-time-five'></i>
-                                                            <span style="color: #90A8BF">Tanggal berakhir</span>
-                                                        </div>
-                                                        @if ($item->periode)
-                                                            <p class="m-0" style="color: #90A8BF">
-                                                                {{ $item->periode->tgl_berakhir }}</p>
+                                                    <div class="d-flex align-items-center gap-2 overflow-x-auto mt-2">
+                                                        @if (!$item->tim->isEmpty())
+                                                            @foreach ($item->tim as $listTim)
+                                                                <span class="badge p-2"
+                                                                    style="background: #3e8829;">{{ $listTim->namaTim->nama }}</span>
+                                                            @endforeach
+                                                        @else
+                                                            <p class="text-danger m-0"> Belum ada tim yang ditambahkan
+                                                            </p>
                                                         @endif
                                                     </div>
                                                 </div>
-                                                <div class="col-12">
-                                                    <div
-                                                        class="text-sm-end text-start gap-2 d-flex d-sm-block mt-sm-0 mt-2">
-
-                                                        <form class="d-flex gap-2 align-items-center"
-                                                            action="{{ route('region.destroy', $item->id) }}"
-                                                            method="POST">
-                                                            @csrf
-                                                            {{-- @method('DELETE') --}}
-                                                            <a class="btn btn-warning rounded-3 p-2">Ubah Data</a>
-                                                            <button onclick="return confirm('Apakah yakin ingin di hapus?')"
-                                                                class="btn btn-danger rounded-3 p-2">Hapus
-                                                                Data</button>
-                                                        </form>
-
+                                                <div class="d-flex justify-content-between align-items-center my-2">
+                                                    <div class="d-flex align-items-center gap-2">
+                                                        <i style="color: #22710E; font-size: 18px;"
+                                                            class='bx bx-map-alt'></i>
+                                                        <span style="color: #90A8BF">Jenis Hutan</span>
                                                     </div>
+                                                    @if ($item->type_hutan)
+                                                        <p class="m-0" style="color: #90A8BF">
+                                                            {{ $item->type_hutan->jenis_hutan }}</p>
+                                                    @endif
+                                                </div>
+                                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                                    <div class="d-flex align-items-center gap-2">
+                                                        <i style="color: #22710E; font-size: 18px;"
+                                                            class='bx bx-map'></i>
+                                                        <span style="color: #90A8BF">Koordinat</span>
+                                                    </div>
+                                                    <p class="m-0" style="color: #90A8BF">{{ $item->latitude }},
+                                                        {{ $item->longitude }}</p>
+                                                </div>
+                                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                                    <div class="d-flex align-items-center gap-2">
+                                                        <i style="color: #22710E; font-size: 18px;"
+                                                            class='bx bx-time'></i>
+                                                        <span style="color: #90A8BF">Tanggal mulai</span>
+                                                    </div>
+                                                    @if ($item->periode)
+                                                        <p class="m-0" style="color: #90A8BF">
+                                                            {{ $item->periode->tgl_mulai }}</p>
+                                                    @endif
 
+                                                </div>
+                                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                                    <div class="d-flex align-items-center gap-2">
+                                                        <i style="color: #22710E; font-size: 18px;"
+                                                            class='bx bx-time-five'></i>
+                                                        <span style="color: #90A8BF">Tanggal berakhir</span>
+                                                    </div>
+                                                    @if ($item->periode)
+                                                        <p class="m-0" style="color: #90A8BF">
+                                                            {{ $item->periode->tgl_berakhir }}</p>
+                                                    @endif
                                                 </div>
                                             </div>
+                                            <div class="col-12">
+                                                <div
+                                                    class="text-sm-end text-start gap-2 d-flex d-sm-block mt-sm-0 mt-2">
+
+                                                    <form class="d-flex gap-2 align-items-center"
+                                                        action="{{ route('region.destroy', $item->id) }}"
+                                                        method="POST">
+                                                        @csrf
+                                                        {{-- @method('DELETE') --}}
+                                                        <a href="{{ route('region.show', $item->id) }}" class="btn btn-warning rounded-3 p-2">Detail</a>
+                                                        <button onclick="return confirm('Apakah yakin ingin di hapus?')"
+                                                            class="btn btn-danger rounded-3 p-2">Hapus</button>
+                                                    </form>
+
+                                                </div>
+
+                                            </div>
                                         </div>
-                                    </a>
+                                    </div>
                                 </div>
                             </div>
 
