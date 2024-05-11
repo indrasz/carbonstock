@@ -108,7 +108,7 @@
                                                         @csrf
                                                         {{-- @method('DELETE') --}}
                                                         <a href="{{ route('region.show', $item->id) }}" class="btn btn-warning rounded-3 p-2">Detail</a>
-                                                        <button onclick="return confirm('Apakah yakin ingin di hapus?')"
+                                                        <button onclick="return confirm('Apakah yakin ingin di hapus?')" type="submit"
                                                             class="btn btn-danger rounded-3 p-2">Hapus</button>
                                                     </form>
 

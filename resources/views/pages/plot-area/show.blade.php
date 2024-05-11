@@ -6,8 +6,8 @@
             <section class="plot-area-section mb-4">
                 <div class="d-block d-sm-flex justify-content-between align-items-center text-center text-sm-start mb-4">
                     <div class="gap-1">
-                        <h4 class="m-0">Detail Plot Area A</h4>
-                        <p class="m-0" style="color: #90A8BF">Detail ringkasan data dari plot area A</p>
+                        <h4 class="m-0">Detail Plot {{ $plot->nama_plot }}</h4>
+                        <p class="m-0" style="color: #90A8BF">Detail ringkasan data dari plot {{ $plot->nama_plot }}</p>
                     </div>
                     {{-- <button class="btn btn-warning rounded-3 mt-3 mt-sm-0">Ubah Data Plot</button> --}}
                 </div>
@@ -291,7 +291,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($plot->subplotC as $row)
+                                            @foreach ($plot->subplotB as $row)
                                                 <tr>
 
                                                     <td>{{ $row->local_name }}</td>
@@ -329,7 +329,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($plot->subplotB as $row)
+                                            @foreach ($plot->subplotC as $row)
                                                 <tr>
 
                                                     <td>{{ $row->local_name }}</td>

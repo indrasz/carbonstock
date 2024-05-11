@@ -76,4 +76,20 @@ class Plot extends Model
     {
         return $this->hasMany(SubplotDTanah::class, 'plot_id', 'id');
     }
+
+    protected static function booted()
+    {
+        static::deleting(function ($plot) {
+            $plot->subplotA()->delete();
+            $plot->subplotASeresah()->delete();
+            $plot->subplotASemai()->delete();
+            $plot->subplotATumbuhanBawah()->delete();
+            $plot->subplotB()->delete();
+            $plot->subplotC()->delete();
+            $plot->subplotD()->delete();
+            $plot->subplotDNekromas()->delete();
+            $plot->subplotDPohon()->delete();
+            $plot->subplotDTanah()->delete();
+        });
+    }
 }

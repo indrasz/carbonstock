@@ -11,7 +11,7 @@
                     </div>
                 </div>
 
-                <form method="POST" action="{{ route('zona.store') }}">
+                <form method="POST" action="{{ route('zona.store', $regionalId) }}">
                     @csrf
                     <fieldset>
                         <input type="hidden" name="id_regional" id="id_regional" value="{{ $regionalId }}">

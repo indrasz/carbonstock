@@ -34,7 +34,7 @@ class HamparanController extends Controller
         // dd($data);
         Hamparan::create($data);
 
-        return redirect()->route('hamparan.index');
+        return redirect()->route('zona.show', $data['id_zona']);
     }
 
     public function show(string $id)

@@ -206,11 +206,11 @@ class DashboardController extends Controller
             $totalCVTanah = number_format($avgCV['subplotDTanah'], 2);
             $totalCATanah = number_format($avgCA['subplotDTanah'], 2);
 
-            $regionCarbonValuePlot = (float)$valueCVSemai + (float)$valueCVSeresah + (float)$valueCVTumbuhanBawah + (float)$totalAvgCVSubplotB + (float)$totalAvgCVSubplotC + (float)$valueCVNekromas + (float)$totalAvgCVSubplotPohon + (float)$totalCVTanah;
-            $regionCarbonAbsorbPlot = (float)$valueCASemai + (float)$valueCASeresah + (float)$valueCATumbuhanBawah + (float)$totalAvgCASubplotB + (float)$totalAvgCASubplotC + (float)$valueCANekromas + (float)$totalAvgCASubplotPohon + (float)$totalCATanah;
+            $regionCarbonValuePlot = (float)$valueCVSemai + (float)$valueCVSeresah  + (float)$totalAvgCVSubplotB + (float)$totalAvgCVSubplotC + (float)$valueCVNekromas + (float)$totalAvgCVSubplotPohon + (float)$totalCVTanah;
+            $regionCarbonAbsorbPlot = (float)$valueCASemai + (float)$valueCASeresah + (float)$totalAvgCASubplotB + (float)$totalAvgCASubplotC + (float)$totalAvgCASubplotPohon;
 
-            $sumCarbonValuePlot += (float)$valueCVSemai + (float)$valueCVSeresah + (float)$valueCVTumbuhanBawah + (float)$totalAvgCVSubplotB + (float)$totalAvgCVSubplotC + (float)$valueCVNekromas + (float)$totalAvgCVSubplotPohon + (float)$totalCVTanah;
-            $sumCarbonAbsorbPlot += (float)$valueCASemai + (float)$valueCASeresah + (float)$valueCATumbuhanBawah + (float)$totalAvgCASubplotB + (float)$totalAvgCASubplotC + (float)$valueCANekromas + (float)$totalAvgCASubplotPohon + (float)$totalCATanah;
+            $sumCarbonValuePlot += (float)$valueCVSemai + (float)$valueCVSeresah + (float)$totalAvgCVSubplotB + (float)$totalAvgCVSubplotC + (float)$valueCVNekromas + (float)$totalAvgCVSubplotPohon + (float)$totalCVTanah;
+            $sumCarbonAbsorbPlot += (float)$valueCASemai + (float)$valueCASeresah + (float)$totalAvgCASubplotB + (float)$totalAvgCASubplotC + (float)$totalAvgCASubplotPohon;
 
             $regionData[] = [
                 'label' => $regional->nama_regional, // Assuming 'name' is the field containing the region label

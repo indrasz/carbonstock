@@ -35,7 +35,8 @@ class PlotAreaController extends Controller
         $masterPlot = MasterPlot::all();
         return view('pages.plot-area.create', [
             'hamparan' => $hamparan,
-            'masterPlot' => $masterPlot
+            'masterPlot' => $masterPlot,
+            'hamparanId' => $hamparanId,
         ]);
     }
 
@@ -46,7 +47,7 @@ class PlotAreaController extends Controller
         // dd($data);
         Plot::create($data);
 
-        return redirect()->route('plot-area.index');
+        return redirect()->route('hamparan.show', $data['id_hamparan']);
     }
 
 
@@ -65,24 +66,6 @@ class PlotAreaController extends Controller
 
         $avgCV = $this->getAvgCarbonValue($plot);
         $avgCA = $this->getAvgCarbonAbsorb($plot);
-
-        // dd($avgCV, $avgCA);
-
-
-
-        // dd($plot);
-        // $seresah = Plot::with(['subplotASeresah'])->findOrFail($id);
-        // // $semai = SubplotASemai::all();
-        // $tumbuhanBawah = Plot::with(['subplotATumbuhanBawah'])->findOrFail($id);
-
-        // $tiang = Plot::with(['subplotC'])->findOrFail($id);
-        // $pancang = Plot::with(['subplotB'])->findOrFail($id);
-
-        // $necromass = Plot::with(['subplotDNekromas'])->findOrFail($id);
-        // $pohon = Plot::with(['subplotDPohon'])->findOrFail($id);
-        // $tanah = Plot::with(['subplotDTanah'])->findOrFail($id);
-        // dd($semai, $seresah, $tumbuhanBawah, $tiang, $pancang, $necromass, $pohon, $tanah);
-
         return view('pages.plot-area.show', [
             'plot' => $plot,
             'plotId' => $id,

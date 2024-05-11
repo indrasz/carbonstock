@@ -40,7 +40,7 @@
                                             <i style="color: #22710E; font-size: 18px;" class='bx bx-map-pin'></i>
                                             <span style="color: #90A8BF">Lokasi</span>
                                         </div>
-                                        <p class="my-0" style="color: #90A8BF" id="nama_koordinat_{{ $item->id }}">
+                                        <p class="my-0 text-truncate" style="color: #90A8BF" id="nama_koordinat_{{ $item->id }}">
                                         </p>
                                     </div>
 

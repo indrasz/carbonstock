@@ -35,7 +35,7 @@
                                         <i style="color: #22710E; font-size: 18px;" class='bx bx-map-pin'></i>
                                         <span style="color: #90A8BF">Lokasi</span>
                                     </div>
-                                    <p class="my-0" style="color: #90A8BF" id="nama_koordinat_{{ $item->id }}"></p>
+                                    <p class="my-0 text-truncate" style="color: #90A8BF" id="nama_koordinat_{{ $item->id }}"></p>
                                 </div>
 
                                 <div class="mt-3">
@@ -45,7 +45,7 @@
                                             action="{{ route('hamparan.destroy', $item->id) }}" method="POST">
                                             @csrf
 
-                                            <a class="btn btn-warning rounded-3 p-2">Ubah</a>
+                                            <a href="{{ route('hamparan.show', $item->id) }}" class="btn btn-warning rounded-3 p-2">Detail</a>
                                             <button onclick="return confirm('Apakah yakin ingin di hapus?')"
                                                 class="btn btn-danger rounded-3 p-2">Hapus
                                                 </button>

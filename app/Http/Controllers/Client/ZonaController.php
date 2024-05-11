@@ -2,16 +2,17 @@
 
 namespace App\Http\Controllers\Client;
 
+use Exception;
 use App\Models\Tim;
 use App\Models\Zona;
 use App\Models\ZonaTim;
 use App\Models\Regional;
 use App\Models\MasterHutan;
+use App\Models\RegionalTim;
 use Illuminate\Http\Request;
 use App\Http\Requests\ZonaRequest;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ZonaTimRequest;
-use App\Models\RegionalTim;
 
 class ZonaController extends Controller
 {
@@ -46,7 +47,7 @@ class ZonaController extends Controller
         // dd($data);
         Zona::create($data);
 
-        return redirect()->route('zona.index');
+        return redirect()->route('region.show', $data['id_regional']);
     }
 
     public function tambahTim(Request $request)
@@ -110,8 +111,16 @@ class ZonaController extends Controller
 
     public function destroy(string $id)
     {
-        $zona = Zona::findorFail($id);
-        $zona->delete();
+        try {
+            $zona = Zona::findOrFail($id);
+
+            // dd($zona);
+            $zona->delete();
+
+            toastr()->success('Zona berhasil dihapus.');
+        } catch (Exception $e) {
+            toastr()->error('Gagal menghapus zona. Silakan coba lagi.');
+        }
 
         return redirect()->route('zona.index');
     }

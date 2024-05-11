@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Client;
 
+use Exception;
 use App\Models\Tim;
 use App\Models\Periode;
 use App\Models\Regional;
@@ -107,8 +108,8 @@ class RegionController extends Controller
         $totalCASeresah = $subplotSeresah->sum('carbon_absorb');
         $uniquePlotIdSeresah = $subplotSeresah->unique('plot_id')->count();
 
-        $cvSeresah = $totalCVSeresah / $uniquePlotIdSeresah;
-        $caSeresah = $totalCASeresah / $uniquePlotIdSeresah;
+        $cvSeresah = $uniquePlotIdSeresah !== 0 ? $totalCVSeresah / $uniquePlotIdSeresah : 0;
+        $caSeresah = $uniquePlotIdSeresah !== 0 ? $totalCASeresah / $uniquePlotIdSeresah : 0;
 
         $valueCVSeresah = number_format(($cvSeresah / 1000000) * 10000, 2);
         $valueCASeresah = number_format(($caSeresah / 1000000) * 10000, 2);
@@ -121,8 +122,8 @@ class RegionController extends Controller
         $totalCASemai = $subplotSemai->sum('carbon_absorb');
         $uniquePlotIdSemai = $subplotSemai->unique('plot_id')->count();
 
-        $cvSemai = $totalCVSemai / $uniquePlotIdSemai;
-        $caSemai = $totalCASemai / $uniquePlotIdSemai;
+        $cvSemai = $uniquePlotIdSemai !== 0 ? $totalCVSemai / $uniquePlotIdSemai : 0;
+        $caSemai = $uniquePlotIdSemai !== 0 ? $totalCASemai / $uniquePlotIdSemai : 0;
 
         $valueCVSemai = number_format(($cvSemai / 1000000) * 10000, 2);
         $valueCASemai = number_format(($caSemai / 1000000) * 10000, 2);
@@ -135,8 +136,8 @@ class RegionController extends Controller
         $totalCATumbuhanBawah = $subplotTumbuhanBawah->sum('carbon_absorb');
         $uniquePlotIdTumbuhanBawah = $subplotTumbuhanBawah->unique('plot_id')->count();
 
-        $cvTumbuhanBawah = $totalCVTumbuhanBawah / $uniquePlotIdTumbuhanBawah;
-        $caTumbuhanBawah = $totalCATumbuhanBawah / $uniquePlotIdTumbuhanBawah;
+        $cvTumbuhanBawah = $uniquePlotIdTumbuhanBawah !== 0 ? $totalCVTumbuhanBawah / $uniquePlotIdTumbuhanBawah : 0;
+        $caTumbuhanBawah = $uniquePlotIdTumbuhanBawah !== 0 ? $totalCATumbuhanBawah / $uniquePlotIdTumbuhanBawah : 0;
 
         $valueCVTumbuhanBawah = number_format(($cvTumbuhanBawah / 1000000) * 10000, 2);
         $valueCATumbuhanBawah = number_format(($caTumbuhanBawah / 1000000) * 10000, 2);
@@ -193,8 +194,8 @@ class RegionController extends Controller
         $totalCANekromas = $subplotsDNekromas->sum('carbon_absorb');
         $uniquePlotIds = $subplotsDNekromas->unique('plot_id')->count();
 
-        $cvNekromas = $totalCVNekromas / $uniquePlotIds;
-        $caNekromas = $totalCANekromas / $uniquePlotIds;
+        $cvNekromas = $uniquePlotIds !== 0 ? $totalCVNekromas / $uniquePlotIds : 0;
+        $caNekromas = $uniquePlotIds !== 0 ? $totalCANekromas / $uniquePlotIds : 0;
 
         $valueCVNekromas = number_format(($cvNekromas / 1000) * 10000 / 400, 2);
         $valueCANekromas = number_format(($caNekromas / 1000) * 10000 / 400, 2);
@@ -228,14 +229,8 @@ class RegionController extends Controller
         $totalCVTanah = number_format($avgCV['subplotDTanah'], 2);
         $totalCATanah = number_format($avgCA['subplotDTanah'], 2);
 
-        // dd($valueCVNekromas, $valueCANekromas);
-
-        // dd($avgCV['subplotDTanah'], $avgCA['subplotDTanah']);
-
-        // dd($valueCVSeresah, $valueCASeresah, $valueCVSemai, $valueCASemai, $valueCVTumbuhanBawah, $valueCATumbuhanBawah, $totalAvgCVSubplotB, $totalAvgCASubplotB, $totalAvgCVSubplotC, $totalAvgCASubplotC, $valueCVNekromas, $valueCANekromas, $totalAvgCVSubplotPohon, $totalAvgCASubplotPohon);
-
-        $sumCarbonValuePlot = (float)$valueCVSemai + (float)$valueCVSeresah + (float)$valueCVTumbuhanBawah + (float)$totalAvgCVSubplotB + (float)$totalAvgCVSubplotC + (float)$valueCVNekromas + (float)$totalAvgCVSubplotPohon + (float)$totalCVTanah;
-        $sumCarbonAbsorbPlot = (float)$valueCASemai + (float)$valueCASeresah + (float)$valueCATumbuhanBawah + (float)$totalAvgCASubplotB + (float)$totalAvgCASubplotC + (float)$valueCANekromas + (float)$totalAvgCASubplotPohon + (float)$totalCATanah;
+        $sumCarbonValuePlot = (float)$valueCVSemai + (float)$valueCVSeresah + (float)$totalAvgCVSubplotB + (float)$totalAvgCVSubplotC + (float)$valueCVNekromas + (float)$totalAvgCVSubplotPohon + (float)$totalCVTanah;
+        $sumCarbonAbsorbPlot = (float)$valueCASemai + (float)$valueCASeresah  + (float)$totalAvgCASubplotB + (float)$totalAvgCASubplotC + (float)$totalAvgCASubplotPohon;
 
         return view('pages.region.show', [
             'regional' => $regional,
@@ -316,8 +311,14 @@ class RegionController extends Controller
 
     public function destroy(string $id)
     {
-        $region = Regional::findorFail($id);
-        $region->delete();
+        try {
+            $region = Regional::findorFail($id);
+            $region->delete();
+
+            toastr()->success('Zona berhasil dihapus.');
+        } catch (Exception $e) {
+            toastr()->error('Gagal menghapus lokasi. Silakan coba lagi.');
+        }
 
         return redirect()->route('region.index');
     }
