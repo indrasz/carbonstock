@@ -64,10 +64,9 @@
                                                             action="{{ route('team.destroy', $item->id) }}" method="POST">
                                                             @csrf
 
-                                                            <a class="btn btn-warning rounded-3 p-2">Ubah</a>
+                                                            <a href="{{ route('team.edit', $item->id) }}" class="btn btn-warning rounded-3 p-2">Edit</a>
                                                             <button onclick="return confirm('Apakah yakin ingin di hapus?')"
-                                                                class="btn btn-danger rounded-3 p-2">Hapus
-                                                                Data</button>
+                                                                class="btn btn-danger rounded-3 p-2">Hapus</button>
                                                         </form>
                                                     @endif
                                                 </div>

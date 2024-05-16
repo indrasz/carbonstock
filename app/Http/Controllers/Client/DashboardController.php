@@ -22,29 +22,49 @@ class DashboardController extends Controller
     {
 
         $regionalData = Regional::with([
-            'zona.hamparan.plot.subplotA',
-            'zona.hamparan.plot.subplotASemai',
-            'zona.hamparan.plot.subplotASeresah',
-            'zona.hamparan.plot.subplotATumbuhanBawah',
-            'zona.hamparan.plot.subplotB',
-            'zona.hamparan.plot.subplotC',
-            'zona.hamparan.plot.subplotD',
-            'zona.hamparan.plot.subplotDNekromas',
-            'zona.hamparan.plot.subplotDTanah',
-            'zona.hamparan.plot.subplotDPohon'
+            'zona.hamparan.plot.subplotA' => function ($query) {
+                $query->orderBy('updated_at', 'desc');
+            },
+            'zona.hamparan.plot.subplotASemai' => function ($query) {
+                $query->orderBy('updated_at', 'desc');
+            },
+            'zona.hamparan.plot.subplotASeresah' => function ($query) {
+                $query->orderBy('updated_at', 'desc');
+            },
+            'zona.hamparan.plot.subplotATumbuhanBawah' => function ($query) {
+                $query->orderBy('updated_at', 'desc');
+            },
+            'zona.hamparan.plot.subplotB' => function ($query) {
+                $query->orderBy('updated_at', 'desc');
+            },
+            'zona.hamparan.plot.subplotC' => function ($query) {
+                $query->orderBy('updated_at', 'desc');
+            },
+            'zona.hamparan.plot.subplotD' => function ($query) {
+                $query->orderBy('updated_at', 'desc');
+            },
+            'zona.hamparan.plot.subplotDNekromas' => function ($query) {
+                $query->orderBy('updated_at', 'desc');
+            },
+            'zona.hamparan.plot.subplotDTanah' => function ($query) {
+                $query->orderBy('updated_at', 'desc');
+            },
+            'zona.hamparan.plot.subplotDPohon' => function ($query) {
+                $query->orderBy('updated_at', 'desc');
+            }
         ])->get();
 
 
-        $seresah = SubplotASeresah::all();
-        $semai = SubplotASemai::all();
-        $tumbuhanBawah = SubplotATumbuhanBawah::all();
+        $seresah = SubplotASeresah::orderBy('updated_at', 'desc')->paginate(25);
+        $semai = SubplotASemai::orderBy('updated_at', 'desc')->paginate(25);
+        $tumbuhanBawah = SubplotATumbuhanBawah::orderBy('updated_at', 'desc')->paginate(25);
 
-        $tiang = SubplotC::all();
-        $pancang = SubplotB::all();
+        $tiang = SubplotC::orderBy('updated_at', 'desc')->paginate(25);
+        $pancang = SubplotB::orderBy('updated_at', 'desc')->paginate(25);
 
-        $necromass = SubplotDNekromas::all();
-        $pohon = SubplotDPohon::all();
-        $tanah = SubplotDTanah::all();
+        $necromass = SubplotDNekromas::orderBy('updated_at', 'desc')->paginate(25);
+        $pohon = SubplotDPohon::orderBy('updated_at', 'desc')->paginate(25);
+        $tanah = SubplotDTanah::orderBy('updated_at', 'desc')->paginate(25);
 
         $regionData = [];
         $sumCarbonValuePlot = 0;
@@ -213,7 +233,7 @@ class DashboardController extends Controller
             $sumCarbonAbsorbPlot += (float)$valueCASemai + (float)$valueCASeresah + (float)$totalAvgCASubplotB + (float)$totalAvgCASubplotC + (float)$totalAvgCASubplotPohon;
 
             $regionData[] = [
-                'label' => $regional->nama_regional, // Assuming 'name' is the field containing the region label
+                'label' => $regional->nama_regional,
                 'carbon_value' => $regionCarbonValuePlot,
                 'carbon_absorb' => $regionCarbonAbsorbPlot,
             ];

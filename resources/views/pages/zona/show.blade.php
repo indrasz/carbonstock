@@ -8,8 +8,8 @@
                     <h4 class="m-0">Daftar Hamparan</h4>
                     <p class="m-0" style="color: #90A8BF">Informasi terkait data hamparan untuk setiap zona yang aktif</p>
                 </div>
-                <a href="{{ route('hamparan.create', $zonaId) }}"
-                    class="btn btn-success rounded-3 mt-3 mt-sm-0 md-trigger" data-modal="modal-1">Tambahkan
+                <a href="{{ route('hamparan.create', $zonaId) }}" class="btn btn-success rounded-3 mt-3 mt-sm-0 md-trigger"
+                    data-modal="modal-1">Tambahkan
                     Data</a>
             </div>
             <section>
@@ -22,7 +22,15 @@
                                 {{-- <img class="card-img-top img-responsive p-3 rounded-5" src="/assets/img/gallery-img/4.jpg"
                                 alt="Card image cap"> --}}
                                 <div class="card-body">
-                                    <h4 class=" mb-0">{{ $item->nama_hamparan }}</h4>
+                                    <div class="d-flex justify-content-between align-items-center mb-2">
+                                        <h4 class=" mb-0">{{ $item->nama_hamparan }}</h4>
+                                        <a href="{{ route('hamparan.edit', ['id' => $item->id, 'zonaId' => $zonaId]) }}"
+                                            class="rounded-pill p-2 bg-info m-0 d-flex align-items-center">
+                                            <i class="text-white bx bx-pencil fs-5 m-0">
+                                            </i>
+                                        </a>
+                                    </div>
+                                    {{-- <h4 class=" mb-0">{{ $item->nama_hamparan }}</h4> --}}
                                     @if ($item->zona)
                                         <p class="card-text mb-0">{{ $item->zona->nama_zona }}</p>
                                     @endif
@@ -40,7 +48,8 @@
                                             <i style="color: #22710E; font-size: 18px;" class='bx bx-map-pin'></i>
                                             <span style="color: #90A8BF">Lokasi</span>
                                         </div>
-                                        <p class="my-0 text-truncate" style="color: #90A8BF" id="nama_koordinat_{{ $item->id }}">
+                                        <p class="my-0 text-truncate" style="color: #90A8BF"
+                                            id="nama_koordinat_{{ $item->id }}">
                                         </p>
                                     </div>
 
@@ -51,7 +60,8 @@
                                                 action="{{ route('hamparan.destroy', $item->id) }}" method="POST">
                                                 @csrf
 
-                                                <a href="{{ route('hamparan.show', $item->id) }}" class="btn btn-warning rounded-3 p-2">Detail</a>
+                                                <a href="{{ route('hamparan.show', $item->id) }}"
+                                                    class="btn btn-warning rounded-3 p-2">Detail</a>
                                                 <button onclick="return confirm('Apakah yakin ingin di hapus?')"
                                                     class="btn btn-danger rounded-3 p-2">Hapus
                                                 </button>
@@ -98,4 +108,3 @@
         }
     </script>
 @endpush
-

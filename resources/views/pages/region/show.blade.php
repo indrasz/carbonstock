@@ -27,7 +27,14 @@
                                 {{-- <img class="card-img-top img-responsive p-3 rounded-5" src="/assets/img/gallery-img/4.jpg"
                                 alt="Card image cap"> --}}
                                 <div class="card-body">
-                                    <h4 class=" mb-0">{{ $zona->nama_zona }}</h4>
+                                    <div class="d-flex justify-content-between align-items-center mb-2">
+                                        <h4 class=" mb-0">{{ $zona->nama_zona }}</h4>
+                                        <a href="{{ route('zona.edit', ['id'=> $zona->id, 'regionalId' => $regionalId]) }}"
+                                            class="rounded-pill p-2 bg-info m-0 d-flex align-items-center">
+                                            <i class="text-white bx bx-pencil fs-5 m-0">
+                                            </i>
+                                        </a>
+                                    </div>
                                     <p class="card-text mb-0">{{ $zona->regional->nama_regional }}</p>
                                     <div class="d-block justify-content-start align-items-center mb-2">
                                         <div class="d-flex align-items-center justify-content-between">
@@ -177,7 +184,7 @@
                                                 </td>
                                             </tr>
 
-                                             <tr>
+                                            <tr>
                                                 <td>Total</td>
                                                 <td class="text-right">
                                                     <div class="badge badge-primary">{{ $sumCarbonValuePlot }}</div>
@@ -261,7 +268,7 @@
                                                 </td>
                                             </tr>
 
-                                             <tr>
+                                            <tr>
                                                 <td>Total</td>
                                                 <td class="text-right">
                                                     <div class="badge badge-primary">{{ $sumCarbonAbsorbPlot }}</div>

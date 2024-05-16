@@ -27,12 +27,19 @@
                                     <div class="card-body">
                                         <div class="row align-items-center">
                                             <div class="col-12">
-                                                <h4 class=" mb-0">{{ $item->nama_regional }}</h4>
-                                                <p class="card-text text-truncate" id="nama_koordinat_{{ $item->id }}"></p>
+                                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                                    <h4 class=" m-0">{{ $item->nama_regional }}</h4>
+                                                    <a href="{{ route('region.edit', $item->id) }}"
+                                                        class="rounded-pill p-2 bg-info m-0 d-flex align-items-center">
+                                                        <i class="text-white bx bx-pencil fs-5 m-0">
+                                                        </i>
+                                                    </a>
+                                                </div>
+                                                <p class="card-text text-truncate" id="nama_koordinat_{{ $item->id }}">
+                                                </p>
                                                 <div class="d-block justify-content-start align-items-center">
                                                     <div class="d-flex align-items-center justify-content-between">
-                                                        <div
-                                                            class="d-flex align-items-center justify-content-start gap-2">
+                                                        <div class="d-flex align-items-center justify-content-start gap-2">
                                                             <i style="color: #22710E; font-size: 18px;"
                                                                 class='bx bx-group'></i>
                                                             <span style="color: #90A8BF">Daftar Tim</span>
@@ -67,8 +74,7 @@
                                                 </div>
                                                 <div class="d-flex justify-content-between align-items-center mb-2">
                                                     <div class="d-flex align-items-center gap-2">
-                                                        <i style="color: #22710E; font-size: 18px;"
-                                                            class='bx bx-map'></i>
+                                                        <i style="color: #22710E; font-size: 18px;" class='bx bx-map'></i>
                                                         <span style="color: #90A8BF">Koordinat</span>
                                                     </div>
                                                     <p class="m-0" style="color: #90A8BF">{{ $item->latitude }},
@@ -76,8 +82,7 @@
                                                 </div>
                                                 <div class="d-flex justify-content-between align-items-center mb-2">
                                                     <div class="d-flex align-items-center gap-2">
-                                                        <i style="color: #22710E; font-size: 18px;"
-                                                            class='bx bx-time'></i>
+                                                        <i style="color: #22710E; font-size: 18px;" class='bx bx-time'></i>
                                                         <span style="color: #90A8BF">Tanggal mulai</span>
                                                     </div>
                                                     @if ($item->periode)
@@ -99,16 +104,16 @@
                                                 </div>
                                             </div>
                                             <div class="col-12">
-                                                <div
-                                                    class="text-sm-end text-start gap-2 d-flex d-sm-block mt-sm-0 mt-2">
+                                                <div class="text-sm-end text-start gap-2 d-flex d-sm-block mt-sm-0 mt-2">
 
                                                     <form class="d-flex gap-2 align-items-center"
-                                                        action="{{ route('region.destroy', $item->id) }}"
-                                                        method="POST">
+                                                        action="{{ route('region.destroy', $item->id) }}" method="POST">
                                                         @csrf
                                                         {{-- @method('DELETE') --}}
-                                                        <a href="{{ route('region.show', $item->id) }}" class="btn btn-warning rounded-3 p-2">Detail</a>
-                                                        <button onclick="return confirm('Apakah yakin ingin di hapus?')" type="submit"
+                                                        <a href="{{ route('region.show', $item->id) }}"
+                                                            class="btn btn-warning rounded-3 p-2">Detail</a>
+                                                        <button onclick="return confirm('Apakah yakin ingin di hapus?')"
+                                                            type="submit"
                                                             class="btn btn-danger rounded-3 p-2">Hapus</button>
                                                     </form>
 

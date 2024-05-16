@@ -118,8 +118,13 @@
                                                     <td>{{ $row->carbon_absorb }}</td>
                                                 </tr>
                                             @endforeach
+
                                         </tbody>
                                     </table>
+
+                                </div>
+                                <div class="w-100 d-block">
+                                    {{ $seresah->links() }}
                                 </div>
                             </div>
                             <div class="tab-pane" id="semai">
@@ -151,6 +156,7 @@
                                         </tbody>
                                     </table>
                                 </div>
+                                {{ $semai->links() }}
                             </div>
                             <div class="tab-pane" id="tumbuhan">
                                 <div class="table-responsive">
@@ -181,6 +187,7 @@
                                         </tbody>
                                     </table>
                                 </div>
+                                {{ $tumbuhanBawah->links() }}
                             </div>
                             <div class="tab-pane" id="pancang">
                                 <div class="table-responsive">
@@ -219,6 +226,8 @@
                                         </tbody>
                                     </table>
                                 </div>
+
+                                {{ $pancang->links() }}
                             </div>
                             <div class="tab-pane" id="tiang">
                                 <div class="table-responsive">
@@ -254,9 +263,11 @@
                                                     {{-- <td>{{ $row->updated_at }}</td> --}}
                                                 </tr>
                                             @endforeach
+
                                         </tbody>
                                     </table>
                                 </div>
+                                {{ $tiang->links() }}
                             </div>
                             <div class="tab-pane" id="necromass">
                                 <div class="table-responsive">
@@ -288,9 +299,11 @@
                                                     <td>{{ $row->updated_at }}</td>
                                                 </tr>
                                             @endforeach
+
                                         </tbody>
                                     </table>
                                 </div>
+                                {{ $necromass->links() }}
                             </div>
                             <div class="tab-pane" id="pohon">
                                 <div class="table-responsive">
@@ -324,10 +337,11 @@
                                                     <td>{{ $row->updated_at }}</td>
                                                 </tr>
                                             @endforeach
+
                                         </tbody>
                                     </table>
                                 </div>
-
+                                {{ $pohon->links() }}
                             </div>
                             <div class="tab-pane" id="tanah">
                                 <div class="table-responsive">
@@ -359,10 +373,11 @@
                                                     <td>{{ $row->updated_at }}</td>
                                                 </tr>
                                             @endforeach
+
                                         </tbody>
                                     </table>
                                 </div>
-
+                                {{ $tanah->links() }}
                             </div>
                         </div>
                     </div>
@@ -460,7 +475,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
-       var regionData = <?php echo $regionJson; ?>;
+        var regionData = <?php echo $regionJson; ?>;
         var labels = regionData.map(region => region.label);
         var carbonValues = regionData.map(region => region.carbon_value);
         var carbonAbsorbs = regionData.map(region => region.carbon_absorb);

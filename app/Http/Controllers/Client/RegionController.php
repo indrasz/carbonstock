@@ -61,16 +61,36 @@ class RegionController extends Controller
     public function show(string $id)
     {
         $regional = Regional::with([
-            'zona.hamparan.plot.subplotA',
-            'zona.hamparan.plot.subplotASemai',
-            'zona.hamparan.plot.subplotASeresah',
-            'zona.hamparan.plot.subplotATumbuhanBawah',
-            'zona.hamparan.plot.subplotB',
-            'zona.hamparan.plot.subplotC',
-            'zona.hamparan.plot.subplotD',
-            'zona.hamparan.plot.subplotDNekromas',
-            'zona.hamparan.plot.subplotDTanah',
-            'zona.hamparan.plot.subplotDPohon'
+            'zona.hamparan.plot.subplotA' => function ($query) {
+                $query->orderBy('updated_at', 'desc');
+            },
+            'zona.hamparan.plot.subplotASemai' => function ($query) {
+                $query->orderBy('updated_at', 'desc');
+            },
+            'zona.hamparan.plot.subplotASeresah' => function ($query) {
+                $query->orderBy('updated_at', 'desc');
+            },
+            'zona.hamparan.plot.subplotATumbuhanBawah' => function ($query) {
+                $query->orderBy('updated_at', 'desc');
+            },
+            'zona.hamparan.plot.subplotB' => function ($query) {
+                $query->orderBy('updated_at', 'desc');
+            },
+            'zona.hamparan.plot.subplotC' => function ($query) {
+                $query->orderBy('updated_at', 'desc');
+            },
+            'zona.hamparan.plot.subplotD' => function ($query) {
+                $query->orderBy('updated_at', 'desc');
+            },
+            'zona.hamparan.plot.subplotDNekromas' => function ($query) {
+                $query->orderBy('updated_at', 'desc');
+            },
+            'zona.hamparan.plot.subplotDTanah' => function ($query) {
+                $query->orderBy('updated_at', 'desc');
+            },
+            'zona.hamparan.plot.subplotDPohon' => function ($query) {
+                $query->orderBy('updated_at', 'desc');
+            }
         ])->findOrFail($id);
 
         //get average carbon value and carbon absorb
@@ -258,13 +278,26 @@ class RegionController extends Controller
 
     public function edit(string $id)
     {
-        //
+        $regional = Regional::findOrFail($id);
+        $masterHutan = MasterHutan::all();
+        $periode = Periode::all();
+
+        return view('pages.region.edit', [
+            'regional' => $regional,
+            'masterHutan' => $masterHutan,
+            'periode' => $periode,
+        ]);
     }
 
 
-    public function update(Request $request, string $id)
+    public function update(RegionRequest $request, $id)
     {
-        //
+        $regional = Regional::findOrFail($id);
+
+        $data = $request->all();
+        $regional->update($data);
+
+        return redirect()->route('region.index');
     }
 
     public function addteam($id)

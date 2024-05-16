@@ -108,35 +108,54 @@ class PlotAreaController extends Controller
     }
 
 
-    public function edit(string $id)
+    public function edit(string $id, $hamparanId)
     {
-        $seresah = SubplotASeresah::all();
-        $semai = SubplotASemai::all();
-        $tumbuhanBawah = SubplotATumbuhanBawah::all();
-
-        $tiang = SubplotB::all();
-        $pancang = SubplotC::all();
-
-        $necromass = SubplotDNekromas::all();
-        $pohon = SubplotDPohon::all();
-        $tanah = SubplotDTanah::all();
-
-        return view('pages.plot-area.show', [
-            'seresah' => $seresah,
-            'semai' => $semai,
-            'tumbuhanBawah' => $tumbuhanBawah,
-            'tiang' => $tiang,
-            'pancang' => $pancang,
-            'necromass' => $necromass,
-            'pohon' => $pohon,
-            'tanah' => $tanah
+        $plot = Plot::findOrFail($id);
+        $masterPlot = MasterPlot::all();
+        $hamparan = Hamparan::findOrFail($hamparanId);
+        return view('pages.plot-area.edit', [
+            'plot' => $plot,
+            'masterPlot' => $masterPlot,
+            'hamparan' => $hamparan,
+            'plotId' => $id,
+            'hamparanId' => $hamparanId,
         ]);
     }
+    // {
+    //     $seresah = SubplotASeresah::all();
+    //     $semai = SubplotASemai::all();
+    //     $tumbuhanBawah = SubplotATumbuhanBawah::all();
+
+    //     $tiang = SubplotB::all();
+    //     $pancang = SubplotC::all();
+
+    //     $necromass = SubplotDNekromas::all();
+    //     $pohon = SubplotDPohon::all();
+    //     $tanah = SubplotDTanah::all();
+
+    //     return view('pages.plot-area.show', [
+    //         'seresah' => $seresah,
+    //         'semai' => $semai,
+    //         'tumbuhanBawah' => $tumbuhanBawah,
+    //         'tiang' => $tiang,
+    //         'pancang' => $pancang,
+    //         'necromass' => $necromass,
+    //         'pohon' => $pohon,
+    //         'tanah' => $tanah
+    //     ]);
+    // }
 
 
-    public function update(Request $request, string $id)
+    public function update(PlotAreaRequest $request, string $id)
     {
-        //
+        $plot = Plot::findOrFail($id);
+
+        $data = $request->all();
+        $plot->update($data);
+
+        // dd($zona);
+
+        return redirect()->route('hamparan.show', $data['id_hamparan']);
     }
 
 

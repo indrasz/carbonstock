@@ -22,10 +22,14 @@ class ZonaController extends Controller
         $regionalTim = Regional::with('tim.namaTim')->get();
         $zona = Zona::with('regional.type_hutan', 'tim.namaTim')->get();
 
+        // dd($zona->toArray());
+
         return view('pages.zona.index', [
             'zona' => $zona,
             'regionalTim' => $regionalTim,
         ]);
+
+
     }
 
 
@@ -52,11 +56,6 @@ class ZonaController extends Controller
 
     public function tambahTim(Request $request)
     {
-
-        // $zonaTim = $request->all();
-        // ZonaTim::create($zonaTim);
-
-        // return redirect()->route('zona.index');
 
         $validatedData = $request->validate([
             'id_zona' => 'required:integer',
@@ -99,14 +98,28 @@ class ZonaController extends Controller
         ]);
     }
 
-    public function edit(string $id)
+    public function edit(string $id, $regionalId)
     {
-        //
+        $zona = Zona::findOrFail($id);
+        $masterHutan = MasterHutan::all();
+        return view('pages.zona.edit', [
+            'zona' => $zona,
+            'masterHutan' => $masterHutan,
+            'regionalId' => $regionalId
+            // 'periode' => $periode,
+        ]);
     }
 
-    public function update(Request $request, string $id)
+    public function update(ZonaRequest $request, string $id)
     {
-        //
+        $zona = Zona::findOrFail($id);
+
+        $data = $request->all();
+        $zona->update($data);
+
+        // dd($zona);
+
+        return redirect()->route('region.show', $data['id_regional']);
     }
 
     public function destroy(string $id)

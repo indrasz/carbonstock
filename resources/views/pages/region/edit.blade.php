@@ -11,8 +11,10 @@
                     </div>
                 </div>
 
-                <form method="POST" action="{{ route('region.store') }}">
+                <form method="POST" action="{{ route('region.update', $regional->id) }}">
                     @csrf
+                    @method('PUT')
+
                     <fieldset>
                         <div class="col-12 mb-3">
                             <label for="map" class="form-label">Choose Your Location</label>
@@ -21,12 +23,12 @@
                         <div class="row mt-3">
                             <div class="form-group mb-3 col-6">
                                 <label for="latitude">Latitude</label>
-                                <input id="latitude" class="form-control" name="latitude" id="latitude" type="text"
+                                <input id="latitude" class="form-control" name="latitude" id="latitude" type="text" value="{{ $regional->latitude }}"
                                     required readonly>
                             </div>
                             <div class="form-group mb-3 col-6">
                                 <label for="longitude">Longitude</label>
-                                <input id="longitude" class="form-control" name="longitude" id="longitude" type="text"
+                                <input id="longitude" class="form-control" name="longitude" id="longitude" type="text" value="{{ $regional->longitude }}"
                                     required readonly>
                             </div>
                             <div class="form-group mb-3 col-6">
@@ -39,7 +41,7 @@
                             </div>
                             <div class="form-group mb-3 col-6">
                                 <label for="nama_regional">Nama Lokasi</label>
-                                <input id="nama_regional" class="form-control" name="nama_regional" type="text" required>
+                                <input id="nama_regional" class="form-control" name="nama_regional" type="text" required value="{{ $regional->nama_regional }}">
                             </div>
                             <div class="form-group mb-3 col-6">
                                 <label for="jenis_hutan">Pilih Jenis Hutan</label>

@@ -47,13 +47,29 @@ class HamparanController extends Controller
         ]);
     }
 
-    public function edit(string $id)
+    public function edit(string $id, $zonaId)
     {
-        //
+        $hamparan = Hamparan::findOrFail($id);
+        $zona = Zona::findOrFail($zonaId);
+        return view('pages.hamparan.edit', [
+            'hamparan' => $hamparan,
+            'zona' => $zona,
+            'hamparanId' => $id,
+            'zonaId' => $zonaId,
+        ]);
     }
-    public function update(Request $request, string $id)
+
+    public function update(HamparanRequest $request, string $id)
     {
-        //
+        $hamparan = Hamparan::findOrFail($id);
+
+        $data = $request->all();
+        $hamparan->update($data);
+
+        // dd($zona);
+
+        return redirect()->route('zona.show', $data['id_zona']);
+
     }
 
 

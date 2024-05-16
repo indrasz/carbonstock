@@ -17,8 +17,17 @@
                             {{-- <img class="card-img-top img-responsive p-3 rounded-5" src="/assets/img/gallery-img/4.jpg"
                                 alt="Card image cap"> --}}
                             <div class="card-body">
-                                <h4 class=" mb-0">{{ $item->nama_zona }}</h4>
-                                <p class="card-text mb-0">{{ $item->regional->nama_regional }}</p>
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <h4 class=" mb-0">{{ $item->nama_zona }}</h4>
+                                    {{-- <a href="{{ route('zona.edit', $item->id) }}"
+                                        class="rounded-pill p-2 bg-info m-0 d-flex align-items-center">
+                                        <i class="text-white bx bx-pencil fs-5 m-0">
+                                        </i>
+                                    </a> --}}
+                                </div>
+                                @if ($item->regional)
+                                    <p class="card-text mb-0">{{ $item->regional->nama_regional }}</p>
+                                @endif
                                 <div class="d-block justify-content-start align-items-center mb-2">
                                     <div class="d-flex align-items-center justify-content-between">
                                         <div class="d-flex align-items-center justify-content-start gap-2">
@@ -49,7 +58,9 @@
                                         <span style="color: #90A8BF">Jenis Hutan</span>
                                     </div>
                                     <p class="m-0 text-end" style="color: #90A8BF">
-                                        {{ $item->regional->type_hutan->jenis_hutan }}
+                                        @if ($item->regional)
+                                            {{ $item->regional->type_hutan->jenis_hutan }}
+                                        @endif
                                     </p>
                                 </div>
                                 <div class="d-flex justify-content-between align-items-center mb-2">

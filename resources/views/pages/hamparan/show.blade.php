@@ -19,11 +19,18 @@
                     @forelse ($hamparan->plot as $item)
                         <div class="col-md-6 col-lg-4 height-card box-margin">
                             <div class="card">
-                                <a href="{{ route('plot-area.edit', $item->id) }}">
+                                {{-- <a href="{{ route('plot-area.edit', $item->id) }}"> --}}
                                     {{-- <img class="card-img-top img-responsive p-3 rounded-5"
                                         src="/assets/img/gallery-img/4.jpg" alt="Card image cap"> --}}
                                     <div class="card-body">
-                                        <h4 class=" mb-0">{{ $item->nama_plot }}</h4>
+                                        <div class="d-flex justify-content-between align-items-center mb-2">
+                                            <h4 class=" mb-0">{{ $item->nama_plot }}</h4>
+                                            <a href="{{ route('plot-area.edit', ['id' => $item->id, 'hamparanId' => $hamparanId]) }}"
+                                                class="rounded-pill p-2 bg-info m-0 d-flex align-items-center">
+                                                <i class="text-white bx bx-pencil fs-5 m-0">
+                                                </i>
+                                            </a>
+                                        </div>
                                         <p class="card-text mb-2">{{ $item->hamparan->nama_hamparan }}</p>
                                         <div class="d-flex justify-content-between align-items-center mb-2">
                                             <div class="d-flex align-items-center gap-2">
@@ -52,7 +59,7 @@
                                             </p>
                                         </div>
                                     </div>
-                                </a>
+                                {{-- </a> --}}
 
 
                                 <div class="p-3">
