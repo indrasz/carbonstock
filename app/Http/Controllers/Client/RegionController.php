@@ -252,6 +252,26 @@ class RegionController extends Controller
         $sumCarbonValuePlot = (float)$valueCVSemai + (float)$valueCVSeresah + (float)$totalAvgCVSubplotB + (float)$totalAvgCVSubplotC + (float)$valueCVNekromas + (float)$totalAvgCVSubplotPohon + (float)$totalCVTanah;
         $sumCarbonAbsorbPlot = (float)$valueCASemai + (float)$valueCASeresah  + (float)$totalAvgCASubplotB + (float)$totalAvgCASubplotC + (float)$totalAvgCASubplotPohon;
 
+        foreach ($regional->zona as $z) {
+            $dir_files = public_path('zona_' . $z->id);
+            $files = [];
+
+            if (is_dir($dir_files)) {
+                $list_files = scandir($dir_files);
+                array_shift($list_files); // Remove '.' from the list
+                array_shift($list_files); // Remove '..' from the list
+
+                foreach ($list_files as $file) {
+                    $files[] = [
+                        'nama_file' => $file,
+                        'path' => 'zona_' . $z->id . '/' . $file
+                    ];
+                }
+            }
+
+            $z->files = $files;
+        }
+
         return view('pages.region.show', [
             'regional' => $regional,
             'regionalId' => $id,

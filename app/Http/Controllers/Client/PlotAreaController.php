@@ -16,6 +16,9 @@ use App\Models\SubplotC;
 use App\Models\SubplotDNekromas;
 use App\Models\SubplotDPohon;
 use App\Models\SubplotDTanah;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Log;
 
 class PlotAreaController extends Controller
 {
@@ -45,7 +48,35 @@ class PlotAreaController extends Controller
     {
         $data = $request->all();
         // dd($data);
-        Plot::create($data);
+        $insert = Plot::create($data);
+
+        if ($request->hasFile('file')) {
+            $dir = public_path('plot_' . $insert->id);
+
+            if (!File::exists($dir)) {
+                try {
+                    File::makeDirectory($dir, 0777, true);
+                    Log::info('Directory created: ' . $dir);
+                } catch (\Exception $e) {
+                    Log::error('Directory creation error: ' . $e->getMessage());
+                    return redirect()->back()->withErrors(['file' => 'Failed to create directory.']);
+                }
+            }
+
+            $file = $request->file('file');
+            $uniqueName = Str::random(6) . '_' . $file->getClientOriginalName();
+
+            while (File::exists($dir . '/' . $uniqueName)) {
+                $uniqueName = Str::random(6) . '_' . $file->getClientOriginalName();
+            }
+            try {
+                $file->move($dir, $uniqueName);
+                // dd('File moved successfully: ' . $dir . '/' . $uniqueName);
+            } catch (\Exception $e) {
+                // dd('File upload error: ' . $e->getMessage());
+                return redirect()->back()->withErrors(['file' => 'Failed to upload file. Please try again.']);
+            }
+        }
 
         return redirect()->route('hamparan.show', $data['id_hamparan']);
     }
@@ -121,29 +152,6 @@ class PlotAreaController extends Controller
             'hamparanId' => $hamparanId,
         ]);
     }
-    // {
-    //     $seresah = SubplotASeresah::all();
-    //     $semai = SubplotASemai::all();
-    //     $tumbuhanBawah = SubplotATumbuhanBawah::all();
-
-    //     $tiang = SubplotB::all();
-    //     $pancang = SubplotC::all();
-
-    //     $necromass = SubplotDNekromas::all();
-    //     $pohon = SubplotDPohon::all();
-    //     $tanah = SubplotDTanah::all();
-
-    //     return view('pages.plot-area.show', [
-    //         'seresah' => $seresah,
-    //         'semai' => $semai,
-    //         'tumbuhanBawah' => $tumbuhanBawah,
-    //         'tiang' => $tiang,
-    //         'pancang' => $pancang,
-    //         'necromass' => $necromass,
-    //         'pohon' => $pohon,
-    //         'tanah' => $tanah
-    //     ]);
-    // }
 
 
     public function update(PlotAreaRequest $request, string $id)

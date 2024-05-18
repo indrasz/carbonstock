@@ -24,18 +24,29 @@
                     @forelse ($regional->zona as $zona)
                         <div class="col-md-6 col-lg-4 height-card box-margin">
                             <div class="card">
-                                {{-- <img class="card-img-top img-responsive p-3 rounded-5" src="/assets/img/gallery-img/4.jpg"
-                                alt="Card image cap"> --}}
+                                {{-- @if (empty($z->files)) --}}
+
+                                {{-- @endif --}}
                                 <div class="card-body">
                                     <div class="d-flex justify-content-between align-items-center mb-2">
-                                        <h4 class=" mb-0">{{ $zona->nama_zona }}</h4>
-                                        <a href="{{ route('zona.edit', ['id'=> $zona->id, 'regionalId' => $regionalId]) }}"
+                                        <div>
+                                            <h4 class=" mb-0">{{ $zona->nama_zona }}</h4>
+
+                                            <p class="card-text mb-0">{{ $zona->regional->nama_regional }}</p>
+                                        </div>
+                                        <a href="{{ route('zona.edit', ['id' => $zona->id, 'regionalId' => $regionalId]) }}"
                                             class="rounded-pill p-2 bg-info m-0 d-flex align-items-center">
                                             <i class="text-white bx bx-pencil fs-5 m-0">
                                             </i>
                                         </a>
                                     </div>
-                                    <p class="card-text mb-0">{{ $zona->regional->nama_regional }}</p>
+                                    @foreach ($zona->files as $file)
+                                        <div class="zona-image">
+                                            <img class="card-img-top img-responsive rounded"
+                                                src="{{ asset($file['path']) }}" alt="Card image cap"
+                                                style="height: 180px; object-fit:cover; object-position:center;">
+                                        </div>
+                                    @endforeach
                                     <div class="d-block justify-content-start align-items-center mb-2">
                                         <div class="d-flex align-items-center justify-content-between">
                                             <div class="d-flex align-items-center justify-content-start gap-2">

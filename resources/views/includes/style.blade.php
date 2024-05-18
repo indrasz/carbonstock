@@ -27,6 +27,12 @@
 {{-- <link href='https://api.mapbox.com/mapbox-gl-js/v2.6.0/mapbox-gl.css' rel='stylesheet' />
 <script src='https://api.mapbox.com/mapbox-gl-js/v2.6.0/mapbox-gl.js'></script> --}}
 
+
+<!-- These plugins only need for the run this page -->
+<link rel="stylesheet" href="css/dropzone.min.css">
+<link rel="stylesheet" href="css/default-assets/dropify.min.css">
+<link rel="stylesheet" href="css/default-assets/fileupload.css">
+
 <script src="https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.js"></script>
 <link href="https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css" rel="stylesheet">
 <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.min.js"></script>

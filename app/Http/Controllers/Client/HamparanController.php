@@ -41,6 +41,26 @@ class HamparanController extends Controller
     {
         $hamparan = Hamparan::with(['plot'])->findOrFail($id);
 
+        foreach ($hamparan->plot as $z) {
+            $dir_files = public_path('plot_' . $z->id);
+            $files = [];
+
+            if (is_dir($dir_files)) {
+                $list_files = scandir($dir_files);
+                array_shift($list_files); // Remove '.' from the list
+                array_shift($list_files); // Remove '..' from the list
+
+                foreach ($list_files as $file) {
+                    $files[] = [
+                        'nama_file' => $file,
+                        'path' => 'plot_' . $z->id . '/' . $file
+                    ];
+                }
+            }
+
+            $z->files = $files;
+        }
+
         return view('pages.hamparan.show', [
             'hamparan' => $hamparan,
             'hamparanId' => $id,

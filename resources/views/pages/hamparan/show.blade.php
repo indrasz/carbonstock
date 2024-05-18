@@ -20,50 +20,60 @@
                         <div class="col-md-6 col-lg-4 height-card box-margin">
                             <div class="card">
                                 {{-- <a href="{{ route('plot-area.edit', $item->id) }}"> --}}
-                                    {{-- <img class="card-img-top img-responsive p-3 rounded-5"
+                                {{-- <img class="card-img-top img-responsive p-3 rounded-5"
                                         src="/assets/img/gallery-img/4.jpg" alt="Card image cap"> --}}
-                                    <div class="card-body">
-                                        <div class="d-flex justify-content-between align-items-center mb-2">
+                                <div class="card-body pb-0">
+                                    <div class="d-flex justify-content-between align-items-center mb-2">
+                                        <div>
                                             <h4 class=" mb-0">{{ $item->nama_plot }}</h4>
-                                            <a href="{{ route('plot-area.edit', ['id' => $item->id, 'hamparanId' => $hamparanId]) }}"
-                                                class="rounded-pill p-2 bg-info m-0 d-flex align-items-center">
-                                                <i class="text-white bx bx-pencil fs-5 m-0">
-                                                </i>
-                                            </a>
+                                            <p class="card-text mb-2">{{ $item->hamparan->nama_hamparan }}</p>
                                         </div>
-                                        <p class="card-text mb-2">{{ $item->hamparan->nama_hamparan }}</p>
-                                        <div class="d-flex justify-content-between align-items-center mb-2">
-                                            <div class="d-flex align-items-center gap-2">
-                                                <i style="color: #22710E; font-size: 18px;" class='bx bx-map-alt'></i>
-                                                <span style="color: #90A8BF">Tipe Plot</span>
-                                            </div>
-                                            <p class="m-0 text-end" style="color: #90A8BF">
-                                                {{ $item->plot->nama_plot }}
-                                            </p>
-                                        </div>
-                                        <div class="d-flex justify-content-between align-items-center mb-2">
-                                            <div class="d-flex align-items-center gap-2">
-                                                <i style="color: #22710E; font-size: 18px;" class='bx bx-map'></i>
-                                                <span style="color: #90A8BF">Koordinat</span>
-                                            </div>
-                                            <p class="m-0 text-end" style="color: #90A8BF">{{ $item->latitude }},
-                                                {{ $item->longitude }}</p>
-                                        </div>
-                                        <div class="d-block justify-content-between align-items-center mb-2">
-                                            <div class="d-flex align-items-center gap-2">
-                                                <i style="color: #22710E; font-size: 18px;" class='bx bx-map-pin'></i>
-                                                <span style="color: #90A8BF">Lokasi</span>
-                                            </div>
-                                            <p class="my-0 text-truncate" style="color: #90A8BF"
-                                                id="nama_koordinat_{{ $item->id }}">
-                                            </p>
-                                        </div>
+
+                                        <a href="{{ route('plot-area.edit', ['id' => $item->id, 'hamparanId' => $hamparanId]) }}"
+                                            class="rounded-pill p-2 bg-info m-0 d-flex align-items-center">
+                                            <i class="text-white bx bx-pencil fs-5 m-0">
+                                            </i>
+                                        </a>
                                     </div>
+                                    @foreach ($item->files as $file)
+                                        <div class="zona-image mb-3">
+                                            <img class="card-img-top img-responsive rounded"
+                                                src="{{ asset($file['path']) }}" alt="Card image cap"
+                                                style="height: 180px; object-fit:cover; object-position:center;">
+                                        </div>
+                                    @endforeach
+                                    <div class="d-flex justify-content-between align-items-center mb-2">
+                                        <div class="d-flex align-items-center gap-2">
+                                            <i style="color: #22710E; font-size: 18px;" class='bx bx-map-alt'></i>
+                                            <span style="color: #90A8BF">Tipe Plot</span>
+                                        </div>
+                                        <p class="m-0 text-end" style="color: #90A8BF">
+                                            {{ $item->plot->nama_plot }}
+                                        </p>
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center mb-2">
+                                        <div class="d-flex align-items-center gap-2">
+                                            <i style="color: #22710E; font-size: 18px;" class='bx bx-map'></i>
+                                            <span style="color: #90A8BF">Koordinat</span>
+                                        </div>
+                                        <p class="m-0 text-end" style="color: #90A8BF">{{ $item->latitude }},
+                                            {{ $item->longitude }}</p>
+                                    </div>
+                                    <div class="d-block justify-content-between align-items-center mb-2">
+                                        <div class="d-flex align-items-center gap-2">
+                                            <i style="color: #22710E; font-size: 18px;" class='bx bx-map-pin'></i>
+                                            <span style="color: #90A8BF">Lokasi</span>
+                                        </div>
+                                        <p class="my-0 text-truncate" style="color: #90A8BF"
+                                            id="nama_koordinat_{{ $item->id }}">
+                                        </p>
+                                    </div>
+                                </div>
                                 {{-- </a> --}}
 
 
-                                <div class="p-3">
-                                    <div class="text-sm-end text-start gap-2 d-flex d-sm-block mt-sm-0 mt-3">
+                                <div class="px-3 pt-0 pb-3">
+                                    <div class="text-sm-end text-start gap-2 d-flex d-sm-block mt-sm-0">
                                         {{-- @if (!$item->anggota->isEmpty()) --}}
                                         <form class="d-flex gap-2 align-items-center"
                                             action="{{ route('plot-area.destroy', $item->id) }}" method="POST">

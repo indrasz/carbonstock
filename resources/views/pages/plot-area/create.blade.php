@@ -11,10 +11,10 @@
                     </div>
                 </div>
 
-                <form method="POST" action="{{ route('plot-area.store') }}">
+                <form method="POST" action="{{ route('plot-area.store') }}" enctype="multipart/form-data">
                     @csrf
                     <fieldset>
-                         <input type="hidden" name="id_hamparan" id="id_hamparan" value="{{ $hamparanId }}">
+                        <input type="hidden" name="id_hamparan" id="id_hamparan" value="{{ $hamparanId }}">
                         <div class="col-12 mb-3">
                             <label for="map" class="form-label">Choose Your Location</label>
                             <div id="map" />
@@ -43,6 +43,14 @@
                                     @endforeach
                                 </select>
                             </div>
+                            <div class="form-group mb-3 col-6">
+                                <label for="zona_img">Upload foto zona</label>
+                                <input accept="image/*" type="file" name="file" id="imgInp" class="form-control" />
+                            </div>
+                            <div class="form-group mb-3 col-6">
+                                <img id="blah" src="/assets/img/gallery-img/4.jpg" alt="your image" class="w-100 h-100"
+                                    style="max-width: 250px; max-height: 250px; object-fit: cover; object-position: center;" />
+                            </div>
                         </div>
                         <button class="btn btn-success rounded-3" type="submit" value="Submit">Simpan</button>
                     </fieldset>
@@ -58,7 +66,7 @@
 @endpush
 
 @push('after-script')
-     <script>
+    <script>
         mapboxgl.accessToken = 'pk.eyJ1IjoiaW5kcmFzeiIsImEiOiJjbHVxaWV3bngycmhiMmtuejluMTNzY216In0.EZ-2uwWJ3SAYv3ehMizmGw';
         const map = new mapboxgl.Map({
             container: 'map',
@@ -92,5 +100,14 @@
             document.getElementById('latitude').value = e.lngLat.lat.toFixed(4);
             document.getElementById('longitude').value = e.lngLat.lng.toFixed(4);
         });
+    </script>
+
+     <script>
+        imgInp.onchange = evt => {
+            const [file] = imgInp.files
+            if (file) {
+                blah.src = URL.createObjectURL(file)
+            }
+        }
     </script>
 @endpush

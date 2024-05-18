@@ -9,27 +9,25 @@ use App\Models\ZonaTim;
 use App\Models\Regional;
 use App\Models\MasterHutan;
 use App\Models\RegionalTim;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Requests\ZonaRequest;
+use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\File;
 use App\Http\Requests\ZonaTimRequest;
 
 class ZonaController extends Controller
 {
-
     public function index()
     {
         $regionalTim = Regional::with('tim.namaTim')->get();
         $zona = Zona::with('regional.type_hutan', 'tim.namaTim')->get();
 
-        // dd($zona->toArray());
-
         return view('pages.zona.index', [
             'zona' => $zona,
             'regionalTim' => $regionalTim,
         ]);
-
-
     }
 
 
@@ -47,9 +45,38 @@ class ZonaController extends Controller
 
     public function store(ZonaRequest $request)
     {
+
         $data = $request->all();
-        // dd($data);
-        Zona::create($data);
+
+        $insert = Zona::create($data);
+
+        if ($request->hasFile('file')) {
+            $dir = public_path('zona_' . $insert->id);
+
+            if (!File::exists($dir)) {
+                try {
+                    File::makeDirectory($dir, 0777, true);
+                    Log::info('Directory created: ' . $dir);
+                } catch (\Exception $e) {
+                    Log::error('Directory creation error: ' . $e->getMessage());
+                    return redirect()->back()->withErrors(['file' => 'Failed to create directory.']);
+                }
+            }
+
+            $file = $request->file('file');
+            $uniqueName = Str::random(6) . '_' . $file->getClientOriginalName();
+
+            while (File::exists($dir . '/' . $uniqueName)) {
+                $uniqueName = Str::random(6) . '_' . $file->getClientOriginalName();
+            }
+            try {
+                $file->move($dir, $uniqueName);
+                // dd('File moved successfully: ' . $dir . '/' . $uniqueName);
+            } catch (\Exception $e) {
+                // dd('File upload error: ' . $e->getMessage());
+                return redirect()->back()->withErrors(['file' => 'Failed to upload file. Please try again.']);
+            }
+        }
 
         return redirect()->route('region.show', $data['id_regional']);
     }

@@ -11,10 +11,13 @@
                     </div>
                 </div>
 
-                <form method="POST" action="{{ route('zona.store', $regionalId) }}">
+
+
+                <form method="POST" action="{{ route('zona.store', $regionalId) }}" enctype="multipart/form-data">
                     @csrf
                     <fieldset>
                         <input type="hidden" name="id_regional" id="id_regional" value="{{ $regionalId }}">
+
                         <div class="col-12 mb-3">
                             <label for="map" class="form-label">Pilih Lokasimu</label>
                             <div id="map" />
@@ -42,15 +45,13 @@
                                     @endforeach
                                 </select>
                             </div>
-                            {{-- <div class="form-group mb-3 col-6">
-                                <select name="id_regional" class="form-control" id="regionalSelect">
-                                    @foreach ($regional as $item)
-                                        <option value="{{ $item->id }}" data-lat="{{ $item->latitude }}"
-                                            data-lng="{{ $item->longitude }}">{{ $item->nama_regional }}</option>
-                                    @endforeach
-                                </select>
-                            </div> --}}
-
+                            <div class="form-group mb-3 col-6">
+                                <label for="zona_img">Upload  foto zona</label>
+                                <input accept="image/*" type="file" name="file" id="imgInp" class="form-control"/>
+                            </div>
+                            <div class="form-group mb-3 col-6">
+                                <img id="blah" src="/assets/img/gallery-img/4.jpg" alt="your image" class="w-100 h-100" style="max-width: 250px; max-height: 250px; object-fit: cover; object-position: center;"/>
+                            </div>
                         </div>
                         <button class="btn btn-success rounded-3" type="submit" value="Submit">Simpan</button>
                     </fieldset>
@@ -100,5 +101,14 @@
             document.getElementById('latitude').value = e.lngLat.lat.toFixed(4);
             document.getElementById('longitude').value = e.lngLat.lng.toFixed(4);
         });
+    </script>
+
+    <script>
+        imgInp.onchange = evt => {
+            const [file] = imgInp.files
+            if (file) {
+                blah.src = URL.createObjectURL(file)
+            }
+        }
     </script>
 @endpush
