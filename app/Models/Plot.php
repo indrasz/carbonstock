@@ -77,6 +77,13 @@ class Plot extends Model
         return $this->hasMany(SubplotDTanah::class, 'plot_id', 'id');
     }
 
+    function periode()
+    {
+        return $this->hasOneThrough(Periode::class, Regional::class, 'id', 'id', 'id_hamparan', 'id_periode')
+        ->join('zona', 'regional.id', '=', 'zona.id_regional')
+        ->join('hamparan', 'zona.id', '=', 'hamparan.id_zona');
+    }
+
     protected static function booted()
     {
         static::deleting(function ($plot) {

@@ -124,176 +124,7 @@
                 </div>
             </section>
             <section>
-                <div class="row">
-                    <div class="col-sm-6 height-card box-margin">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title mb-0">Summary Kandungan Karbon</h4>
-                                <p class="mb-3">Bagian ini untuk menampilkan hitungan total kandungan karbon untuk lokasi
-                                    {{ $regional->nama_regional }}</p>
-
-                                <div class="template-demo">
-                                    <table class="table mb-0">
-                                        <thead>
-                                            <tr>
-                                                <th>Subplot</th>
-                                                <th class="text-right">Karbon</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>Seresah</td>
-                                                <td class="text-right">
-                                                    <div class="badge badge-primary p-2">{{ $valueCVSeresah }}</div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Semai</td>
-                                                <td class="text-right">
-                                                    <div class="badge badge-primary">{{ $valueCVSemai }}</div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Tumbuhan Bawah</td>
-                                                <td class="text-right">
-                                                    <div class="badge badge-primary">{{ $valueCVTumbuhanBawah }}</div>
-                                                </td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>Pancang</td>
-                                                <td class="text-right">
-                                                    <div class="badge badge-primary">{{ $totalAvgCVSubplotB }}</div>
-                                                </td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>Tiang</td>
-                                                <td class="text-right">
-                                                    <div class="badge badge-primary">{{ $totalAvgCVSubplotC }}</div>
-                                                </td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>Nekromas</td>
-                                                <td class="text-right">
-                                                    <div class="badge badge-primary">{{ $valueCVNekromas }}</div>
-                                                </td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>Pohon</td>
-                                                <td class="text-right">
-                                                    <div class="badge badge-primary">{{ $totalAvgCVSubplotPohon }}</div>
-                                                </td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>Tanah</td>
-                                                <td class="text-right">
-                                                    <div class="badge badge-primary">{{ $totalCVTanah }}</div>
-                                                </td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>Total</td>
-                                                <td class="text-right">
-                                                    <div class="badge badge-primary">{{ $sumCarbonValuePlot }}</div>
-                                                </td>
-                                            </tr>
-
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-6 height-card box-margin">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title mb-0">Summary Serapan CO2</h4>
-                                <p class="mb-3">Bagian ini untuk menampilkan hitungan total serapa CO2 untuk lokasi
-                                    {{ $regional->nama_regional }}</p>
-
-                                <div class="template-demo">
-                                    <table class="table mb-0">
-                                        <thead>
-                                            <tr>
-                                                <th>Subplot</th>
-                                                <th class="text-right">Karbon</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>Seresah</td>
-                                                <td class="text-right">
-                                                    <div class="badge badge-primary p-2">{{ $valueCASeresah }}</div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Semai</td>
-                                                <td class="text-right">
-                                                    <div class="badge badge-primary">{{ $valueCASemai }}</div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Tumbuhan Bawah</td>
-                                                <td class="text-right">
-                                                    <div class="badge badge-primary">{{ $valueCATumbuhanBawah }}</div>
-                                                </td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>Pancang</td>
-                                                <td class="text-right">
-                                                    <div class="badge badge-primary">{{ $totalAvgCASubplotB }}</div>
-                                                </td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>Tiang</td>
-                                                <td class="text-right">
-                                                    <div class="badge badge-primary">{{ $totalAvgCASubplotC }}</div>
-                                                </td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>Nekromas</td>
-                                                <td class="text-right">
-                                                    <div class="badge badge-primary">{{ $valueCANekromas }}</div>
-                                                </td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>Pohon</td>
-                                                <td class="text-right">
-                                                    <div class="badge badge-primary">{{ $totalAvgCASubplotPohon }}</div>
-                                                </td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>Tanah</td>
-                                                <td class="text-right">
-                                                    <div class="badge badge-primary">{{ $totalCATanah }}</div>
-                                                </td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>Total</td>
-                                                <td class="text-right">
-                                                    <div class="badge badge-primary">{{ $sumCarbonAbsorbPlot }}</div>
-                                                </td>
-                                            </tr>
-
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card">
+                <div class="card mb-4">
                     <div class="card-body">
                         <h4 class="card-title mb-4">Data Subplot</h4>
 
@@ -658,6 +489,177 @@
                                     </table>
                                 </div>
 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-sm-6 height-card box-margin">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title mb-0">Summary Kandungan Karbon</h4>
+                                <p class="mb-3">Bagian ini untuk menampilkan hitungan total kandungan karbon untuk lokasi
+                                    {{ $regional->nama_regional }}</p>
+
+                                <div class="template-demo">
+                                    <table class="table mb-0">
+                                        <thead>
+                                            <tr>
+                                                <th>Subplot</th>
+                                                <th class="text-right">Karbon</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Seresah</td>
+                                                <td class="text-right">
+                                                    <div class="badge badge-primary p-2">{{ $valueCVSeresah }}</div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Semai</td>
+                                                <td class="text-right">
+                                                    <div class="badge badge-primary">{{ $valueCVSemai }}</div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Tumbuhan Bawah</td>
+                                                <td class="text-right">
+                                                    <div class="badge badge-primary">{{ $valueCVTumbuhanBawah }}</div>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>Pancang</td>
+                                                <td class="text-right">
+                                                    <div class="badge badge-primary">{{ $totalAvgCVSubplotB }}</div>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>Tiang</td>
+                                                <td class="text-right">
+                                                    <div class="badge badge-primary">{{ $totalAvgCVSubplotC }}</div>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>Nekromas</td>
+                                                <td class="text-right">
+                                                    <div class="badge badge-primary">{{ $valueCVNekromas }}</div>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>Pohon</td>
+                                                <td class="text-right">
+                                                    <div class="badge badge-primary">{{ $totalAvgCVSubplotPohon }}</div>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>Tanah</td>
+                                                <td class="text-right">
+                                                    <div class="badge badge-primary">{{ $totalCVTanah }}</div>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>Total</td>
+                                                <td class="text-right">
+                                                    <div class="badge badge-primary">{{ $sumCarbonValuePlot }}</div>
+                                                </td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6 height-card box-margin">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title mb-0">Summary Serapan CO2</h4>
+                                <p class="mb-3">Bagian ini untuk menampilkan hitungan total serapa CO2 untuk lokasi
+                                    {{ $regional->nama_regional }}</p>
+
+                                <div class="template-demo">
+                                    <table class="table mb-0">
+                                        <thead>
+                                            <tr>
+                                                <th>Subplot</th>
+                                                <th class="text-right">Karbon</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Seresah</td>
+                                                <td class="text-right">
+                                                    <div class="badge badge-primary p-2">{{ $valueCASeresah }}</div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Semai</td>
+                                                <td class="text-right">
+                                                    <div class="badge badge-primary">{{ $valueCASemai }}</div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Tumbuhan Bawah</td>
+                                                <td class="text-right">
+                                                    <div class="badge badge-primary">{{ $valueCATumbuhanBawah }}</div>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>Pancang</td>
+                                                <td class="text-right">
+                                                    <div class="badge badge-primary">{{ $totalAvgCASubplotB }}</div>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>Tiang</td>
+                                                <td class="text-right">
+                                                    <div class="badge badge-primary">{{ $totalAvgCASubplotC }}</div>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>Nekromas</td>
+                                                <td class="text-right">
+                                                    <div class="badge badge-primary">{{ $valueCANekromas }}</div>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>Pohon</td>
+                                                <td class="text-right">
+                                                    <div class="badge badge-primary">{{ $totalAvgCASubplotPohon }}</div>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>Tanah</td>
+                                                <td class="text-right">
+                                                    <div class="badge badge-primary">{{ $totalCATanah }}</div>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>Total</td>
+                                                <td class="text-right">
+                                                    <div class="badge badge-primary">{{ $sumCarbonAbsorbPlot }}</div>
+                                                </td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>

@@ -36,7 +36,7 @@ Route::post('/validateUser', [AuthController::class, 'validateUser'])->name('log
 Route::post('/createUser', [AuthController::class, 'createUser'])->name('register.createUser');
 
 // Route::group(["middleware" => ["auth", "verified"]], function () {
-Route::middleware(['auth'])->group(
+Route::middleware(['auth','isAdmin'])->group(
     function () {
         Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 

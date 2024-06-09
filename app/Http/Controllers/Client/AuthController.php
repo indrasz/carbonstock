@@ -85,12 +85,13 @@ class AuthController extends Controller
                 'jenis_kelamin' => $request->jenis_kelamin,
                 'email' => $request->email,
                 'password' => md5($request->password),
+                'role' => 'USER',
             ]);
 
             $request->session()->put('user', $user);
 
-            toastr()->success('Anda berhasil registrasi');
-            return redirect()->route('dashboard');
+            toastr()->success('Anda berhasil registrasi, silahkan login jika terverifikasi sebagai admin');
+            return redirect()->route('login');
         } catch (Exception $e) {
             toastr()->error('Terjadi kesalahan saat membuat akun: ' . $e->getMessage());
             return redirect()->back();

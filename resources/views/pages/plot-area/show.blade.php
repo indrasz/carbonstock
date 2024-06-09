@@ -11,135 +11,16 @@
                     </div>
                     {{-- <button class="btn btn-warning rounded-3 mt-3 mt-sm-0">Ubah Data Plot</button> --}}
                 </div>
-                <div class="row">
-                    <div class="col-md-6 height-card box-margin">
-                        <div class="card">
-                            <img class="card-img-top img-responsive p-3 rounded-5" src="/assets/img/gallery-img/4.jpg"
-                                alt="Card image cap">
-                            <div class="card-body">
-                                <h4 class=" mb-0">Plot A</h4>
-                                <p class="card-text">Hamparan 1</p>
-                                <div class="d-flex justify-content-between align-items-center mb-2">
-                                    <div class="d-flex align-items-center gap-2">
-                                        <i style="color: #22710E; font-size: 18px;" class='bx bx-info-circle'></i>
-                                        <span style="color: #90A8BF">Kandungan Karbon</span>
-                                    </div>
-                                    <p class="m-0" style="color: #90A8BF">34.35 ton/ha</p>
-                                </div>
-                                <div class="d-flex justify-content-between align-items-center mb-2">
-                                    <div class="d-flex align-items-center gap-2">
-                                        <i style="color: #22710E; font-size: 18px;" class='bx bx-info-circle'></i>
-                                        <span style="color: #90A8BF">Serapan CO2</span>
-                                    </div>
-                                    <p class="m-0" style="color: #90A8BF">126.60 ton/ha</p>
-                                </div>
-                                <div class="d-flex justify-content-between align-items-center mb-2">
-                                    <div class="d-flex align-items-center gap-2">
-                                        <i style="color: #22710E; font-size: 18px;" class='bx bx-time'></i>
-                                        <span style="color: #90A8BF">Tanggal Pencatatan</span>
-                                    </div>
-                                    <p class="m-0" style="color: #90A8BF">22 Mei - 3 Jun 2023</p>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3 height-card box-margin">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class=" mb-0">Summary Total</h4>
-                                <p class="card-text">Kandungan Karbon (Ton C/Ha)</p>
-                                <div class="d-flex justify-content-between align-items-center mb-2">
-                                    <p style="color: #90A8BF" class="m-0">Seresah</p>
-                                    <p class="m-0 text-end" style="color: #90A8BF">34.35 ton/ha</p>
-                                </div>
-                                <div class="d-flex justify-content-between align-items-center mb-2">
-                                    <p style="color: #90A8BF" class="m-0">Tumbuhan Bawah</p>
-                                    <p class="m-0 text-end" style="color: #90A8BF">126.60 ton/ha</p>
-                                </div>
-                                <div class="d-flex justify-content-between align-items-center mb-2">
-                                    <p style="color: #90A8BF" class="m-0">Semai</p>
-                                    <p class="m-0 text-end" style="color: #90A8BF">34.35 ton/ha</p>
-                                </div>
-                                <div class="d-flex justify-content-between align-items-center mb-2">
-                                    <p style="color: #90A8BF" class="m-0">Pancang</p>
-                                    <p class="m-0 text-end" style="color: #90A8BF">126.60 ton/ha</p>
-                                </div>
-                                <div class="d-flex justify-content-between align-items-center mb-2">
-                                    <p style="color: #90A8BF" class="m-0">Tiang</p>
-                                    <p class="m-0 text-end" style="color: #90A8BF">34.35 ton/ha</p>
-                                </div>
-                                <div class="d-flex justify-content-between align-items-center mb-2">
-                                    <p style="color: #90A8BF" class="m-0">Pohon</p>
-                                    <p class="m-0 text-end" style="color: #90A8BF">126.60 ton/ha</p>
-                                </div>
-                                <div class="d-flex justify-content-between align-items-center mb-2">
-                                    <p style="color: #90A8BF" class="m-0">Nekromas</p>
-                                    <p class="m-0 text-end" style="color: #90A8BF">34.35 ton/ha</p>
-                                </div>
-                                <div class="d-flex justify-content-between align-items-center mb-2">
-                                    <p style="color: #90A8BF" class="m-0">Tanah</p>
-                                    <p class="m-0 text-end" style="color: #90A8BF">126.60 ton/ha</p>
-                                </div>
-                                {{-- <div class="d-flex justify-content-between align-items-center mb-2">
-                                    <div class="d-flex align-items-center gap-2">
-                                        <i style="color: #22710E; font-size: 18px;" class='bx bx-time'></i>
-                                        <span style="color: #90A8BF">Tanggal Pencatatan</span>
-                                    </div>
-                                    <p class="m-0 text-end" style="color: #90A8BF">22 Mei - 3 Jun 2023</p>
-                                </div> --}}
-
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3 height-card box-margin">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class=" mb-0">Summary Total</h4>
-                                <p class="card-text">Serapan CO2 (Ton C/Ha)</p>
-                                <div class="d-flex justify-content-between align-items-center mb-2">
-                                    <p style="color: #90A8BF" class="m-0">Seresah</p>
-                                    <p class="m-0 text-end" style="color: #90A8BF">34.35 ton/ha</p>
-                                </div>
-                                <div class="d-flex justify-content-between align-items-center mb-2">
-                                    <p style="color: #90A8BF" class="m-0">Tumbuhan Bawah</p>
-                                    <p class="m-0 text-end" style="color: #90A8BF">126.60 ton/ha</p>
-                                </div>
-                                <div class="d-flex justify-content-between align-items-center mb-2">
-                                    <p style="color: #90A8BF" class="m-0">Semai</p>
-                                    <p class="m-0 text-end" style="color: #90A8BF">34.35 ton/ha</p>
-                                </div>
-                                <div class="d-flex justify-content-between align-items-center mb-2">
-                                    <p style="color: #90A8BF" class="m-0">Pancang</p>
-                                    <p class="m-0 text-end" style="color: #90A8BF">126.60 ton/ha</p>
-                                </div>
-                                <div class="d-flex justify-content-between align-items-center mb-2">
-                                    <p style="color: #90A8BF" class="m-0">Tiang</p>
-                                    <p class="m-0 text-end" style="color: #90A8BF">34.35 ton/ha</p>
-                                </div>
-                                <div class="d-flex justify-content-between align-items-center mb-2">
-                                    <p style="color: #90A8BF" class="m-0">Pohon</p>
-                                    <p class="m-0 text-end" style="color: #90A8BF">126.60 ton/ha</p>
-                                </div>
-                                <div class="d-flex justify-content-between align-items-center mb-2">
-                                    <p style="color: #90A8BF" class="m-0">Nekromas</p>
-                                    <p class="m-0 text-end" style="color: #90A8BF">34.35 ton/ha</p>
-                                </div>
-                                <div class="d-flex justify-content-between align-items-center mb-2">
-                                    <p style="color: #90A8BF" class="m-0">Tanah</p>
-                                    <p class="m-0 text-end" style="color: #90A8BF">126.60 ton/ha</p>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </section>
 
             <section>
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title mb-4">Data Subplot</h4>
+                        <div class="d-flex justify-content-between">
+                            <h4 class="card-title mb-4">Data Subplot</h4>
+
+                            <p class="mb-4">Tanggal Pencatatan : {{ $plot->hamparan->first()->zona->regional->periode->tgl_mulai }}</p>
+                        </div>
 
                         <ul class="nav nav-tabs nav-bordered nav-justified overflow-x-auto">
                             <li class="nav-item">

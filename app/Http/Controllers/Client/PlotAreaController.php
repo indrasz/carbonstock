@@ -92,7 +92,8 @@ class PlotAreaController extends Controller
             'subplotB',
             'subplotDNekromas',
             'subplotDPohon',
-            'subplotDTanah'
+            'subplotDTanah',
+            'hamparan.zona.regional.periode'
         ])->findOrFail($id);
 
         $avgCV = $this->getAvgCarbonValue($plot);
