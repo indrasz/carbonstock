@@ -9,7 +9,7 @@
                         <h4 class="m-0">Detail Plot {{ $plot->nama_plot }}</h4>
                         <p class="m-0" style="color: #90A8BF">Detail ringkasan data dari plot {{ $plot->nama_plot }}</p>
                     </div>
-                    {{-- <button class="btn btn-warning rounded-3 mt-3 mt-sm-0">Ubah Data Plot</button> --}}
+                    {{-- <a href="{{ route('plot-area.add-data', $plot->id) }}" class="btn btn-success rounded-3 mt-3 mt-sm-0">Masukkan Data Plot</a> --}}
                 </div>
             </section>
 
@@ -242,7 +242,7 @@
                                                 <th>Biomass</th>
                                                 <th>Kandungan Karbon</th>
                                                 <th>Serapan CO2</th>
-                                                <th>Updated At</th>
+                                                {{-- <th>Updated At</th> --}}
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -256,7 +256,7 @@
                                                     <td>{{ $row->biomass }}</td>
                                                     <td>{{ $row->carbon_value }}</td>
                                                     <td>{{ $row->carbon_absorb }}</td>
-                                                    <td>{{ $row->updated_at }}</td>
+                                                    {{-- <td>{{ $row->updated_at }}</td> --}}
                                                 </tr>
                                             @endforeach
                                         </tbody>
@@ -277,7 +277,7 @@
                                                 <th>Biomass</th>
                                                 <th>Kandungan Karbon</th>
                                                 <th>Serapan CO2</th>
-                                                <th>Updated At</th>
+                                                {{-- <th>Updated At</th> --}}
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -292,7 +292,7 @@
                                                     <td>{{ $row->biomass }}</td>
                                                     <td>{{ $row->carbon_value }}</td>
                                                     <td>{{ $row->carbon_absorb }}</td>
-                                                    <td>{{ $row->updated_at }}</td>
+                                                    {{-- <td>{{ $row->updated_at }}</td> --}}
                                                 </tr>
                                             @endforeach
                                         </tbody>
@@ -313,7 +313,7 @@
                                                 <th>Carbon Ton Ha</th>
                                                 <th>Carbon Ton</th>
                                                 <th>Serapan CO2</th>
-                                                <th>Updated At</th>
+                                                {{-- <th>Updated At</th> --}}
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -327,7 +327,7 @@
                                                     <td>{{ $row->carbon_ton_ha }}</td>
                                                     <td>{{ $row->carbon_ton }}</td>
                                                     <td>{{ $row->carbon_absorb }}</td>
-                                                    <td>{{ $row->updated_at }}</td>
+                                                    {{-- <td>{{ $row->updated_at }}</td> --}}
                                                 </tr>
                                             @endforeach
                                         </tbody>

@@ -175,4 +175,11 @@ class PlotAreaController extends Controller
 
         return redirect()->route('plot-area.index');
     }
+
+    public function addDataPlotArea(string $id){
+        $plot = Plot::findorFail($id);
+        return view('pages.plot-area.add-data', [
+            'plot' => $plot
+        ]);
+    }
 }

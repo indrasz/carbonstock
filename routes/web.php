@@ -88,6 +88,8 @@ Route::middleware(['auth','isAdmin'])->group(
         Route::post('/plot-area', [PlotAreaController::class, 'store'])->name('plot-area.store');
         Route::post('/plot-area/{id}', [PlotAreaController::class, 'destroy'])->name('plot-area.destroy');
 
+        Route::get('/plot-area/add/{id}', [PlotAreaController::class, 'addDataPlotArea'])->name('plot-area.add-data');
+
         Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
     }
 );

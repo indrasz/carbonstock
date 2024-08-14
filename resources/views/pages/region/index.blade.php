@@ -51,9 +51,19 @@
                                                     </div>
                                                     <div class="d-flex align-items-center gap-2 overflow-x-auto mt-2">
                                                         @if (!$item->tim->isEmpty())
-                                                            @foreach ($item->tim as $listTim)
+                                                            {{-- @foreach ($item->tim as $listTim)
                                                                 <span class="badge p-2"
                                                                     style="background: #3e8829;">{{ $listTim->namaTim->nama }}</span>
+                                                            @endforeach --}}
+                                                            @foreach ($item->tim as $listTim)
+                                                                @if ($listTim->namaTim)
+                                                                    <span class="badge p-2"
+                                                                        style="background: #3e8829;">{{ $listTim->namaTim->nama }}</span>
+                                                                @else
+                                                                    <span class="badge p-2"
+                                                                        style="background: #ff0000;">Nama Tim Tidak
+                                                                        Tersedia</span>
+                                                                @endif
                                                             @endforeach
                                                         @else
                                                             <p class="text-danger m-0"> Belum ada tim yang ditambahkan
