@@ -41,14 +41,11 @@ class Regional extends Model
     public static function booted(): void
     {
         static::deleting(function (Regional $regional) {
-            // Hapus entitas terkait RegionalTim
             $regional->tim()->delete();
 
-            // Hapus entitas terkait Zona dan Hamparan
             $regional->zona()->each(function ($zona) {
                 $zona->delete();
             });
         });
-
     }
 }

@@ -14,6 +14,7 @@
                 <form method="POST" action="{{ route('hamparan.store') }}">
                     @csrf
                     <fieldset>
+                        <input type="hidden" name="id_zona" id="id_zona" value="{{ $zonaId }}">
                         <div class="col-12 mb-3">
                             <label for="map" class="form-label">Pilih Lokasimu</label>
                             <div id="map" />
@@ -33,15 +34,6 @@
                                 <label for="nama_hamparan">Nama Hamparan</label>
                                 <input id="nama_hamparan" class="form-control" name="nama_hamparan" type="text" required>
                             </div>
-                            <div class="form-group mb-3 col-6">
-                                <label for="id_zona">Nama Zona</label>
-                                <select name="id_zona" class="form-control" id="zonaSelect">
-                                    @foreach ($zona as $item)
-                                        <option selected value="{{ $item->id }}" data-lat="{{ $item->latitude }}"
-                                            data-lng="{{ $item->longitude }}">{{ $item->nama_zona }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
 
                         </div>
                         <button class="btn btn-success rounded-3" type="submit" value="Submit">Simpan</button>
@@ -60,12 +52,12 @@
 @push('after-script')
     <script>
         mapboxgl.accessToken = 'pk.eyJ1IjoiaW5kcmFzeiIsImEiOiJjbHVxaWV3bngycmhiMmtuejluMTNzY216In0.EZ-2uwWJ3SAYv3ehMizmGw';
-
         const map = new mapboxgl.Map({
             container: 'map',
             style: 'mapbox://styles/mapbox/streets-v11',
-            center: [parseFloat(document.getElementById('zonaSelect').options[0].getAttribute('data-lng')), parseFloat(document.getElementById('zonaSelect').options[0].getAttribute('data-lat'))], // Koordinat default yang digunakan
-            zoom: 13 // Tingkat zoom default yang digunakan // Tingkat zoom default yang digunakan
+            // Default center dan zoom diatur berdasarkan data regional
+            center: [{{ $zona->longitude }}, {{ $zona->latitude }}],
+            zoom: 18
         });
 
         map.addControl(new mapboxgl.NavigationControl());
@@ -91,21 +83,6 @@
             marker.setLngLat(e.lngLat).addTo(map);
             document.getElementById('latitude').value = e.lngLat.lat.toFixed(4);
             document.getElementById('longitude').value = e.lngLat.lng.toFixed(4);
-        });
-
-        // Tambahkan event listener untuk elemen select
-        document.getElementById('zonaSelect').addEventListener('change', function() {
-            // Dapatkan lat dan long dari opsi yang dipilih
-            var selectedOption = this.options[this.selectedIndex];
-            var lat = parseFloat(selectedOption.getAttribute('data-lat'));
-            var lng = parseFloat(selectedOption.getAttribute('data-lng'));
-
-            // Perbarui center map dan level zoom
-            map.flyTo({
-                center: [lng, lat],
-                zoom: 10, // Atur level zoom sesuai kebutuhan Anda
-                essential: true // Sisipkan opsi ini agar perubahan map dianggap sebagai perubahan penting
-            });
         });
     </script>
 @endpush

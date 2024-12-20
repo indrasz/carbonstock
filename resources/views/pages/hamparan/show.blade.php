@@ -2,22 +2,46 @@
 
 @section('content')
     <div class="main-panel">
-        <div class="content-wrapper p-5">
-            <section class="plot-area-section mb-4">
-                <div class="d-block d-sm-flex justify-content-between align-items-center text-center text-sm-start mb-4">
-                    <div class="gap-1">
-                        <h4 class="m-0">Data Plot Area</h4>
-                        <p class="m-0" style="color: #90A8BF">Pendataan plot area yang dituju</p>
-                    </div>
-                    {{-- <a href="{{ route('plot-area.create') }}" class="btn btn-success rounded-3">Tambahkan Data</a> --}}
+        <div class="content-wrapper p-sm-4 p-2 pt-4">
+            <div class="d-block d-sm-flex justify-content-between align-items-center text-center text-sm-start mb-4">
+                <div class="gap-1">
+                    <h4 class="m-0">Data Plot Area</h4>
+                    <p class="m-0" style="color: #90A8BF">Pendataan plot area yang dituju</p>
                 </div>
+                <a href="{{ route('plot-area.create', $hamparanId) }}"
+                    class="btn btn-success rounded-3 mt-3 mt-sm-0 md-trigger" data-modal="modal-1">Tambahkan
+                    Data</a>
+            </div>
+            <section>
+
+                {{-- <h4 class="card-title mb-4">Data Plot</h4> --}}
                 <div class="row">
-                    @forelse ($plotArea as $item)
+                    @forelse ($hamparan->plot as $item)
                         <div class="col-md-6 col-lg-4 height-card box-margin">
                             <div class="card">
-                                <div class="card-body">
-                                    <h4 class=" mb-0">{{ $item->nama_plot }}</h4>
-                                    <p class="card-text mb-2">{{ $item->hamparan->nama_hamparan }}</p>
+                                {{-- <a href="{{ route('plot-area.edit', $item->id) }}"> --}}
+                                {{-- <img class="card-img-top img-responsive p-3 rounded-5"
+                                        src="/assets/img/gallery-img/4.jpg" alt="Card image cap"> --}}
+                                <div class="card-body pb-0">
+                                    <div class="d-flex justify-content-between align-items-center mb-2">
+                                        <div>
+                                            <h4 class=" mb-0">{{ $item->nama_plot }}</h4>
+                                            <p class="card-text mb-2">{{ $item->hamparan->nama_hamparan }}</p>
+                                        </div>
+
+                                        <a href="{{ route('plot-area.edit', ['id' => $item->id, 'hamparanId' => $hamparanId]) }}"
+                                            class="rounded-pill p-2 bg-info m-0 d-flex align-items-center">
+                                            <i class="text-white bx bx-pencil fs-5 m-0">
+                                            </i>
+                                        </a>
+                                    </div>
+                                    @foreach ($item->files as $file)
+                                        <div class="zona-image mb-3">
+                                            <img class="card-img-top img-responsive rounded"
+                                                src="{{ asset($file['path']) }}" alt="Card image cap"
+                                                style="height: 180px; object-fit:cover; object-position:center;">
+                                        </div>
+                                    @endforeach
                                     <div class="d-flex justify-content-between align-items-center mb-2">
                                         <div class="d-flex align-items-center gap-2">
                                             <i style="color: #22710E; font-size: 18px;" class='bx bx-map-alt'></i>
@@ -40,11 +64,16 @@
                                             <i style="color: #22710E; font-size: 18px;" class='bx bx-map-pin'></i>
                                             <span style="color: #90A8BF">Lokasi</span>
                                         </div>
-                                        <p class="my-0 text-truncate" style="color: #90A8BF" id="nama_koordinat_{{ $item->id }}">
+                                        <p class="my-0 text-truncate" style="color: #90A8BF"
+                                            id="nama_koordinat_{{ $item->id }}">
                                         </p>
                                     </div>
+                                </div>
+                                {{-- </a> --}}
 
-                                    <div class="text-sm-end text-start gap-2 d-flex d-sm-block mt-sm-0 mt-3">
+
+                                <div class="px-3 pt-0 pb-3">
+                                    <div class="text-sm-end text-start gap-2 d-flex d-sm-block mt-sm-0">
                                         {{-- @if (!$item->anggota->isEmpty()) --}}
                                         <form class="d-flex gap-2 align-items-center"
                                             action="{{ route('plot-area.destroy', $item->id) }}" method="POST">
@@ -57,19 +86,17 @@
                                             </button>
                                         </form>
                                         {{-- @endif --}}
-
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        @empty
+                    @empty
                     @endforelse
                 </div>
             </section>
         </div>
     </div>
 @endsection
-
 @push('after-script')
     <script>
         mapboxgl.accessToken = 'pk.eyJ1IjoiaW5kcmFzeiIsImEiOiJjbHVxaWV3bngycmhiMmtuejluMTNzY216In0.EZ-2uwWJ3SAYv3ehMizmGw';
@@ -81,19 +108,18 @@
                 .then(response => response.json())
                 .then(data => {
                     const address = data.features[0].place_name;
-                    // Gunakan ID yang disisipkan untuk memperbarui elemen yang sesuai
                     document.getElementById('nama_koordinat_' + id).innerText = address;
                 })
                 .catch(error => console.error('Error:', error));
         }
-        var plotData = <?php echo json_encode($plotArea); ?>;
-        // console.log(regionalData);
-        if (Array.isArray(plotData)) {
-            plotData.forEach(item => {
+        var hamparanData = <?php echo json_encode($hamparan->plot); ?>;
+        // console.log(hamparanData);
+        if (Array.isArray(hamparanData)) {
+            hamparanData.forEach(item => {
                 getAddressFromCoordinates(item.latitude, item.longitude, item.id);
             });
         } else {
-            console.error('Plot bukan array');
+            console.error('regionalData bukan array');
         }
     </script>
 @endpush

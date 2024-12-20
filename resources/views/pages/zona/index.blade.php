@@ -8,7 +8,7 @@
                     <h4 class="m-0">Daftar Zona</h4>
                     <p class="m-0" style="color: #90A8BF">Informasi data terkait zona untuk setiap regional</p>
                 </div>
-                <a href="{{ route('zona.create') }}" class="btn btn-success rounded-3 mt-3 mt-sm-0">Tambahkan Data</a>
+                {{-- <a href="{{ route('zona.create') }}" class="btn btn-success rounded-3 mt-3 mt-sm-0">Tambahkan Data</a> --}}
             </div>
             <div class="row">
                 @forelse ($zona as $item)
@@ -17,8 +17,17 @@
                             {{-- <img class="card-img-top img-responsive p-3 rounded-5" src="/assets/img/gallery-img/4.jpg"
                                 alt="Card image cap"> --}}
                             <div class="card-body">
-                                <h4 class=" mb-0">{{ $item->nama_zona }}</h4>
-                                <p class="card-text mb-0">{{ $item->regional->nama_regional }}</p>
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <h4 class=" mb-0">{{ $item->nama_zona }}</h4>
+                                    {{-- <a href="{{ route('zona.edit', $item->id) }}"
+                                        class="rounded-pill p-2 bg-info m-0 d-flex align-items-center">
+                                        <i class="text-white bx bx-pencil fs-5 m-0">
+                                        </i>
+                                    </a> --}}
+                                </div>
+                                @if ($item->regional)
+                                    <p class="card-text mb-0">{{ $item->regional->nama_regional }}</p>
+                                @endif
                                 <div class="d-block justify-content-start align-items-center mb-2">
                                     <div class="d-flex align-items-center justify-content-between">
                                         <div class="d-flex align-items-center justify-content-start gap-2">
@@ -49,7 +58,9 @@
                                         <span style="color: #90A8BF">Jenis Hutan</span>
                                     </div>
                                     <p class="m-0 text-end" style="color: #90A8BF">
-                                        {{ $item->regional->type_hutan->jenis_hutan }}
+                                        @if ($item->regional)
+                                            {{ $item->regional->type_hutan->jenis_hutan }}
+                                        @endif
                                     </p>
                                 </div>
                                 <div class="d-flex justify-content-between align-items-center mb-2">
@@ -65,18 +76,20 @@
                                         <i style="color: #22710E; font-size: 18px;" class='bx bx-map-pin'></i>
                                         <span style="color: #90A8BF">Lokasi</span>
                                     </div>
-                                    <p class="my-0" style="color: #90A8BF" id="nama_koordinat_{{ $item->id }}"></p>
+                                    <p class="my-0 text-truncate" style="color: #90A8BF"
+                                        id="nama_koordinat_{{ $item->id }}"></p>
                                 </div>
 
                                 <div class="mt-3">
-                                    <div class="text-sm-end text-start gap-2 d-flex d-sm-block mt-sm-0 mt-3">
+                                    <div class="text-sm-end text-start d-flex gap-2 align-items-center mt-sm-0 mt-3">
                                         {{-- @if (!$item->anggota->isEmpty()) --}}
+                                        <a href="{{ route('zona.show', $item->id) }}"
+                                            class="btn btn-warning rounded-3 p-2">Detail</a>
                                         <form class="d-flex gap-2 align-items-center"
                                             action="{{ route('zona.destroy', $item->id) }}" method="POST">
                                             @csrf
 
-                                            <a class="btn btn-warning rounded-3 p-2">Ubah</a>
-                                            <button onclick="return confirm('Apakah yakin ingin di hapus?')"
+                                            <button onclick="return confirm('Apakah yakin ingin di hapus?')" type="submit"
                                                 class="btn btn-danger rounded-3 p-2">Hapus
                                             </button>
                                         </form>
@@ -87,6 +100,8 @@
                             </div>
                         </div>
                     </div>
+
+
 
                     <div class="modal inmodal" id="myModal{{ $item->id }}" tabindex="-1" role="dialog"
                         aria-hidden="true">
@@ -102,14 +117,20 @@
 
                                         <label>Nama Tim</label>
                                         <div class="form-group w-100 mb-2" id="listTeam">
+
                                             <select name="id_tim[]" class="form-control">
                                                 @foreach ($regionalTim as $regional)
                                                     @foreach ($regional->tim as $timItem)
-                                                        <option value="{{ $timItem->namaTim->id }}">
-                                                            {{ $timItem->namaTim->nama }}</option>
+                                                        @if ($timItem->namaTim)
+                                                            <option value="{{ $timItem->namaTim->id }}">
+                                                                {{ $timItem->namaTim->nama }}</option>
+                                                        @else
+                                                            <option disabled>Nama Tim Tidak Tersedia</option>
+                                                        @endif
                                                     @endforeach
                                                 @endforeach
                                             </select>
+
                                         </div>
                                         <div id="appendTeam"></div>
                                         <a href="#" id="addTeam">
@@ -118,7 +139,6 @@
                                         <button class="btn btn-success rounded-2 mt-2" type="submit">Tambah Tim</button>
                                     </form>
                                 </div>
-
                             </div>
                         </div>
                     </div>

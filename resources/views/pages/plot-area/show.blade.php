@@ -6,140 +6,21 @@
             <section class="plot-area-section mb-4">
                 <div class="d-block d-sm-flex justify-content-between align-items-center text-center text-sm-start mb-4">
                     <div class="gap-1">
-                        <h4 class="m-0">Detail Plot Area A</h4>
-                        <p class="m-0" style="color: #90A8BF">Detail ringkasan data dari plot area A</p>
+                        <h4 class="m-0">Detail Plot {{ $plot->nama_plot }}</h4>
+                        <p class="m-0" style="color: #90A8BF">Detail ringkasan data dari plot {{ $plot->nama_plot }}</p>
                     </div>
-                    {{-- <button class="btn btn-warning rounded-3 mt-3 mt-sm-0">Ubah Data Plot</button> --}}
-                </div>
-                <div class="row">
-                    <div class="col-md-6 height-card box-margin">
-                        <div class="card">
-                            <img class="card-img-top img-responsive p-3 rounded-5" src="/assets/img/gallery-img/4.jpg"
-                                alt="Card image cap">
-                            <div class="card-body">
-                                <h4 class=" mb-0">Plot A</h4>
-                                <p class="card-text">Hamparan 1</p>
-                                <div class="d-flex justify-content-between align-items-center mb-2">
-                                    <div class="d-flex align-items-center gap-2">
-                                        <i style="color: #22710E; font-size: 18px;" class='bx bx-info-circle'></i>
-                                        <span style="color: #90A8BF">Kandungan Karbon</span>
-                                    </div>
-                                    <p class="m-0" style="color: #90A8BF">34.35 ton/ha</p>
-                                </div>
-                                <div class="d-flex justify-content-between align-items-center mb-2">
-                                    <div class="d-flex align-items-center gap-2">
-                                        <i style="color: #22710E; font-size: 18px;" class='bx bx-info-circle'></i>
-                                        <span style="color: #90A8BF">Serapan CO2</span>
-                                    </div>
-                                    <p class="m-0" style="color: #90A8BF">126.60 ton/ha</p>
-                                </div>
-                                <div class="d-flex justify-content-between align-items-center mb-2">
-                                    <div class="d-flex align-items-center gap-2">
-                                        <i style="color: #22710E; font-size: 18px;" class='bx bx-time'></i>
-                                        <span style="color: #90A8BF">Tanggal Pencatatan</span>
-                                    </div>
-                                    <p class="m-0" style="color: #90A8BF">22 Mei - 3 Jun 2023</p>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3 height-card box-margin">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class=" mb-0">Summary Total</h4>
-                                <p class="card-text">Kandungan Karbon (Ton C/Ha)</p>
-                                <div class="d-flex justify-content-between align-items-center mb-2">
-                                    <p style="color: #90A8BF" class="m-0">Seresah</p>
-                                    <p class="m-0 text-end" style="color: #90A8BF">34.35 ton/ha</p>
-                                </div>
-                                <div class="d-flex justify-content-between align-items-center mb-2">
-                                    <p style="color: #90A8BF" class="m-0">Tumbuhan Bawah</p>
-                                    <p class="m-0 text-end" style="color: #90A8BF">126.60 ton/ha</p>
-                                </div>
-                                <div class="d-flex justify-content-between align-items-center mb-2">
-                                    <p style="color: #90A8BF" class="m-0">Semai</p>
-                                    <p class="m-0 text-end" style="color: #90A8BF">34.35 ton/ha</p>
-                                </div>
-                                <div class="d-flex justify-content-between align-items-center mb-2">
-                                    <p style="color: #90A8BF" class="m-0">Pancang</p>
-                                    <p class="m-0 text-end" style="color: #90A8BF">126.60 ton/ha</p>
-                                </div>
-                                <div class="d-flex justify-content-between align-items-center mb-2">
-                                    <p style="color: #90A8BF" class="m-0">Tiang</p>
-                                    <p class="m-0 text-end" style="color: #90A8BF">34.35 ton/ha</p>
-                                </div>
-                                <div class="d-flex justify-content-between align-items-center mb-2">
-                                    <p style="color: #90A8BF" class="m-0">Pohon</p>
-                                    <p class="m-0 text-end" style="color: #90A8BF">126.60 ton/ha</p>
-                                </div>
-                                <div class="d-flex justify-content-between align-items-center mb-2">
-                                    <p style="color: #90A8BF" class="m-0">Nekromas</p>
-                                    <p class="m-0 text-end" style="color: #90A8BF">34.35 ton/ha</p>
-                                </div>
-                                <div class="d-flex justify-content-between align-items-center mb-2">
-                                    <p style="color: #90A8BF" class="m-0">Tanah</p>
-                                    <p class="m-0 text-end" style="color: #90A8BF">126.60 ton/ha</p>
-                                </div>
-                                {{-- <div class="d-flex justify-content-between align-items-center mb-2">
-                                    <div class="d-flex align-items-center gap-2">
-                                        <i style="color: #22710E; font-size: 18px;" class='bx bx-time'></i>
-                                        <span style="color: #90A8BF">Tanggal Pencatatan</span>
-                                    </div>
-                                    <p class="m-0 text-end" style="color: #90A8BF">22 Mei - 3 Jun 2023</p>
-                                </div> --}}
-
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3 height-card box-margin">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class=" mb-0">Summary Total</h4>
-                                <p class="card-text">Serapan CO2 (Ton C/Ha)</p>
-                                <div class="d-flex justify-content-between align-items-center mb-2">
-                                    <p style="color: #90A8BF" class="m-0">Seresah</p>
-                                    <p class="m-0 text-end" style="color: #90A8BF">34.35 ton/ha</p>
-                                </div>
-                                <div class="d-flex justify-content-between align-items-center mb-2">
-                                    <p style="color: #90A8BF" class="m-0">Tumbuhan Bawah</p>
-                                    <p class="m-0 text-end" style="color: #90A8BF">126.60 ton/ha</p>
-                                </div>
-                                <div class="d-flex justify-content-between align-items-center mb-2">
-                                    <p style="color: #90A8BF" class="m-0">Semai</p>
-                                    <p class="m-0 text-end" style="color: #90A8BF">34.35 ton/ha</p>
-                                </div>
-                                <div class="d-flex justify-content-between align-items-center mb-2">
-                                    <p style="color: #90A8BF" class="m-0">Pancang</p>
-                                    <p class="m-0 text-end" style="color: #90A8BF">126.60 ton/ha</p>
-                                </div>
-                                <div class="d-flex justify-content-between align-items-center mb-2">
-                                    <p style="color: #90A8BF" class="m-0">Tiang</p>
-                                    <p class="m-0 text-end" style="color: #90A8BF">34.35 ton/ha</p>
-                                </div>
-                                <div class="d-flex justify-content-between align-items-center mb-2">
-                                    <p style="color: #90A8BF" class="m-0">Pohon</p>
-                                    <p class="m-0 text-end" style="color: #90A8BF">126.60 ton/ha</p>
-                                </div>
-                                <div class="d-flex justify-content-between align-items-center mb-2">
-                                    <p style="color: #90A8BF" class="m-0">Nekromas</p>
-                                    <p class="m-0 text-end" style="color: #90A8BF">34.35 ton/ha</p>
-                                </div>
-                                <div class="d-flex justify-content-between align-items-center mb-2">
-                                    <p style="color: #90A8BF" class="m-0">Tanah</p>
-                                    <p class="m-0 text-end" style="color: #90A8BF">126.60 ton/ha</p>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
+                    {{-- <a href="{{ route('plot-area.add-data', $plot->id) }}" class="btn btn-success rounded-3 mt-3 mt-sm-0">Masukkan Data Plot</a> --}}
                 </div>
             </section>
 
             <section>
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title mb-4">Data Subplot</h4>
+                        <div class="d-flex justify-content-between">
+                            <h4 class="card-title mb-4">Data Subplot</h4>
+
+                            <p class="mb-4">Tanggal Pencatatan : {{ $plot->hamparan->first()->zona->regional->periode->tgl_mulai }}</p>
+                        </div>
 
                         <ul class="nav nav-tabs nav-bordered nav-justified overflow-x-auto">
                             <li class="nav-item">
@@ -198,7 +79,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($seresah as $row)
+                                            @foreach ($plot->subplotASeresah as $row)
                                                 <tr>
                                                     <td>{{ $row->basah_total }}</td>
                                                     <td>{{ $row->basah_sample }}</td>
@@ -227,7 +108,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($semai as $row)
+                                            @foreach ($plot->subplotASemai as $row)
                                                 <tr>
 
                                                     <td>{{ $row->basah_total }}</td>
@@ -257,7 +138,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($tumbuhanBawah as $row)
+                                            @foreach ($plot->subplotATumbuhanBawah as $row)
                                                 <tr>
 
                                                     <td>{{ $row->basah_total }}</td>
@@ -291,7 +172,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($pancang as $row)
+                                            @foreach ($plot->subplotB as $row)
                                                 <tr>
 
                                                     <td>{{ $row->local_name }}</td>
@@ -329,7 +210,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($tiang as $row)
+                                            @foreach ($plot->subplotC as $row)
                                                 <tr>
 
                                                     <td>{{ $row->local_name }}</td>
@@ -361,11 +242,11 @@
                                                 <th>Biomass</th>
                                                 <th>Kandungan Karbon</th>
                                                 <th>Serapan CO2</th>
-                                                <th>Updated At</th>
+                                                {{-- <th>Updated At</th> --}}
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($necromass as $row)
+                                            @foreach ($plot->subplotDNekromas as $row)
                                                 <tr>
 
                                                     <td>{{ $row->diameter_pangkal }}</td>
@@ -375,7 +256,7 @@
                                                     <td>{{ $row->biomass }}</td>
                                                     <td>{{ $row->carbon_value }}</td>
                                                     <td>{{ $row->carbon_absorb }}</td>
-                                                    <td>{{ $row->updated_at }}</td>
+                                                    {{-- <td>{{ $row->updated_at }}</td> --}}
                                                 </tr>
                                             @endforeach
                                         </tbody>
@@ -396,11 +277,11 @@
                                                 <th>Biomass</th>
                                                 <th>Kandungan Karbon</th>
                                                 <th>Serapan CO2</th>
-                                                <th>Updated At</th>
+                                                {{-- <th>Updated At</th> --}}
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($pohon as $row)
+                                            @foreach ($plot->subplotDPohon as $row)
                                                 <tr>
 
                                                     <td>{{ $row->local_name }}</td>
@@ -411,7 +292,7 @@
                                                     <td>{{ $row->biomass }}</td>
                                                     <td>{{ $row->carbon_value }}</td>
                                                     <td>{{ $row->carbon_absorb }}</td>
-                                                    <td>{{ $row->updated_at }}</td>
+                                                    {{-- <td>{{ $row->updated_at }}</td> --}}
                                                 </tr>
                                             @endforeach
                                         </tbody>
@@ -432,11 +313,11 @@
                                                 <th>Carbon Ton Ha</th>
                                                 <th>Carbon Ton</th>
                                                 <th>Serapan CO2</th>
-                                                <th>Updated At</th>
+                                                {{-- <th>Updated At</th> --}}
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($tanah as $row)
+                                            @foreach ($plot->subplotDTanah as $row)
                                                 <tr>
 
                                                     <td>{{ $row->kedalaman_sample }}</td>
@@ -446,7 +327,7 @@
                                                     <td>{{ $row->carbon_ton_ha }}</td>
                                                     <td>{{ $row->carbon_ton }}</td>
                                                     <td>{{ $row->carbon_absorb }}</td>
-                                                    <td>{{ $row->updated_at }}</td>
+                                                    {{-- <td>{{ $row->updated_at }}</td> --}}
                                                 </tr>
                                             @endforeach
                                         </tbody>

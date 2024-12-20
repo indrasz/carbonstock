@@ -11,13 +11,11 @@
                     </div>
                 </div>
 
-
-
-                <form method="POST" action="{{ route('zona.store', $regionalId) }}" enctype="multipart/form-data">
+                <form method="POST" action="{{ route('hamparan.update', $hamparan->id) }}">
                     @csrf
+                    @method('PUT')
                     <fieldset>
-                        <input type="hidden" name="id_regional" id="id_regional" value="{{ $regionalId }}">
-
+                        <input type="hidden" name="id_zona" id="id_zona" value="{{ $zonaId }}">
                         <div class="col-12 mb-3">
                             <label for="map" class="form-label">Pilih Lokasimu</label>
                             <div id="map" />
@@ -25,33 +23,19 @@
                         <div class="row mt-3">
                             <div class="form-group mb-3 col-6">
                                 <label for="latitude">Latitude</label>
-                                <input id="latitude" class="form-control" name="latitude" id="latitude" type="text"
+                                <input id="latitude" class="form-control" name="latitude" id="latitude" type="text" value="{{ $hamparan->latitude }}"
                                     required readonly>
                             </div>
                             <div class="form-group mb-3 col-6">
                                 <label for="longitude">Longitude</label>
-                                <input id="longitude" class="form-control" name="longitude" id="longitude" type="text"
+                                <input id="longitude" class="form-control" name="longitude" id="longitude" type="text" value="{{ $hamparan->longitude }}"
                                     required readonly>
                             </div>
                             <div class="form-group mb-3 col-6">
-                                <label for="nama_zona">Nama Zona</label>
-                                <input id="nama_zona" class="form-control" name="nama_zona" type="text" required>
+                                <label for="nama_hamparan">Nama Hamparan</label>
+                                <input id="nama_hamparan" class="form-control" name="nama_hamparan" type="text" value="{{ $hamparan->nama_hamparan }}" required>
                             </div>
-                            <div class="form-group mb-3 col-6">
-                                <label for="jenis_hutan">Pilih Jenis Hutan</label>
-                                <select name="jenis_hutan" class="form-control" id="exampleFormControlSelect1">
-                                    @foreach ($masterHutan as $item)
-                                        <option value="{{ $item->id }}">{{ $item->jenis_hutan }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="form-group mb-3 col-6">
-                                <label for="zona_img">Upload  foto zona</label>
-                                <input accept="image/*" type="file" name="file" id="imgInp" class="form-control"/>
-                            </div>
-                            <div class="form-group mb-3 col-6">
-                                <img id="blah" src="/assets/img/gallery-img/4.jpg" alt="your image" class="w-100 h-100" style="max-width: 250px; max-height: 250px; object-fit: cover; object-position: center;"/>
-                            </div>
+
                         </div>
                         <button class="btn btn-success rounded-3" type="submit" value="Submit">Simpan</button>
                     </fieldset>
@@ -73,8 +57,8 @@
             container: 'map',
             style: 'mapbox://styles/mapbox/streets-v11',
             // Default center dan zoom diatur berdasarkan data regional
-            center: [{{ $regional->longitude }}, {{ $regional->latitude }}],
-            zoom: 15
+            center: [{{ $zona->longitude }}, {{ $zona->latitude }}],
+            zoom: 18
         });
 
         map.addControl(new mapboxgl.NavigationControl());
@@ -101,14 +85,5 @@
             document.getElementById('latitude').value = e.lngLat.lat.toFixed(4);
             document.getElementById('longitude').value = e.lngLat.lng.toFixed(4);
         });
-    </script>
-
-    <script>
-        imgInp.onchange = evt => {
-            const [file] = imgInp.files
-            if (file) {
-                blah.src = URL.createObjectURL(file)
-            }
-        }
     </script>
 @endpush

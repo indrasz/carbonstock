@@ -36,13 +36,14 @@
                                         <option value="{{ $item->id }}">{{ $item->tgl_mulai }} - {{ $item->tgl_berakhir }}</option>
                                     @endforeach
                                 </select>
+                                
                             </div>
                             <div class="form-group mb-3 col-6">
                                 <label for="nama_regional">Nama Lokasi</label>
                                 <input id="nama_regional" class="form-control" name="nama_regional" type="text" required>
                             </div>
                             <div class="form-group mb-3 col-6">
-                                <label for="jenis_hutan">Jenis Hutan</label>
+                                <label for="jenis_hutan">Pilih Jenis Hutan</label>
                                 <select name="jenis_hutan" class="form-control" id="exampleFormControlSelect1">
                                     @foreach ($masterHutan as $item)
                                         <option value="{{ $item->id }}">{{ $item->jenis_hutan }}</option>

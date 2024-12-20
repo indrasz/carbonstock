@@ -27,6 +27,9 @@ class ZonaRequest extends FormRequest
             'id_regional' => 'required',
             'jenis_hutan' => 'required',
             'nama_zona' => 'required',
+            'file' => [
+                'nullable', 'file', 'max:1024',
+            ],
         ];
     }
 }

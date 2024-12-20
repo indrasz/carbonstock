@@ -21,6 +21,12 @@
 <script src="/assets/js/default-assets/form-validation-custom.js"></script>
 <script src="/assets/js/default-assets/bootstrap-maxlength-active.js"></script>
 
+
+<!-- Inject JS -->
+<script src="/assets/js/dropzone.min.js"></script>
+<script src="/assets/js/default-assets/dropzone-custom.js"></script>
+<script src="/assets/js/default-assets/dropzone-and-module.min.js"></script>
+
 <!-- Inject JS -->
 {{-- <script src="/assets/js/default-assets/file-upload.js"></script>
 <script src="/assets/js/default-assets/basic-form.js"></script>

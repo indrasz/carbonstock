@@ -26,7 +26,10 @@ class PlotAreaRequest extends FormRequest
             'longitude' => 'required',
             'nama_plot' => 'required',
             'type_plot' => 'required',
-            'id_hamparan' => 'required'
+            'id_hamparan' => 'required',
+            'file' => [
+                'nullable', 'file', 'max:1024',
+            ],
         ];
     }
 }

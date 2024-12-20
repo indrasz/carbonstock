@@ -11,9 +11,10 @@
                     </div>
                 </div>
 
-                <form method="POST" action="{{ route('plot-area.store') }}">
+                <form method="POST" action="{{ route('plot-area.store') }}" enctype="multipart/form-data">
                     @csrf
                     <fieldset>
+                        <input type="hidden" name="id_hamparan" id="id_hamparan" value="{{ $hamparanId }}">
                         <div class="col-12 mb-3">
                             <label for="map" class="form-label">Choose Your Location</label>
                             <div id="map" />
@@ -33,28 +34,22 @@
                                 <label for="nama_plot">Nama Plot</label>
                                 <input id="nama_plot" class="form-control" name="nama_plot" type="text" required>
                             </div>
-                            <div class="form-group mb-3 col-6">
-                                <label for="id_hamparan">Pilih Hamparan</label>
-                                {{-- <select name="id_hamparan" class="form-control" id="exampleFormControlSelect1">
-                                    @foreach ($hamparan as $item)
-                                        <option value="{{ $item->id }}">{{ $item->nama_hamparan }}</option>
-                                    @endforeach
-                                </select> --}}
 
-                                <select name="id_hamparan" class="form-control" id="hamparanSelect">
-                                    @foreach ($hamparan as $item)
-                                        <option selected value="{{ $item->id }}" data-lat="{{ $item->latitude }}"
-                                            data-lng="{{ $item->longitude }}">{{ $item->nama_hamparan }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
                             <div class="form-group mb-3 col-6">
-                                <label for="type_plot">Tipe Plot</label>
+                                <label for="type_plot">Pilih Tipe Plot</label>
                                 <select name="type_plot" class="form-control" id="exampleFormControlSelect1">
                                     @foreach ($masterPlot as $item)
                                         <option value="{{ $item->id }}">{{ $item->nama_plot }}</option>
                                     @endforeach
                                 </select>
+                            </div>
+                            <div class="form-group mb-3 col-6">
+                                <label for="zona_img">Upload foto zona</label>
+                                <input accept="image/*" type="file" name="file" id="imgInp" class="form-control" />
+                            </div>
+                            <div class="form-group mb-3 col-6">
+                                <img id="blah" src="/assets/img/gallery-img/4.jpg" alt="your image" class="w-100 h-100"
+                                    style="max-width: 250px; max-height: 250px; object-fit: cover; object-position: center;" />
                             </div>
                         </div>
                         <button class="btn btn-success rounded-3" type="submit" value="Submit">Simpan</button>
@@ -73,12 +68,12 @@
 @push('after-script')
     <script>
         mapboxgl.accessToken = 'pk.eyJ1IjoiaW5kcmFzeiIsImEiOiJjbHVxaWV3bngycmhiMmtuejluMTNzY216In0.EZ-2uwWJ3SAYv3ehMizmGw';
-
         const map = new mapboxgl.Map({
             container: 'map',
             style: 'mapbox://styles/mapbox/streets-v11',
-            center: [parseFloat(document.getElementById('hamparanSelect').options[0].getAttribute('data-lng')), parseFloat(document.getElementById('hamparanSelect').options[0].getAttribute('data-lat'))], // Koordinat default yang digunakan
-            zoom: 18 // Tingkat zoom default yang digunakan // Tingkat zoom default yang digunakan
+            // Default center dan zoom diatur berdasarkan data regional
+            center: [{{ $hamparan->longitude }}, {{ $hamparan->latitude }}],
+            zoom: 18
         });
 
         map.addControl(new mapboxgl.NavigationControl());
@@ -105,20 +100,14 @@
             document.getElementById('latitude').value = e.lngLat.lat.toFixed(4);
             document.getElementById('longitude').value = e.lngLat.lng.toFixed(4);
         });
+    </script>
 
-        // Tambahkan event listener untuk elemen select
-        document.getElementById('hamparanSelect').addEventListener('change', function() {
-            // Dapatkan lat dan long dari opsi yang dipilih
-            var selectedOption = this.options[this.selectedIndex];
-            var lat = parseFloat(selectedOption.getAttribute('data-lat'));
-            var lng = parseFloat(selectedOption.getAttribute('data-lng'));
-
-            // Perbarui center map dan level zoom
-            map.flyTo({
-                center: [lng, lat],
-                zoom: 10, // Atur level zoom sesuai kebutuhan Anda
-                essential: true // Sisipkan opsi ini agar perubahan map dianggap sebagai perubahan penting
-            });
-        });
+     <script>
+        imgInp.onchange = evt => {
+            const [file] = imgInp.files
+            if (file) {
+                blah.src = URL.createObjectURL(file)
+            }
+        }
     </script>
 @endpush

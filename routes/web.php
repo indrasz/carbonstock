@@ -36,12 +36,15 @@ Route::post('/validateUser', [AuthController::class, 'validateUser'])->name('log
 Route::post('/createUser', [AuthController::class, 'createUser'])->name('register.createUser');
 
 // Route::group(["middleware" => ["auth", "verified"]], function () {
-Route::middleware(['auth'])->group(
+Route::middleware(['auth','isAdmin'])->group(
     function () {
         Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
         Route::get('/hamparan', [HamparanController::class, 'index'])->name('hamparan.index');
-        Route::get('/hamparan/create', [HamparanController::class, 'create'])->name('hamparan.create');
+        Route::get('/hamparan/create/{id}', [HamparanController::class, 'create'])->name('hamparan.create');
+        Route::get('/hamparan/edit/{id}/{zonaId}', [HamparanController::class, 'edit'])->name('hamparan.edit');
+        Route::put('/hamparan/update/{id}', [HamparanController::class, 'update'])->name('hamparan.update');
+        Route::get('/hamparan/show/{id}', [HamparanController::class, 'show'])->name('hamparan.show');
         Route::post('/hamparan/{id}', [HamparanController::class, 'destroy'])->name('hamparan.destroy');
         Route::post('/hamparan', [HamparanController::class, 'store'])->name('hamparan.store');
 
@@ -56,6 +59,8 @@ Route::middleware(['auth'])->group(
         Route::post('/team', [TeamController::class, 'store'])->name('team.store');
         Route::post('/team/tambahAnggota', [TeamController::class, 'tambahAnggota'])->name('team.tambahAnggota');
         Route::post('/team/{id}', [TeamController::class, 'destroy'])->name('team.destroy');
+        Route::put('/team/updateTeam/{id}', [TeamController::class, 'update'])->name('team.updateTeam');
+        // Route::post('/team/destroy-anggota/{id}', [TeamController::class, 'destroyAnggota'])->name('team.destroyAnggota');
 
         Route::get('/regional/show/{id}', [RegionController::class, 'show'])->name('region.show');
         Route::get('/regional/create', [RegionController::class, 'create'])->name('region.create');
@@ -63,19 +68,27 @@ Route::middleware(['auth'])->group(
         Route::post('/regional', [RegionController::class, 'store'])->name('region.store');
         Route::post('/regional/{id}', [RegionController::class, 'destroy'])->name('region.destroy');
         Route::POST('/region/tambahTim', [RegionController::class, 'storeTeam'])->name('region.tambahTim');
+        Route::put('/region/update/{id}', [RegionController::class, 'update'])->name('region.update');
+        Route::get('/regional/edit/{id}', [RegionController::class, 'edit'])->name('region.edit');
 
-        Route::get('/zona/edit/{id}', [ZonaController::class, 'edit'])->name('zona.edit');
-        Route::get('/zona/create', [ZonaController::class, 'create'])->name('zona.create');
+        Route::get('/zona/edit/{id}/{regionalId}', [ZonaController::class, 'edit'])->name('zona.edit');
+        Route::put('/zona/update/{id}', [ZonaController::class, 'update'])->name('zona.update');
+        Route::get('/zona/show/{id}', [ZonaController::class, 'show'])->name('zona.show');
+        Route::get('/zona/create/{id}', [ZonaController::class, 'create'])->name('zona.create');
         Route::get('/zona', [ZonaController::class, 'index'])->name('zona.index');
         Route::post('/zona', [ZonaController::class, 'store'])->name('zona.store');
         Route::post('/zona/tambahTim', [ZonaController::class, 'tambahTim'])->name('zona.tambahTim');
         Route::post('/zona/{id}', [ZonaController::class, 'destroy'])->name('zona.destroy');
 
-        Route::get('/plot-area/edit/{id}', [PlotAreaController::class, 'edit'])->name('plot-area.edit');
-        Route::get('/plot-area/create', [PlotAreaController::class, 'create'])->name('plot-area.create');
+        Route::get('/plot-area/edit/{id}/{hamparanId}', [PlotAreaController::class, 'edit'])->name('plot-area.edit');
+        Route::put('/plot-area/update/{id}', [PlotAreaController::class, 'update'])->name('plot-area.update');
+        Route::get('/plot-area/show/{id}', [PlotAreaController::class, 'show'])->name('plot-area.show');
+        Route::get('/plot-area/create/{id}', [PlotAreaController::class, 'create'])->name('plot-area.create');
         Route::get('/plot-area', [PlotAreaController::class, 'index'])->name('plot-area.index');
         Route::post('/plot-area', [PlotAreaController::class, 'store'])->name('plot-area.store');
         Route::post('/plot-area/{id}', [PlotAreaController::class, 'destroy'])->name('plot-area.destroy');
+
+        Route::get('/plot-area/add/{id}', [PlotAreaController::class, 'addDataPlotArea'])->name('plot-area.add-data');
 
         Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
     }

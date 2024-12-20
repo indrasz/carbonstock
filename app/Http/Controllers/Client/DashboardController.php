@@ -21,126 +21,231 @@ class DashboardController extends Controller
     public function index()
     {
 
-        $regional = Regional::with([
-            'zona.hamparan.plot.subplotA',
-            'zona.hamparan.plot.subplotASemai',
-            'zona.hamparan.plot.subplotASeresah',
-            'zona.hamparan.plot.subplotATumbuhanBawah',
-            'zona.hamparan.plot.subplotB',
-            'zona.hamparan.plot.subplotC',
-            'zona.hamparan.plot.subplotD',
-            'zona.hamparan.plot.subplotDNekromas',
-            'zona.hamparan.plot.subplotDTanah',
-            'zona.hamparan.plot.subplotDPohon'
+        $regionalData = Regional::with([
+            'zona.hamparan.plot.subplotA' => function ($query) {
+                $query->orderBy('updated_at', 'desc');
+            },
+            'zona.hamparan.plot.subplotASemai' => function ($query) {
+                $query->orderBy('updated_at', 'desc');
+            },
+            'zona.hamparan.plot.subplotASeresah' => function ($query) {
+                $query->orderBy('updated_at', 'desc');
+            },
+            'zona.hamparan.plot.subplotATumbuhanBawah' => function ($query) {
+                $query->orderBy('updated_at', 'desc');
+            },
+            'zona.hamparan.plot.subplotB' => function ($query) {
+                $query->orderBy('updated_at', 'desc');
+            },
+            'zona.hamparan.plot.subplotC' => function ($query) {
+                $query->orderBy('updated_at', 'desc');
+            },
+            'zona.hamparan.plot.subplotD' => function ($query) {
+                $query->orderBy('updated_at', 'desc');
+            },
+            'zona.hamparan.plot.subplotDNekromas' => function ($query) {
+                $query->orderBy('updated_at', 'desc');
+            },
+            'zona.hamparan.plot.subplotDTanah' => function ($query) {
+                $query->orderBy('updated_at', 'desc');
+            },
+            'zona.hamparan.plot.subplotDPohon' => function ($query) {
+                $query->orderBy('updated_at', 'desc');
+            }
         ])->get();
 
 
-        $seresah = SubplotASeresah::all();
-        $semai = SubplotASemai::all();
-        $tumbuhanBawah = SubplotATumbuhanBawah::all();
+        $seresah = SubplotASeresah::orderBy('updated_at', 'desc')->paginate(25);
+        $semai = SubplotASemai::orderBy('updated_at', 'desc')->paginate(25);
+        $tumbuhanBawah = SubplotATumbuhanBawah::orderBy('updated_at', 'desc')->paginate(25);
 
-        $tiang = SubplotB::all();
-        $pancang = SubplotC::all();
+        $tiang = SubplotC::orderBy('updated_at', 'desc')->paginate(25);
+        $pancang = SubplotB::orderBy('updated_at', 'desc')->paginate(25);
 
-        $necromass = SubplotDNekromas::all();
-        $pohon = SubplotDPohon::all();
-        $tanah = SubplotDTanah::all();
+        $necromass = SubplotDNekromas::orderBy('updated_at', 'desc')->paginate(25);
+        $pohon = SubplotDPohon::orderBy('updated_at', 'desc')->paginate(25);
+        $tanah = SubplotDTanah::orderBy('updated_at', 'desc')->paginate(25);
 
-        $avgAllCarbonValueSemai = $semai->avg('carbon_value');
-        $avgAllCarbonAbsorbSemai = $semai->avg('carbon_absorb');
-        $avgAllCarbonValueSeresah = $seresah->avg('carbon_value');
-        $avgAllCarbonAbsorbSeresah = $seresah->avg('carbon_absorb');
-        $avgAllCarbonValueTumbuhanBawah = $tumbuhanBawah->avg('carbon_value');
-        $avgAllCarbonAbsorbTumbuhanBawah = $tumbuhanBawah->avg('carbon_absorb');
-        $avgAllCarbonValueSubplotB = $tiang->avg('carbon_value');
-        $avgAllCarbonAbsorbSubplotB = $tiang->avg('carbon_absorb');
-        $avgAllCarbonValueSubplotC = $pancang->avg('carbon_value');
-        $avgAllCarbonAbsorbSubplotC = $pancang->avg('carbon_absorb');
-        $avgAllCarbonValueNekromas = $necromass->avg('carbon_value');
-        $avgAllCarbonAbsorbNekromas = $necromass->avg('carbon_absorb');
-        $avgAllCarbonValuePohon = $pohon->avg('carbon_value');
-        $avgAllCarbonAbsorbPohon = $pohon->avg('carbon_absorb');
-        $avgAllCarbonValueTanah = $tanah->avg('carbon_value');
-        $avgAllCarbonAbsorbTanah = $tanah->avg('carbon_absorb');
-
+        $regionData = [];
         $sumCarbonValuePlot = 0;
         $sumCarbonAbsorbPlot = 0;
 
-        $regionalCarbonValues = [];
-        $regionalCarbonAbsorbs = [];
+        foreach ($regionalData as $regional) {
 
-        foreach ($regional as $reg) {
+            $avgCV = [
+                // 'subplotA' => $regional->zona->flatMap->hamparan->flatMap->plot->flatMap->subplotA->avg('carbon_value'),
+                'subplotASemai' => $regional->zona->flatMap->hamparan->flatMap->plot->flatMap->subplotASemai->avg('carbon_value'),
+                'subplotASeresah' => $regional->zona->flatMap->hamparan->flatMap->plot->flatMap->subplotASeresah->avg('carbon_value'),
+                'subplotATumbuhanBawah' => $regional->zona->flatMap->hamparan->flatMap->plot->flatMap->subplotATumbuhanBawah->avg('carbon_value'),
+                'subplotB' => $regional->zona->flatMap->hamparan->flatMap->plot->flatMap->subplotB->avg('carbon_value'),
+                'subplotC' => $regional->zona->flatMap->hamparan->flatMap->plot->flatMap->subplotC->avg('carbon_value'),
+                // 'subplotD' => $regional->zona->flatMap->hamparan->flatMap->plot->flatMap->subplotD->avg('carbon_value'),
+                'subplotDNekromas' => $regional->zona->flatMap->hamparan->flatMap->plot->flatMap->subplotDNekromas->avg('carbon_value'),
+                'subplotDPohon' => $regional->zona->flatMap->hamparan->flatMap->plot->flatMap->subplotDPohon->avg('carbon_value'),
+                'subplotDTanah' => $regional->zona->flatMap->hamparan->flatMap->plot->flatMap->subplotDTanah->avg('carbon_ton'),
+            ];
 
-            $regionalCarbonValue = 0;
-            $regionalCarbonAbsorb = 0;
-            $totalPlots = 0;
+            $avgCA = [
+                // 'subplotA' => $regional->zona->flatMap->hamparan->flatMap->plot->flatMap->subplotA->avg('carbon_value'),
+                'subplotASemai' => $regional->zona->flatMap->hamparan->flatMap->plot->flatMap->subplotASemai->avg('carbon_absorb'),
+                'subplotASeresah' => $regional->zona->flatMap->hamparan->flatMap->plot->flatMap->subplotASeresah->avg('carbon_absorb'),
+                'subplotATumbuhanBawah' => $regional->zona->flatMap->hamparan->flatMap->plot->flatMap->subplotATumbuhanBawah->avg('carbon_absorb'),
+                'subplotB' => $regional->zona->flatMap->hamparan->flatMap->plot->flatMap->subplotB->avg('carbon_absorb'),
+                'subplotC' => $regional->zona->flatMap->hamparan->flatMap->plot->flatMap->subplotC->avg('carbon_absorb'),
+                // 'subplotD' => $regional->zona->flatMap->hamparan->flatMap->plot->flatMap->subplotD->avg('carbon_absorb'),
+                'subplotDNekromas' => $regional->zona->flatMap->hamparan->flatMap->plot->flatMap->subplotDNekromas->avg('carbon_absorb'),
+                'subplotDPohon' => $regional->zona->flatMap->hamparan->flatMap->plot->flatMap->subplotDPohon->avg('carbon_absorb'),
+                'subplotDTanah' => $regional->zona->flatMap->hamparan->flatMap->plot->flatMap->subplotDTanah->avg('carbon_absorb'),
+            ];
 
-            foreach ($reg->zona as $zona) {
-                foreach ($zona->hamparan as $hamparan) {
-                    foreach ($hamparan->plot as $plot) {
-                        // Hitung rata-rata carbon_value dan carbon_absorb untuk setiap plot subplotA Semai
-                        $allSubplotASemaiPlot = SubplotASemai::where('plot_id', $plot->id)->get();
-                        $avgCarbonValueSemai = $allSubplotASemaiPlot->avg('carbon_value');
-                        $avgCarbonAbsorbSemai = $allSubplotASemaiPlot->avg('carbon_absorb');
+            //get value carbon value and carbon absorb Subplot A Seresah
 
-                        // Hitung rata-rata carbon_value dan carbon_absorb untuk setiap plot subplotA Seresah
-                        $allSubplotASeresahPlot = SubplotASeresah::where('plot_id', $plot->id)->get();
-                        $avgCarbonValueSeresah = $allSubplotASeresahPlot->avg('carbon_value');
-                        $avgCarbonAbsorbSeresah = $allSubplotASeresahPlot->avg('carbon_absorb');
+            $subplotSeresah = $regional->zona->flatMap->hamparan->flatMap->plot->flatMap->subplotASeresah;
 
-                        // Hitung rata-rata carbon_value dan carbon_absorb untuk setiap plot subplotA Tumbuhan Bawah
-                        $allSubplotATumbuhanBawahPlot = SubplotATumbuhanBawah::where('plot_id', $plot->id)->get();
-                        $avgCarbonValueTumbuhanBawah = $allSubplotATumbuhanBawahPlot->avg('carbon_value');
-                        $avgCarbonAbsorbTumbuhanBawah = $allSubplotATumbuhanBawahPlot->avg('carbon_absorb');
+            $totalCVSeresah = $subplotSeresah->sum('carbon_value');
+            $totalCASeresah = $subplotSeresah->sum('carbon_absorb');
+            $uniquePlotIdSeresah = $subplotSeresah->unique('plot_id')->count();
 
-                        // Hitung rata-rata carbon_value dan carbon_absorb untuk setiap plot subplotA Tumbuhan Bawah
-                        $allSubplotB = SubplotB::where('plot_id', $plot->id)->get();
-                        $avgCarbonValueSubplotB = $allSubplotB->avg('carbon_value');
-                        $avgCarbonAbsorbSubplotB = $allSubplotB->avg('carbon_absorb');
+            $cvSeresah = $uniquePlotIdSeresah !== 0 ? $totalCVSeresah / $uniquePlotIdSeresah : 0;
+            $caSeresah = $uniquePlotIdSeresah !== 0 ? $totalCASeresah / $uniquePlotIdSeresah : 0;
 
-                        // Hitung rata-rata carbon_value dan carbon_absorb untuk setiap plot subplotA Tumbuhan Bawah
-                        $allSubplotC = SubplotC::where('plot_id', $plot->id)->get();
-                        $avgCarbonValueSubplotC = $allSubplotC->avg('carbon_value');
-                        $avgCarbonAbsorbSubplotC = $allSubplotC->avg('carbon_absorb');
+            $valueCVSeresah = number_format(($cvSeresah / 1000000) * 10000, 2);
+            $valueCASeresah = number_format(($caSeresah / 1000000) * 10000, 2);
 
-                        $allSubplotDNekromasPlot = SubplotDNekromas::where('plot_id', $plot->id)->get();
-                        $avgCarbonValueNekromas = $allSubplotDNekromasPlot->avg('carbon_value');
-                        $avgCarbonAbsorbNekromas = $allSubplotDNekromasPlot->avg('carbon_absorb');
+            //get value carbon value and carbon absorb Subplot A Semai
 
-                        // Hitung rata-rata carbon_value dan carbon_absorb untuk setiap plot subplotA Seresah
-                        $allSubplotDPohonPlot = SubplotDPohon::where('plot_id', $plot->id)->get();
-                        $avgCarbonValuePohon = $allSubplotDPohonPlot->avg('carbon_value');
-                        $avgCarbonAbsorbPohon = $allSubplotDPohonPlot->avg('carbon_absorb');
+            $subplotSemai = $regional->zona->flatMap->hamparan->flatMap->plot->flatMap->subplotASemai;
 
-                        // Hitung rata-rata carbon_value dan carbon_absorb untuk setiap plot subplotA Tumbuhan Bawah
-                        $allSubplotDTanahPlot = SubplotDTanah::where('plot_id', $plot->id)->get();
-                        $avgCarbonValueTanah = $allSubplotDTanahPlot->avg('carbon_value');
-                        $avgCarbonAbsorbTanah = $allSubplotDTanahPlot->avg('carbon_absorb');
+            $totalCVSemai = $subplotSemai->sum('carbon_value');
+            $totalCASemai = $subplotSemai->sum('carbon_absorb');
+            $uniquePlotIdSemai = $subplotSemai->unique('plot_id')->count();
 
-                        // Hitung rata-rata keseluruhan untuk plot
-                        $sumCarbonValuePlot += ($avgCarbonValueSemai + $avgCarbonValueSeresah + $avgCarbonValueTumbuhanBawah + $avgCarbonValueSubplotB + $avgCarbonValueSubplotC + $avgCarbonValueNekromas + $avgCarbonValuePohon + $avgCarbonValueTanah);
-                        $sumCarbonAbsorbPlot += ($avgCarbonAbsorbSemai + $avgCarbonAbsorbSeresah + $avgCarbonAbsorbTumbuhanBawah + +$avgCarbonAbsorbSubplotB + $avgCarbonAbsorbSubplotC + $avgCarbonAbsorbNekromas + $avgCarbonAbsorbPohon + $avgCarbonAbsorbTanah);
+            $cvSemai = $uniquePlotIdSemai !== 0 ? $totalCVSemai / $uniquePlotIdSemai : 0;
+            $caSemai = $uniquePlotIdSemai !== 0 ? $totalCASemai / $uniquePlotIdSemai : 0;
 
-                        $regionalCarbonValue += ($avgCarbonValueSemai + $avgCarbonValueSeresah + $avgCarbonValueTumbuhanBawah + $avgCarbonValueSubplotB + $avgCarbonValueSubplotC + $avgCarbonValueNekromas + $avgCarbonValuePohon + $avgCarbonValueTanah);
-                        $regionalCarbonAbsorb += ($avgCarbonAbsorbSemai + $avgCarbonAbsorbSeresah + $avgCarbonAbsorbTumbuhanBawah + +$avgCarbonAbsorbSubplotB + $avgCarbonAbsorbSubplotC + $avgCarbonAbsorbNekromas + $avgCarbonAbsorbPohon + $avgCarbonAbsorbTanah);
-                        $totalPlots++;
-                    }
-                }
-            }
+            $valueCVSemai = number_format(($cvSemai / 1000000) * 10000, 2);
+            $valueCASemai = number_format(($caSemai / 1000000) * 10000, 2);
 
-            $regionalCarbonValues[$reg->nama_regional] = $regionalCarbonValue;
-            $regionalCarbonAbsorbs[$reg->nama_regional] = $regionalCarbonAbsorb;
+            //get value carbon value and carbon absorb Subplot A Tumbuhan Bawah
+
+            $subplotTumbuhanBawah = $regional->zona->flatMap->hamparan->flatMap->plot->flatMap->subplotATumbuhanBawah;
+
+            $totalCVTumbuhanBawah = $subplotTumbuhanBawah->sum('carbon_value');
+            $totalCATumbuhanBawah = $subplotTumbuhanBawah->sum('carbon_absorb');
+            $uniquePlotIdTumbuhanBawah = $subplotTumbuhanBawah->unique('plot_id')->count();
+
+            $cvTumbuhanBawah = $uniquePlotIdTumbuhanBawah !== 0 ? $totalCVTumbuhanBawah / $uniquePlotIdTumbuhanBawah : 0;
+            $caTumbuhanBawah = $uniquePlotIdTumbuhanBawah !== 0 ? $totalCATumbuhanBawah / $uniquePlotIdTumbuhanBawah : 0;
+
+            $valueCVTumbuhanBawah = number_format(($cvTumbuhanBawah / 1000000) * 10000, 2);
+            $valueCATumbuhanBawah = number_format(($caTumbuhanBawah / 1000000) * 10000, 2);
+
+            //get value carbon value and carbon absorb Subplot B Pancang
+
+            $subplotB = $regional->zona->flatMap->hamparan->flatMap->plot->flatMap->subplotB;
+
+            $avgCVSubplotB = $subplotB->groupBy('plot_id')->map(function ($groupedPlots) {
+
+                $carbonValue = ($groupedPlots->avg('carbon_value') * ($groupedPlots->count() / 25) * 10000) / 1000;
+                $carbonAbsorb = ($groupedPlots->avg('carbon_absorb') * ($groupedPlots->count() / 25) * 10000) / 1000;
+
+                return [
+                    'plot_id' => $groupedPlots->first()->plot_id,
+                    'avg' => $groupedPlots->avg('carbon_value'),
+                    'total' => $groupedPlots->count(),
+                    'carbon_value' => $carbonValue,
+                    'carbon_absorb' => $carbonAbsorb,
+                ];
+            })->values();
+            $avgArrayCVSubplotB = $avgCVSubplotB->toArray();
+
+
+            $totalAvgCVSubplotB = number_format(collect($avgArrayCVSubplotB)->avg('carbon_value'), 2);
+            $totalAvgCASubplotB = number_format(collect($avgArrayCVSubplotB)->avg('carbon_absorb'), 2);
+
+            //get value carbon value and carbon absorb Subplot C Tiang
+
+            $subplotC = $regional->zona->flatMap->hamparan->flatMap->plot->flatMap->subplotC;
+
+            $avgSubplotC = $subplotC->groupBy('plot_id')->map(function ($groupedPlots) {
+
+                $carbonValue = ($groupedPlots->avg('carbon_value') * ($groupedPlots->count() / 100) * 10000) / 1000;
+                $carbonAbsorb = ($groupedPlots->avg('carbon_absorb') * ($groupedPlots->count() / 100) * 10000) / 1000;
+
+                return [
+                    'plot_id' => $groupedPlots->first()->plot_id,
+                    'avg' => $groupedPlots->avg('carbon_value'),
+                    'total' => $groupedPlots->count(),
+                    'carbon_value' => $carbonValue,
+                    'carbon_absorb' => $carbonAbsorb,
+                ];
+            })->values();
+            $avgArraySubplotC = $avgSubplotC->toArray();
+
+            $totalAvgCVSubplotC = number_format(collect($avgArraySubplotC)->avg('carbon_value'), 2);
+            $totalAvgCASubplotC = number_format(collect($avgArraySubplotC)->avg('carbon_absorb'), 2);
+
+            //get value carbon value and carbon absorb Subplot D Necromass
+            $subplotsDNekromas = $regional->zona->flatMap->hamparan->flatMap->plot->flatMap->subplotDNekromas;
+
+            $totalCVNekromas = $subplotsDNekromas->sum('carbon_value');
+            $totalCANekromas = $subplotsDNekromas->sum('carbon_absorb');
+            $uniquePlotIds = $subplotsDNekromas->unique('plot_id')->count();
+            $cvNekromas = $uniquePlotIds !== 0 ? $totalCVNekromas / $uniquePlotIds : 0;
+            $caNekromas = $uniquePlotIds !== 0 ? $totalCANekromas / $uniquePlotIds : 0;
+
+            $valueCVNekromas = number_format(($cvNekromas / 1000) * 10000 / 400, 2);
+            $valueCANekromas = number_format(($caNekromas / 1000) * 10000 / 400, 2);
+
+            //get value carbon value and carbon absorb Subplot D Pohon
+
+            $subplotPohon = $regional->zona->flatMap->hamparan->flatMap->plot->flatMap->subplotDPohon;
+
+            $avgSubplotPohon = $subplotPohon->groupBy('plot_id')->map(function ($groupedPlots) {
+
+                $carbonValue = ($groupedPlots->avg('carbon_value') * ($groupedPlots->count() / 400) * 10000) / 1000;
+                $carbonAbsorb = ($groupedPlots->avg('carbon_absorb') * ($groupedPlots->count() / 400) * 10000) / 1000;
+
+                return [
+                    'plot_id' => $groupedPlots->first()->plot_id,
+                    'avg' => $groupedPlots->avg('carbon_value'),
+                    'total' => $groupedPlots->count(),
+                    'carbon_value' => $carbonValue,
+                    'carbon_absorb' => $carbonAbsorb,
+                ];
+            })->values();
+            $avgArraySubplotPohon = $avgSubplotPohon->toArray();
+
+            // dd($avgArraySubplotPohon);
+
+            $totalAvgCVSubplotPohon = number_format(collect($avgArraySubplotPohon)->avg('carbon_value'), 2);
+            $totalAvgCASubplotPohon = number_format(collect($avgArraySubplotPohon)->avg('carbon_absorb'), 2);
+
+            //get value carbon value and carbon absorb Subplot D Tanah
+
+            $totalCVTanah = number_format($avgCV['subplotDTanah'], 2);
+            $totalCATanah = number_format($avgCA['subplotDTanah'], 2);
+
+            $regionCarbonValuePlot = (float)$valueCVSemai + (float)$valueCVSeresah  + (float)$totalAvgCVSubplotB + (float)$totalAvgCVSubplotC + (float)$valueCVNekromas + (float)$totalAvgCVSubplotPohon + (float)$totalCVTanah;
+            $regionCarbonAbsorbPlot = (float)$valueCASemai + (float)$valueCASeresah + (float)$totalAvgCASubplotB + (float)$totalAvgCASubplotC + (float)$totalAvgCASubplotPohon;
+
+            $sumCarbonValuePlot += (float)$valueCVSemai + (float)$valueCVSeresah + (float)$totalAvgCVSubplotB + (float)$totalAvgCVSubplotC + (float)$valueCVNekromas + (float)$totalAvgCVSubplotPohon + (float)$totalCVTanah;
+            $sumCarbonAbsorbPlot += (float)$valueCASemai + (float)$valueCASeresah + (float)$totalAvgCASubplotB + (float)$totalAvgCASubplotC + (float)$totalAvgCASubplotPohon;
+
+            $regionData[] = [
+                'label' => $regional->nama_regional,
+                'carbon_value' => $regionCarbonValuePlot,
+                'carbon_absorb' => $regionCarbonAbsorbPlot,
+            ];
         }
 
-        // dd($regionalCarbonValues, $regionalCarbonAbsorbs, $sumCarbonValuePlot, $sumCarbonAbsorbPlot);
-
+        $regionJson = json_encode($regionData);
 
         return view('pages.index', [
-            'regional' => $regional,
+            'regionalData' => $regionalData,
             'sumCarbonValuePlot' => $sumCarbonValuePlot,
             'sumCarbonAbsorbPlot' => $sumCarbonAbsorbPlot,
-            'regionalCarbonValues' => $regionalCarbonValues,
-            'regionalCarbonAbsorbs' => $regionalCarbonAbsorbs,
+            'regionJson' => $regionJson,
             'seresah' => $seresah,
             'semai' => $semai,
             'tumbuhanBawah' => $tumbuhanBawah,
@@ -149,38 +254,6 @@ class DashboardController extends Controller
             'necromass' => $necromass,
             'pohon' => $pohon,
             'tanah' => $tanah,
-            'avgCarbonValueSemai' => $avgCarbonValueSemai,
-            'avgCarbonAbsorbSemai' => $avgCarbonAbsorbSemai,
-            'avgCarbonValueSeresah' => $avgCarbonValueSeresah,
-            'avgCarbonAbsorbSeresah' => $avgCarbonAbsorbSeresah,
-            'avgCarbonValueTumbuhanBawah' => $avgCarbonValueTumbuhanBawah,
-            'avgCarbonAbsorbTumbuhanBawah' => $avgCarbonAbsorbTumbuhanBawah,
-            'avgCarbonValueSubplotB' => $avgCarbonValueSubplotB,
-            'avgCarbonAbsorbSubplotB' => $avgCarbonAbsorbSubplotB,
-            'avgCarbonValueSubplotC' => $avgCarbonValueSubplotC,
-            'avgCarbonAbsorbSubplotC' => $avgCarbonAbsorbSubplotC,
-            'avgCarbonValueNekromas' => $avgCarbonValueNekromas,
-            'avgCarbonAbsorbNekromas' => $avgCarbonAbsorbNekromas,
-            'avgCarbonValuePohon' => $avgCarbonValuePohon,
-            'avgCarbonAbsorbPohon' => $avgCarbonAbsorbPohon,
-            'avgCarbonValueTanah' => $avgCarbonValueTanah,
-            'avgCarbonAbsorbTanah' => $avgCarbonAbsorbTanah,
-            'avgAllCarbonValueSemai' => $avgAllCarbonValueSemai,
-            'avgAllCarbonAbsorbSemai' => $avgAllCarbonAbsorbSemai,
-            'avgAllCarbonValueSeresah' => $avgAllCarbonValueSeresah,
-            'avgAllCarbonAbsorbSeresah' => $avgAllCarbonAbsorbSeresah,
-            'avgAllCarbonValueTumbuhanBawah' => $avgAllCarbonValueTumbuhanBawah,
-            'avgAllCarbonAbsorbTumbuhanBawah' => $avgAllCarbonAbsorbTumbuhanBawah,
-            'avgAllCarbonValueSubplotB' => $avgAllCarbonValueSubplotB,
-            'avgAllCarbonAbsorbSubplotB' => $avgAllCarbonAbsorbSubplotB,
-            'avgAllCarbonValueSubplotC' => $avgAllCarbonValueSubplotC,
-            'avgAllCarbonAbsorbSubplotC' => $avgAllCarbonAbsorbSubplotC,
-            'avgAllCarbonValueNekromas' => $avgAllCarbonValueNekromas,
-            'avgAllCarbonAbsorbNekromas' => $avgAllCarbonAbsorbNekromas,
-            'avgAllCarbonValuePohon' => $avgAllCarbonValuePohon,
-            'avgAllCarbonAbsorbPohon' => $avgAllCarbonAbsorbPohon,
-            'avgAllCarbonValueTanah' => $avgAllCarbonValueTanah,
-            'avgAllCarbonAbsorbTanah' => $avgAllCarbonAbsorbTanah,
         ]);
     }
 }

@@ -28,4 +28,11 @@ class Hamparan extends Model
     {
         return $this->hasMany(Plot::class, 'id_hamparan', 'id');
     }
+
+    protected static function booted()
+    {
+        static::deleting(function ($hamparan) {
+            $hamparan->plot()->delete();
+        });
+    }
 }
