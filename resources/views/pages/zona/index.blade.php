@@ -117,14 +117,6 @@
 
                                         <label>Nama Tim</label>
                                         <div class="form-group w-100 mb-2" id="listTeam">
-                                            {{-- <select name="id_tim[]" class="form-control">
-                                                @foreach ($regionalTim as $regional)
-                                                    @foreach ($regional->tim as $timItem)
-                                                        <option value="{{ $timItem->namaTim->id }}">
-                                                            {{ $timItem->namaTim->nama }}</option>
-                                                    @endforeach
-                                                @endforeach
-                                            </select> --}}
 
                                             <select name="id_tim[]" class="form-control">
                                                 @foreach ($regionalTim as $regional)
