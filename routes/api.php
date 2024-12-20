@@ -32,9 +32,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::prefix('user')->group(function() {
     Route::post('login', [UserController::class, 'login']);
     Route::post('register', [UserController::class, 'addUser']);
+    Route::post('logout', [UserController::class, 'logout']);
 });
 
-Route::prefix('admin')->group(function(){
+Route::prefix('admin')->middleware(['adminonly'])->group(function(){
     Route::prefix('user')->group(function(){
         Route::get('/listUser', [UserController::class, 'getUser']);
         Route::put('/setActive/{idUser}', [UserController::class, 'setActiveUser']);
@@ -140,4 +141,19 @@ Route::prefix('laporan')->group(function(){
     Route::get('semai', [LaporanController::class, 'get_semai']);
     Route::post('add-semai', [LaporanController::class, 'add_semai']);
     Route::delete('delete-semai/{id_subplot}/{id_semai}', [LaporanController::class, 'delete_semai']);
+
+    //
+    Route::get('subplot-a', [LaporanMobile::class, 'get_subplot_a']);
+    Route::get('subplot-b', [LaporanMobile::class, 'get_subplot_b']);
+    Route::get('subplot-c', [LaporanMobile::class, 'get_subplot_c']);
+    Route::get('subplot-d', [LaporanMobile::class, 'get_subplot_d']);
+
+    Route::get('/list-user', [UserController::class, 'getUser']);
+    Route::get('/list-tim', [TimController::class, 'get']);
+    Route::get('/list-anggota-tim/{idTim}', [TimController::class, 'getAnggotaTim']);
+    Route::get('/list-periode', [PeriodeController::class, 'get']);
+    Route::get('/list-regional', [RegionalController::class, 'get']);
+    Route::get('/list-zona', [ZonaController::class, 'get']);
+    Route::get('/list-hamparan', [HamparanController::class, 'get']);
+    Route::get('/list-plot', [PlotController::class, 'get']);
 });

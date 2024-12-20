@@ -25,7 +25,8 @@ class Users extends Model
         'jenis_kelamin',
         'email',
         'password',
-        'role'
+        'role',
+        'token'
     ];
 
     // function tim(){

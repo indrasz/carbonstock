@@ -36,6 +36,7 @@
                                         <option value="{{ $item->id }}">{{ $item->tgl_mulai }} - {{ $item->tgl_berakhir }}</option>
                                     @endforeach
                                 </select>
+                                
                             </div>
                             <div class="form-group mb-3 col-6">
                                 <label for="nama_regional">Nama Lokasi</label>
