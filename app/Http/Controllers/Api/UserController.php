@@ -42,6 +42,11 @@ class UserController extends Controller
             $id = Str::random(6);
         }
 
+        $token = Str::random(20);
+        while(Users::where('token', $token)->count() > 0){
+            $token = Str::random(20);
+        }
+
         //insert data to database
         $inserts = Users::create([
             'id' => $id,
@@ -51,7 +56,9 @@ class UserController extends Controller
             'telepon' => $request->telepon,
             'jenis_kelamin' => $request->jenis_kelamin,
             'email' => $request->email,
-            'password' => md5($request->password)
+            'password' => md5($request->password),
+            'role' => 'umum',
+            'token' => $token
         ]);
 
         return $this->responses(true, 'Berhasil mendaftarkan akun');
@@ -84,6 +91,7 @@ class UserController extends Controller
                 ->join('anggota_tim as at', 'zt.id_tim', 'at.id_tim')
                 ->where('at.id_user', $users[0]->id)
                 ->get('p.*');
+            $request->session()->put('users_mobile', $users);
             return $this->responses(true, 'Berhasil login', $users[0]);
         }else {
             return $this->responses(false, 'Gagal Login. Username atau password salah');
@@ -127,6 +135,15 @@ class UserController extends Controller
         
         $delete = Users::where('id', $idUser)->delete();
         return $this->responses(true, 'Berhasil menghapus user');
+    }
+
+    function logout(Request $request){
+        if($request->session()->get('users_mobile', NULL) != NULL){
+            $request->session()->pull('users_mobile');
+            return $this->responses(true, 'Berhasil logout');
+        }else {
+            return $this->responses(false, 'Gagal logout');
+        }
     }
 
     //default respponse all request
